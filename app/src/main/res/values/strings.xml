@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mystra77VN</string>
+    <string name="exit">Bye Bye</string>
+    <string name="exitQuestion">do you really want to exit?</string>
 </resources>
