@@ -2,4 +2,7 @@
     <string name="app_name">Mystra77VN</string>
     <string name="exit">Bye Bye</string>
     <string name="exitQuestion">do you really want to exit?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

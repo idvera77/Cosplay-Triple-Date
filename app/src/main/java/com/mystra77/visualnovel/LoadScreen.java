@@ -2,9 +2,7 @@ package com.mystra77.visualnovel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,7 +14,7 @@ public class LoadScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.load_screen);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -26,11 +24,13 @@ public class LoadScreen extends AppCompatActivity {
 
         progressAnimation();
 
+
     }
 
     public void progressAnimation(){
         LoadingScreenAnimation loadingScreenAnimation = new LoadingScreenAnimation(this, progressBar, textView, 0f, 100f);
-        loadingScreenAnimation.setDuration(8000);
+        loadingScreenAnimation.setDuration(2000);
         progressBar.setAnimation(loadingScreenAnimation);
+
     }
 }

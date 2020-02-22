@@ -14,17 +14,19 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
         setContentView(R.layout.activity_home);
 
     }
 
     public void Start(final View view) {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                startActivity( new Intent(view.getContext(), GameStart.class));
-            }
-        }, 10000);
+
+        startActivity(new Intent(view.getContext(), GameStart.class));
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+
+
     }
 
     @Override
@@ -36,13 +38,13 @@ public class HomeActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        moveTaskToBack(true);
+                        android.os.Process.killProcess(android.os.Process.myPid());
+                        System.exit(1);
                     }
-
                 })
                 .setNegativeButton("No", null)
                 .show();
-
     }
 
 }
