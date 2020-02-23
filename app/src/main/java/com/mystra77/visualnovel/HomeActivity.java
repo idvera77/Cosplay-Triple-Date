@@ -1,13 +1,17 @@
 package com.mystra77.visualnovel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
+
 import android.view.View;
+import android.widget.ImageView;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -15,7 +19,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
         setContentView(R.layout.activity_home);
 
     }
@@ -25,12 +28,36 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(new Intent(view.getContext(), GameStart.class));
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
-
-
     }
 
-    @Override
-    public void onBackPressed() {
+    public void Continue(View view) {
+        ContinueFragment fragment = new ContinueFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+        transaction.replace(R.id.frameZoneFragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void Gallery(View view) {
+        GalleryFragment fragment = new GalleryFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+        transaction.replace(R.id.frameZoneFragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void Settings(View view) {
+        SettingsFragment fragment = new SettingsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+        transaction.replace(R.id.frameZoneFragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void Exit(View view) {
         new AlertDialog.Builder(this)
                 .setIcon(R.drawable.ic_launcher_background)
                 .setTitle(R.string.exit)
@@ -47,4 +74,12 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
+    public void showImage0(View view) {
+
+    }
 }
