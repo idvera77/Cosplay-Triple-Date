@@ -6,20 +6,27 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
 
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 
 
 public class HomeActivity extends AppCompatActivity {
+    private int unlockImageGallery;
+    private Button btnContinue, btnGaleria, btnSettings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_home);
+
+        btnContinue = this.findViewById(R.id.btnContinue);
+        btnGaleria = this.findViewById(R.id.btnGallery);
+        btnSettings = this.findViewById(R.id.btnSettings);
 
     }
 
@@ -31,30 +38,40 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void Continue(View view) {
+        btnContinue.setEnabled(false);
         ContinueFragment fragment = new ContinueFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         transaction.replace(R.id.frameZoneFragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+        btnSettings.setEnabled(true);
+        btnGaleria.setEnabled(true);
     }
 
     public void Gallery(View view) {
+        btnGaleria.setEnabled(false);
         GalleryFragment fragment = new GalleryFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         transaction.replace(R.id.frameZoneFragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+        unlockImageGallery ++;
+        btnSettings.setEnabled(true);
+        btnContinue.setEnabled(true);
     }
 
     public void Settings(View view) {
+        btnSettings.setEnabled(false);
         SettingsFragment fragment = new SettingsFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         transaction.replace(R.id.frameZoneFragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+        btnGaleria.setEnabled(true);
+        btnContinue.setEnabled(true);
     }
 
     public void Exit(View view) {
@@ -74,12 +91,13 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
+    public int unlockGallery(){
+        return unlockImageGallery;
+    }
+
     @Override
     public void onBackPressed() {
 
     }
 
-    public void showImage0(View view) {
-
-    }
 }
