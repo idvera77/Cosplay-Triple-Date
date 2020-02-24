@@ -1,4 +1,4 @@
-package com.mystra77.visualnovel;
+package com.mystra77.visualnovel.fragments;
 
 
 import android.app.AlertDialog;
@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
+import com.mystra77.visualnovel.HomeActivity;
+import com.mystra77.visualnovel.R;
 
 import java.util.ArrayList;
 
@@ -57,14 +60,14 @@ public class GalleryFragment extends Fragment {
         image7.setImageResource(R.mipmap.sinacceso);
 
         galleryArrayList = new ArrayList<Integer>();
-        galleryArrayList.add(R.mipmap.cementerio);
-        galleryArrayList.add(R.mipmap.bosque);
-        galleryArrayList.add(R.mipmap.montana);
-        galleryArrayList.add(R.mipmap.cementerio);
-        galleryArrayList.add(R.mipmap.bosque);
-        galleryArrayList.add(R.mipmap.montana);
-        galleryArrayList.add(R.mipmap.cementerio);
-        galleryArrayList.add(R.mipmap.bosque);
+        galleryArrayList.add(R.mipmap.demon);
+        galleryArrayList.add(R.mipmap.albedo);
+        galleryArrayList.add(R.mipmap.teacher);
+        galleryArrayList.add(R.mipmap.strech);
+        galleryArrayList.add(R.mipmap.twob);
+        galleryArrayList.add(R.mipmap.tae);
+        galleryArrayList.add(R.mipmap.shiranui);
+        galleryArrayList.add(R.mipmap.selfie);
 
         if (activity.unlockGallery() >= 1){
             image0.setImageResource(galleryArrayList.get(0));
@@ -147,7 +150,7 @@ public class GalleryFragment extends Fragment {
         return view;
     }
 
-    public void showImage(int positionImage){
+    public void showImage(int positionImage) {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         ImageView imageView = new ImageView(view.getContext());
         imageView.setImageResource(galleryArrayList.get(positionImage));
@@ -155,13 +158,12 @@ public class GalleryFragment extends Fragment {
         builder.setView(imageView);
         AlertDialog alert = builder.create();
         alert.show();
-
+        alert.getWindow().getDecorView().setBackgroundResource(android.R.color.transparent);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = alert.getWindow();
         lp.copyFrom(window.getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(lp);
-
     }
 }

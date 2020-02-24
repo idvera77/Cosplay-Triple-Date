@@ -1,4 +1,4 @@
-package com.mystra77.visualnovel;
+package com.mystra77.visualnovel.fragments;
 
 
 import android.os.Bundle;
@@ -9,14 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mystra77.visualnovel.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContinueFragment extends Fragment {
+public class SettingsFragment extends Fragment {
 
 
-    public ContinueFragment() {
+    public SettingsFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +27,7 @@ public class ContinueFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_continue, container, false);
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
 }

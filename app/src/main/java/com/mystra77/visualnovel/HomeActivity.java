@@ -7,10 +7,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.View;
 import android.widget.Button;
+
+import com.mystra77.visualnovel.fragments.ContinueFragment;
+import com.mystra77.visualnovel.fragments.GalleryFragment;
+import com.mystra77.visualnovel.fragments.SettingsFragment;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -100,4 +105,31 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    public void goToPatreon(View view) {
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_launcher_background)
+                .setTitle(R.string.exit)
+                .setMessage(R.string.exitQuestion)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.patreon.com/mystra77")));
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    public void goToTwitter(View view) {
+        new AlertDialog.Builder(this,  R.style.AlertDialogCustom)
+                .setMessage(R.string.exitQuestion)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mystra77")));
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 }
