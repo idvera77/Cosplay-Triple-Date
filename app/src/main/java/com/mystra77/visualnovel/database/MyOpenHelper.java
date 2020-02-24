@@ -1,70 +1,91 @@
 package com.mystra77.visualnovel.database;
 
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
+
 public class MyOpenHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "PopolloAdventure"; // Nombre
-    private static final int DATABASE_VERSION = 1; // Version
-
-    //Nombre de las tablas
-    private static final String TABLE_JUGADOR = "jugador";
-
-    //Nombre de las columnas en tablas
-    private static final String NOMBRE = "nombre";
-    private static final String PASSWORD = "password";
-    private static final String VIDA = "vida";
-    private static final String ATAQUE = "ataque";
-    private static final String DEFENSA = "defensa";
-    private static final String MANA = "mana";
-    private static final String PUNTUACION = "puntuacion";
-    private static final String KEY_ID = "id";
-
-    // Tabla Jugador
-    private static final String CREATE_TABLE_JUGADOR = "CREATE TABLE " + TABLE_JUGADOR + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + NOMBRE + " VARCHAR(30)," + PASSWORD + " VARCHAR(30)," +
-            VIDA + " INTEGER," + MANA + " INTEGER," + ATAQUE + " INTEGER," + DEFENSA + " INTEGER," + PUNTUACION + " INTEGER);";
-
     public MyOpenHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context, Constants.getDatabaseName(), null, Constants.getDatabaseVersion());
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // creating required tables
-        db.execSQL(CREATE_TABLE_JUGADOR);
+        db.execSQL(Constants.getCreateTableGame());
+        db.execSQL("INSERT INTO " + Constants.getTableGame() + "(" + Constants.getKeyId() + ") VALUES ( 1 )");
+        db.execSQL("INSERT INTO " + Constants.getTableGame() + "(" + Constants.getKeyId() + ") VALUES ( 2 )");
+        db.execSQL("INSERT INTO " + Constants.getTableGame() + "(" + Constants.getKeyId() + ") VALUES ( 3 )");
+        db.execSQL(Constants.getUpdateTimeTrigger());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_JUGADOR);
+        db.execSQL("DROP TABLE IF EXISTS " + Constants.getTableGame());
         onCreate(db);
     }
 
-    public void guardarJugador(String nombre, String password) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO " + TABLE_JUGADOR + "(" + KEY_ID + ", " + NOMBRE + ", " + PASSWORD + ") VALUES ( null, '" + nombre + "', '" + password + "')");
-        db.close();
+    public void saveGame(SQLiteDatabase db, int id, int level, int tsundere, int neko, int mature, int score) {
+        ContentValues values = new ContentValues();
+        values.put(Constants.getLEVEL(), level);
+        values.put(Constants.getTSUNDERE(), tsundere);
+        values.put(Constants.getNEKO(), neko);
+        values.put(Constants.getMATURE(), mature);
+        values.put(Constants.getSCORE(), score);
+        db.update(Constants.getTableGame(), values, Constants.getKeyId() + " = (" + id + " );", null);
     }
 
-    public Boolean nombreRepetido(String nombre) {
-        SQLiteDatabase db = getReadableDatabase();
-        int encontrado = 0;
-        Cursor cursor = db.rawQuery("SELECT " + NOMBRE + " FROM " + TABLE_JUGADOR + ";", null);
-        while (cursor.moveToNext()) {
-            if (cursor.getString(0).equals(nombre)) {
-                encontrado = 1;
-            }
-        }
-        cursor.close();
-        db.close();
-        if (encontrado == 0) {
-            return false;
-        } else {
-            return true;
-        }
+    public void loadGame(SQLiteDatabase db, int id){
+
     }
+
+                /*
+    private static final String CREATE_TABLE_GAME = "CREATE TABLE " + TABLE_GAME + "("
+            + KEY_ID + " INTEGER PRIMARY KEY NOT NULL, " + TIME + " TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
+            + LEVEL + " INTEGER," + TSUNDERE + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
+
+
+
+            SELECT datetime('now', 'localtime');
+            contentValues.put( COLUMN_TIME_STAMP, " time('now') " );
+     */
+
 }
+
+    /*
+         public void empezarPartida() {
+        MiOpenHelper moh = new MiOpenHelper(contexto);
+        SQLiteDatabase db = moh.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(JuegoDataBase.getScoreFieldName(), 0);
+        db.insert(JuegoDataBase.getScoreTablename(), null, values);
+    }
+
+    @Override
+    public void terminarPartida(int puntos) {
+        MiOpenHelper moh = new MiOpenHelper(contexto);
+        SQLiteDatabase db = moh.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(JuegoDataBase.getScoreFieldName(), puntos);
+        db.update(JuegoDataBase.getScoreTablename(), values,  JuegoDataBase.getStartdateFieldName() + " = (SELECT MAX("+ JuegoDataBase.getStartdateFieldName()+") FROM " + JuegoDataBase.getScoreTablename() + ");", null);
+    }
+
+
+    public ArrayList<String> mejorPartida() {
+        ArrayList<String> puntuaciones = new ArrayList<String>();
+        MiOpenHelper moh = new MiOpenHelper(contexto);
+        SQLiteDatabase db = moh.getWritableDatabase();
+        Cursor resultadoConsulta = db.rawQuery("select * from " + JuegoDataBase.getScoreTablename()
+                + " Order by " + JuegoDataBase.getScoreFieldName() + " desc limit 3;", null);
+        if(resultadoConsulta.getCount() > 0){
+            resultadoConsulta.moveToFirst();
+            do {
+                puntuaciones.add(resultadoConsulta.getString(resultadoConsulta.getColumnIndex(JuegoDataBase.getScoreFieldName())));
+            } while (resultadoConsulta.moveToNext());
+        }
+        return puntuaciones;
+    }
+     */
