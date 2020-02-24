@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.mystra77.visualnovel.fragments.ContinueFragment;
@@ -26,8 +28,11 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_home);
+
 
         btnContinue = this.findViewById(R.id.btnContinue);
         btnGaleria = this.findViewById(R.id.btnGallery);
@@ -62,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         transaction.replace(R.id.frameZoneFragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
-        unlockImageGallery ++;
+        unlockImageGallery++;
         btnSettings.setEnabled(true);
         btnContinue.setEnabled(true);
     }
@@ -80,9 +85,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void Exit(View view) {
-        new AlertDialog.Builder(this)
-                .setIcon(R.drawable.ic_launcher_background)
-                .setTitle(R.string.exit)
+        new AlertDialog.Builder(this, R.style.AlertDialogCustom)
                 .setMessage(R.string.exitQuestion)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
@@ -96,20 +99,14 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
-    public int unlockGallery(){
+    public int unlockGallery() {
         return unlockImageGallery;
     }
 
-    @Override
-    public void onBackPressed() {
-
-    }
 
     public void goToPatreon(View view) {
-        new AlertDialog.Builder(this)
-                .setIcon(R.drawable.ic_launcher_background)
-                .setTitle(R.string.exit)
-                .setMessage(R.string.exitQuestion)
+        new AlertDialog.Builder(this, R.style.AlertDialogCustom)
+                .setMessage(R.string.moveToPatreon)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -121,8 +118,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void goToTwitter(View view) {
-        new AlertDialog.Builder(this,  R.style.AlertDialogCustom)
-                .setMessage(R.string.exitQuestion)
+        new AlertDialog.Builder(this, R.style.AlertDialogCustom)
+                .setMessage(R.string.moveToTwitter)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -131,5 +128,10 @@ public class HomeActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }

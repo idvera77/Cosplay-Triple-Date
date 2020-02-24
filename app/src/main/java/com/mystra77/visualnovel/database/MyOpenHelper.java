@@ -46,24 +46,24 @@ public class MyOpenHelper extends SQLiteOpenHelper {
 
     public void guardarJugador(String nombre, String password) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO " + TABLE_JUGADOR + "("+ KEY_ID +", " + NOMBRE + ", " + PASSWORD +") VALUES ( null, '"+ nombre+"', '"+password+"')");
+        db.execSQL("INSERT INTO " + TABLE_JUGADOR + "(" + KEY_ID + ", " + NOMBRE + ", " + PASSWORD + ") VALUES ( null, '" + nombre + "', '" + password + "')");
         db.close();
     }
 
-    public Boolean nombreRepetido(String nombre){
+    public Boolean nombreRepetido(String nombre) {
         SQLiteDatabase db = getReadableDatabase();
         int encontrado = 0;
-        Cursor cursor = db.rawQuery("SELECT " + NOMBRE + " FROM " + TABLE_JUGADOR + ";" , null);
-        while (cursor.moveToNext()){
-            if(cursor.getString(0).equals(nombre)){
+        Cursor cursor = db.rawQuery("SELECT " + NOMBRE + " FROM " + TABLE_JUGADOR + ";", null);
+        while (cursor.moveToNext()) {
+            if (cursor.getString(0).equals(nombre)) {
                 encontrado = 1;
             }
         }
         cursor.close();
         db.close();
-        if (encontrado == 0){
+        if (encontrado == 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }

@@ -2,5 +2,6 @@
     <string name="app_name">Mystra77VN</string>
     <string name="exit">Exit</string>
     <string name="exitQuestion">do you really want to exit?</string>
-
+    <string name="moveToPatreon">^_^ move to Patreon?</string>
+    <string name="moveToTwitter">^_^ move to Twitter?</string>
 </resources>
