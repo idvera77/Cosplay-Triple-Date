@@ -29,4 +29,5 @@ public class LoadScreen extends AppCompatActivity {
         loadingScreenAnimation.setDuration(2000);
         progressBar.setAnimation(loadingScreenAnimation);
     }
+
 }

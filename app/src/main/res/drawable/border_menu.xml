@@ -5,5 +5,5 @@
     <solid android:color="@color/backgroundMenu" />
     <stroke
         android:width="2dp"
-        android:color="@color/borderMenu" />
+        android:color="@color/border" />
 </shape>

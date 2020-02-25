@@ -8,7 +8,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -28,7 +27,6 @@ import java.util.ArrayList;
 
 
 public class HomeActivity extends AppCompatActivity {
-    private int unlockImageGallery;
     private Button btnStart, btnContinue, btnGallery, btnSettings;
     private ArrayList<Button> arrayButtons;
     private GameStartFragment gameStartFragment;
@@ -37,12 +35,13 @@ public class HomeActivity extends AppCompatActivity {
     private SettingsFragment settingsFragment;
     private FragmentTransaction transaction;
     private Handler handler;
+    private MyOpenHelper moh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Delete Status Bar and Animation
+        //Delete Status Bar and insert Animation
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -57,12 +56,10 @@ public class HomeActivity extends AppCompatActivity {
         activeFragment(gameStartFragment);
 
         //Open database
-        MyOpenHelper moh = new MyOpenHelper(this);
-        SQLiteDatabase database = moh.getWritableDatabase();
+        moh = new MyOpenHelper(this);
+        moh.getWritableDatabase();
 
-        moh.saveGame(database, 1, 0, 0, 0, 0, 0);
-
-
+        //
         btnStart = this.findViewById(R.id.btnStartGame);
         btnContinue = this.findViewById(R.id.btnContinue);
         btnGallery = this.findViewById(R.id.btnGallery);
@@ -80,21 +77,6 @@ public class HomeActivity extends AppCompatActivity {
     public void Start(final View view) {
         disableButton(btnStart);
         activeFragment(gameStartFragment);
-
-
-        /*
-        startActivity(new Intent(view.getContext(), GameStart.class));
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-          requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-    }
-         */
     }
 
     public void Continue(View view) {
@@ -105,8 +87,6 @@ public class HomeActivity extends AppCompatActivity {
     public void Gallery(View view) {
         disableButton(btnGallery);
         activeFragment(galleryFragment);
-        unlockImageGallery++;
-
     }
 
     public void Settings(View view) {
@@ -128,11 +108,6 @@ public class HomeActivity extends AppCompatActivity {
                 .setNegativeButton(R.string.no, null)
                 .show();
     }
-
-    public int unlockGallery() {
-        return unlockImageGallery;
-    }
-
 
     public void goToPatreon(View view) {
         new AlertDialog.Builder(this, R.style.AlertDialogCustom)
@@ -184,14 +159,13 @@ public class HomeActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public MyOpenHelper getMoh() {
+        return moh;
+    }
+
     @Override
     public void onBackPressed() {
 
     }
 
-    @Override
-    protected void onDestroy() {
-        handler.removeCallbacks(null);
-        super.onDestroy();
-    }
 }

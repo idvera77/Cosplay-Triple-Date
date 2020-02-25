@@ -8,21 +8,21 @@ public class Constants {
 
     private static final String KEY_ID = "id";
     private static final String TIME = "time";
-    private static final String LEVEL = "level";
+    private static final String STAGE = "stage";
     private static final String TSUNDERE = "tsundere";
     private static final String NEKO = "neko";
     private static final String MATURE = "mature";
     private static final String SCORE = "score";
 
     private static final String CREATE_TABLE_GAME = "CREATE TABLE " + TABLE_GAME + "("
-            + KEY_ID + " INTEGER PRIMARY KEY NOT NULL, " + TIME + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, "
-            + LEVEL + " INTEGER," + TSUNDERE + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
+            + KEY_ID + " INTEGER PRIMARY KEY NOT NULL, " + TIME + " TIMESTAMP DEFAULT 0, "
+            + STAGE + " INTEGER," + TSUNDERE + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
 
     private static final String UPDATE_TIME_TRIGGER = "CREATE TRIGGER update_time_trigger " +
-                    "AFTER UPDATE ON " + TABLE_GAME + " BEGIN " +
-                    "UPDATE " + TABLE_GAME + " SET " + TIME + " = current_timestamp " +
-                    "WHERE " + KEY_ID + " = old." + KEY_ID + ";" +
-                    "END";
+            "AFTER UPDATE ON " + TABLE_GAME + " BEGIN " +
+            "UPDATE " + TABLE_GAME + " SET " + TIME + " = current_timestamp " +
+            "WHERE " + KEY_ID + " = old." + KEY_ID + ";" +
+            "END";
 
 
     public static String getDatabaseName() {
@@ -45,8 +45,8 @@ public class Constants {
         return TIME;
     }
 
-    public static String getLEVEL() {
-        return LEVEL;
+    public static String getSTAGE() {
+        return STAGE;
     }
 
     public static String getTSUNDERE() {
@@ -69,5 +69,7 @@ public class Constants {
         return CREATE_TABLE_GAME;
     }
 
-    public static String getUpdateTimeTrigger() { return UPDATE_TIME_TRIGGER; }
+    public static String getUpdateTimeTrigger() {
+        return UPDATE_TIME_TRIGGER;
+    }
 }

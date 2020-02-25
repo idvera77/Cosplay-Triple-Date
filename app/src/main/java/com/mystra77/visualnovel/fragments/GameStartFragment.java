@@ -14,12 +14,14 @@ import android.widget.Button;
 import com.mystra77.visualnovel.Game;
 import com.mystra77.visualnovel.HomeActivity;
 import com.mystra77.visualnovel.R;
+import com.mystra77.visualnovel.classes.Player;
 
 
 public class GameStartFragment extends Fragment {
     private HomeActivity activity;
     private View view;
     private Button newGame;
+    private Intent intentNewGame;
 
     public GameStartFragment() {
         // Required empty public constructor
@@ -36,7 +38,12 @@ public class GameStartFragment extends Fragment {
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), Game.class));
+                Bundle bundle = new Bundle();
+                Player player = new Player();
+                bundle.putSerializable("player", player);
+                intentNewGame = new Intent(view.getContext(), Game.class);
+                intentNewGame.putExtras(bundle);
+                startActivity(intentNewGame);
             }
         });
         return view;

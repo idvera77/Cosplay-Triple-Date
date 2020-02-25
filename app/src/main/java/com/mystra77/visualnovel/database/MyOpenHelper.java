@@ -1,11 +1,14 @@
 package com.mystra77.visualnovel.database;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.mystra77.visualnovel.classes.Player;
+
+import java.util.ArrayList;
 
 
 public class MyOpenHelper extends SQLiteOpenHelper {
@@ -28,9 +31,10 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void saveGame(SQLiteDatabase db, int id, int level, int tsundere, int neko, int mature, int score) {
+    public void saveGame(int id, int stage, int tsundere, int neko, int mature, int score) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(Constants.getLEVEL(), level);
+        values.put(Constants.getSTAGE(), stage);
         values.put(Constants.getTSUNDERE(), tsundere);
         values.put(Constants.getNEKO(), neko);
         values.put(Constants.getMATURE(), mature);
@@ -38,54 +42,55 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         db.update(Constants.getTableGame(), values, Constants.getKeyId() + " = (" + id + " );", null);
     }
 
-    public void loadGame(SQLiteDatabase db, int id){
+    public Player loadGame(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Player player;
+        Cursor result = db.query(Constants.getTableGame(), null, Constants.getKeyId() + "=" + id, null, null, null, null);
+        result.moveToFirst();
+        player = new Player(result.getInt(result.getColumnIndex(Constants.getSTAGE())),
+                result.getInt(result.getColumnIndex(Constants.getTSUNDERE())),
+                result.getInt(result.getColumnIndex(Constants.getNEKO())),
+                result.getInt(result.getColumnIndex(Constants.getMATURE())),
+                result.getInt(result.getColumnIndex(Constants.getSCORE())));
+        return player;
+    }
+
+    public void deleteGame(int id){
 
     }
 
-                /*
-    private static final String CREATE_TABLE_GAME = "CREATE TABLE " + TABLE_GAME + "("
-            + KEY_ID + " INTEGER PRIMARY KEY NOT NULL, " + TIME + " TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,"
-            + LEVEL + " INTEGER," + TSUNDERE + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
+    public int unlockGallerySelect() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.query(Constants.getTableGame(), null, null, null, null, null, Constants.getSCORE() + " DESC");
+        if (result.moveToFirst()) {
+            return result.getInt(result.getColumnIndex(Constants.getSCORE()));
+        } else {
+            return 0;
+        }
+    }
 
-
-
-            SELECT datetime('now', 'localtime');
-            contentValues.put( COLUMN_TIME_STAMP, " time('now') " );
-     */
-
+    public ArrayList<String> fillLoadButton() {
+        ArrayList<String> dateLoadString = new ArrayList<String>();
+        String timeData, stageData, scoreData;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor result = db.query(Constants.getTableGame(), null, null, null, null, null, Constants.getKeyId());
+        if (result.moveToFirst()) {
+            do {
+                stageData = "STAGE: " + result.getString(result.getColumnIndex(Constants.getSTAGE()));
+                scoreData = "SCORE: " + result.getString(result.getColumnIndex(Constants.getSCORE()));
+                timeData = result.getString(result.getColumnIndex(Constants.getTIME()));
+                if (!timeData.equals("0")) {
+                    dateLoadString.add(stageData + "\n\n" + scoreData + "\n\n" + timeData);
+                } else {
+                    dateLoadString.add(".");
+                }
+            } while (result.moveToNext());
+            return dateLoadString;
+        } else {
+            return dateLoadString;
+        }
+    }
 }
 
-    /*
-         public void empezarPartida() {
-        MiOpenHelper moh = new MiOpenHelper(contexto);
-        SQLiteDatabase db = moh.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(JuegoDataBase.getScoreFieldName(), 0);
-        db.insert(JuegoDataBase.getScoreTablename(), null, values);
-    }
-
-    @Override
-    public void terminarPartida(int puntos) {
-        MiOpenHelper moh = new MiOpenHelper(contexto);
-        SQLiteDatabase db = moh.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(JuegoDataBase.getScoreFieldName(), puntos);
-        db.update(JuegoDataBase.getScoreTablename(), values,  JuegoDataBase.getStartdateFieldName() + " = (SELECT MAX("+ JuegoDataBase.getStartdateFieldName()+") FROM " + JuegoDataBase.getScoreTablename() + ");", null);
-    }
 
 
-    public ArrayList<String> mejorPartida() {
-        ArrayList<String> puntuaciones = new ArrayList<String>();
-        MiOpenHelper moh = new MiOpenHelper(contexto);
-        SQLiteDatabase db = moh.getWritableDatabase();
-        Cursor resultadoConsulta = db.rawQuery("select * from " + JuegoDataBase.getScoreTablename()
-                + " Order by " + JuegoDataBase.getScoreFieldName() + " desc limit 3;", null);
-        if(resultadoConsulta.getCount() > 0){
-            resultadoConsulta.moveToFirst();
-            do {
-                puntuaciones.add(resultadoConsulta.getString(resultadoConsulta.getColumnIndex(JuegoDataBase.getScoreFieldName())));
-            } while (resultadoConsulta.moveToNext());
-        }
-        return puntuaciones;
-    }
-     */
