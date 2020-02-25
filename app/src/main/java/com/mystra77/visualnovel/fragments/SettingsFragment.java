@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 import com.mystra77.visualnovel.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class SettingsFragment extends Fragment {
 
 

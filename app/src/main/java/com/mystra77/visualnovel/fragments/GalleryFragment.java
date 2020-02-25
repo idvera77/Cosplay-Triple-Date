@@ -19,25 +19,18 @@ import com.mystra77.visualnovel.R;
 import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GalleryFragment extends Fragment {
-    HomeActivity activity;
-    View view;
-    ArrayList<Integer> galleryArrayList;
-    ImageView image0, image1, image2, image3, image4, image5, image6, image7;
-    int unlockImage;
+    private HomeActivity activity;
+    private View view;
+    private ArrayList<Integer> galleryArrayList;
+    private ImageView image0, image1, image2, image3, image4, image5, image6, image7;
 
     public GalleryFragment() {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         activity = (HomeActivity) getActivity();
         view = inflater.inflate(R.layout.fragment_gallery, container, false);
 
@@ -69,7 +62,7 @@ public class GalleryFragment extends Fragment {
         galleryArrayList.add(R.mipmap.shiranui);
         galleryArrayList.add(R.mipmap.selfie);
 
-        if (activity.unlockGallery() >= 1){
+        if (activity.unlockGallery() >= 1) {
             image0.setImageResource(galleryArrayList.get(0));
             image0.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,7 +71,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (activity.unlockGallery() >= 2){
+        if (activity.unlockGallery() >= 2) {
             image1.setImageResource(galleryArrayList.get(1));
             image1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,7 +80,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (activity.unlockGallery() >= 3){
+        if (activity.unlockGallery() >= 3) {
             image2.setImageResource(galleryArrayList.get(2));
             image2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,7 +90,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (activity.unlockGallery() >= 4){
+        if (activity.unlockGallery() >= 4) {
             image3.setImageResource(galleryArrayList.get(3));
             image3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -107,7 +100,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (activity.unlockGallery() >= 5){
+        if (activity.unlockGallery() >= 5) {
             image4.setImageResource(galleryArrayList.get(4));
             image4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -117,7 +110,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (activity.unlockGallery() >= 6){
+        if (activity.unlockGallery() >= 6) {
             image5.setImageResource(galleryArrayList.get(5));
             image5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,7 +120,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (activity.unlockGallery() >= 7){
+        if (activity.unlockGallery() >= 7) {
             image6.setImageResource(galleryArrayList.get(6));
             image6.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -137,7 +130,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (activity.unlockGallery() >= 8){
+        if (activity.unlockGallery() >= 8) {
             image7.setImageResource(galleryArrayList.get(7));
             image7.setOnClickListener(new View.OnClickListener() {
                 @Override

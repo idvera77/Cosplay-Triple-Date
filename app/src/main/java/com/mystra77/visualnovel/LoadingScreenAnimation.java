@@ -13,7 +13,7 @@ public class LoadingScreenAnimation extends Animation {
     private TextView textView;
     private float from, to;
 
-    public LoadingScreenAnimation(Context context,ProgressBar progressBar, TextView textView, float from, float to) {
+    public LoadingScreenAnimation(Context context, ProgressBar progressBar, TextView textView, float from, float to) {
         this.context = context;
         this.progressBar = progressBar;
         this.textView = textView;
@@ -25,11 +25,10 @@ public class LoadingScreenAnimation extends Animation {
     protected void applyTransformation(float interpolatedTime, Transformation t) {
         super.applyTransformation(interpolatedTime, t);
         float value = from + (to - from) * interpolatedTime;
-        progressBar.setProgress((int)value);
-        textView.setText((int)value+" %");
+        progressBar.setProgress((int) value);
+        textView.setText((int) value + " %");
 
-        if(value == to){
-
+        if (value == to) {
             context.startActivity(new Intent(context, HomeActivity.class));
         }
     }

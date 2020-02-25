@@ -16,21 +16,17 @@ public class LoadScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.load_screen);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         progressBar = findViewById(R.id.loadingProgressBar);
         textView = findViewById(R.id.loadingTips);
 
         progressAnimation();
-
-
     }
 
-    public void progressAnimation(){
+    public void progressAnimation() {
         LoadingScreenAnimation loadingScreenAnimation = new LoadingScreenAnimation(this, progressBar, textView, 0f, 100f);
         loadingScreenAnimation.setDuration(2000);
         progressBar.setAnimation(loadingScreenAnimation);
-
     }
 }

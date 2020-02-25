@@ -1,6 +1,7 @@
 package com.mystra77.visualnovel;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
@@ -11,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,52 +24,62 @@ import com.mystra77.visualnovel.fragments.GalleryFragment;
 import com.mystra77.visualnovel.fragments.GameStartFragment;
 import com.mystra77.visualnovel.fragments.SettingsFragment;
 
+import java.util.ArrayList;
+
 
 public class HomeActivity extends AppCompatActivity {
     private int unlockImageGallery;
     private Button btnStart, btnContinue, btnGallery, btnSettings;
+    private ArrayList<Button> arrayButtons;
+    private GameStartFragment gameStartFragment;
+    private ContinueFragment continueFragment;
+    private GalleryFragment galleryFragment;
+    private SettingsFragment settingsFragment;
+    private FragmentTransaction transaction;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Delete Status Bar
+        //Delete Status Bar and Animation
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        //
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_home);
 
-        //First Fragment
-        GameStartFragment fragment = new GameStartFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frameZoneFragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        //Start Fragment
+        gameStartFragment = new GameStartFragment();
+        continueFragment = new ContinueFragment();
+        galleryFragment = new GalleryFragment();
+        settingsFragment = new SettingsFragment();
+
+        activeFragment(gameStartFragment);
 
         //Open database
         MyOpenHelper moh = new MyOpenHelper(this);
         SQLiteDatabase database = moh.getWritableDatabase();
 
-        moh.saveGame(database, 1, 0, 0,0,0,0);
+        moh.saveGame(database, 1, 0, 0, 0, 0, 0);
+
 
         btnStart = this.findViewById(R.id.btnStartGame);
-        btnStart.setEnabled(false);
         btnContinue = this.findViewById(R.id.btnContinue);
         btnGallery = this.findViewById(R.id.btnGallery);
         btnSettings = this.findViewById(R.id.btnSettings);
+        btnStart.setEnabled(false);
+
+        arrayButtons = new ArrayList<Button>();
+        arrayButtons.add(btnStart);
+        arrayButtons.add(btnContinue);
+        arrayButtons.add(btnGallery);
+        arrayButtons.add(btnSettings);
 
     }
 
     public void Start(final View view) {
         disableButton(btnStart);
-        GameStartFragment fragment = new GameStartFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        transaction.replace(R.id.frameZoneFragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        activeFragment(gameStartFragment);
 
 
         /*
@@ -87,34 +99,19 @@ public class HomeActivity extends AppCompatActivity {
 
     public void Continue(View view) {
         disableButton(btnContinue);
-        ContinueFragment fragment = new ContinueFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        transaction.replace(R.id.frameZoneFragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        activeFragment(continueFragment);
     }
 
     public void Gallery(View view) {
         disableButton(btnGallery);
-        GalleryFragment fragment = new GalleryFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        transaction.replace(R.id.frameZoneFragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        activeFragment(galleryFragment);
         unlockImageGallery++;
 
     }
 
     public void Settings(View view) {
         disableButton(btnSettings);
-        SettingsFragment fragment = new SettingsFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
-        transaction.replace(R.id.frameZoneFragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        activeFragment(settingsFragment);
     }
 
     public void Exit(View view) {
@@ -163,29 +160,38 @@ public class HomeActivity extends AppCompatActivity {
                 .show();
     }
 
+    public void disableButton(Button button) {
+        final Button lockButton = button;
+        for (Button buttonPosition : arrayButtons) {
+            buttonPosition.setEnabled(false);
+        }
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                for (Button buttonPosition : arrayButtons) {
+                    buttonPosition.setEnabled(true);
+                }
+                lockButton.setEnabled(false);
+            }
+        }, 1300);
+    }
+
+    public void activeFragment(Fragment fragment) {
+        transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
+        transaction.replace(R.id.frameZoneFragment, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     @Override
     public void onBackPressed() {
 
     }
 
-    public void disableButton(Button button){
-        btnStart.setEnabled(true);
-        btnContinue.setEnabled(true);
-        btnGallery.setEnabled(true);
-        btnSettings.setEnabled(true);
-        btnStart.setEnabled(true);
-        btnStart.setEnabled(true);
-        if(button == btnStart){
-            btnStart.setEnabled(false);
-        }
-        if(button == btnContinue){
-            btnContinue.setEnabled(false);
-        }
-        if(button == btnGallery){
-            btnGallery.setEnabled(false);
-        }
-        if(button == btnSettings){
-            btnSettings.setEnabled(false);
-        }
+    @Override
+    protected void onDestroy() {
+        handler.removeCallbacks(null);
+        super.onDestroy();
     }
 }
