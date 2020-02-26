@@ -3,6 +3,7 @@
     <string name="newGame">New Game</string>
     <string name="exit">Exit</string>
     <string name="exitQuestion">Do you really want to exit?</string>
+    <string name="saveGame">Do you want to save?</string>
     <string name="deleteSaveGame">Are you sure you want to delete this save?</string>
     <string name="moveToPatreon">^_^ Move to Patreon?</string>
     <string name="moveToTwitter">^_^ Move to Twitter?</string>

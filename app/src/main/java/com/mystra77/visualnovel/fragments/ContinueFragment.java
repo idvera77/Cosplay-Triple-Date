@@ -46,15 +46,6 @@ public class ContinueFragment extends Fragment {
         delete2 = view.findViewById(R.id.btnDeleteLoad2);
         delete3 = view.findViewById(R.id.btnDeleteLoad3);
 
-        load1.setText(R.string.empty);
-        load2.setText(R.string.empty);
-        load3.setText(R.string.empty);
-        load1.setEnabled(false);
-        load2.setEnabled(false);
-        load3.setEnabled(false);
-        delete1.setEnabled(false);
-        delete2.setEnabled(false);
-        delete3.setEnabled(false);
 
         fillButton = activity.getMoh().fillLoadButton();
 
@@ -113,34 +104,47 @@ public class ContinueFragment extends Fragment {
         delete1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteAlert();
+                deleteAlert(1);
             }
         });
 
         delete2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteAlert();
+                deleteAlert(2);
             }
         });
 
-        delete2.setOnClickListener(new View.OnClickListener() {
+        delete3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteAlert();
+                deleteAlert(3);
             }
         });
 
         return view;
     }
 
-    public void deleteAlert() {
+    public void deleteAlert(final int deleteSaveId) {
         new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
                 .setMessage(R.string.deleteSaveGame)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        activity.getMoh().deleteSaveGame(deleteSaveId);
+                        if (deleteSaveId == 1) {
+                            load1.setText(R.string.empty);
+                            load1.setEnabled(false);
+                            delete1.setEnabled(false);
+                        } else if (deleteSaveId == 2) {
+                            load2.setText(R.string.empty);
+                            load2.setEnabled(false);
+                            delete2.setEnabled(false);
+                        } else if (deleteSaveId == 3) {
+                            load3.setText(R.string.empty);
+                            load3.setEnabled(false);
+                            delete3.setEnabled(false);
+                        }
                     }
                 })
                 .setNegativeButton(R.string.no, null)

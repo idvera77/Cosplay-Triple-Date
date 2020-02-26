@@ -2,7 +2,9 @@ package com.mystra77.visualnovel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.database.sqlite.SQLiteDatabase;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -35,27 +37,44 @@ public class Game extends AppCompatActivity {
             player = (Player) bundle.getSerializable("player");
         }
 
+        /*
+         if(player.getScore() < 800){
+            startService(new Intent(this, ServiceGallery.class));
+        }
+        */
+        player.setScore(player.getScore() + 200);
         System.out.println(player);
-        player.setScore(player.getScore() + 1000);
-        System.out.println(player);
-
     }
 
     public void save1(View view) {
-        moh.saveGame(1, player.getStage(), player.getTsundere(), player.getNeko(), player.getMature(), player.getScore());
+        saveFile(1);
     }
 
     public void save2(View view) {
-        moh.saveGame(2, player.getStage(), player.getTsundere(), player.getNeko(), player.getMature(), player.getScore());
+        saveFile(2);
     }
 
     public void save3(View view) {
-        moh.saveGame(3, player.getStage(), player.getTsundere(), player.getNeko(), player.getMature(), player.getScore());
+        saveFile(3);
+    }
+
+    public void saveFile(final int saveFileId) {
+        new AlertDialog.Builder(this, R.style.AlertDialogCustom)
+                .setMessage(R.string.saveGame)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        moh.saveGame(saveFileId, player.getStage(), player.getTsundere(), player.getNeko(), player.getMature(), player.getScore());
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+        startActivity(new Intent(this, HomeActivity.class));
     }
 }

@@ -3,6 +3,7 @@
     <color name="colorLoadScreen">#DDBC99</color>
     <color name="border">#A27E8E</color>
     <color name="borderMenu">#3C362A</color>
+    <color name="borderImageGallery">#A27E8E</color>
     <color name="backgroundMenu">#B33C362A</color>
     <color name="backgroundHome">#704A3F</color>
     <color name="baseButton">#D39889</color>

@@ -46,15 +46,6 @@ public class GalleryFragment extends Fragment {
         image6 = view.findViewById(R.id.imageGallery6);
         image7 = view.findViewById(R.id.imageGallery7);
 
-        image0.setImageResource(R.mipmap.sinacceso);
-        image1.setImageResource(R.mipmap.sinacceso);
-        image2.setImageResource(R.mipmap.sinacceso);
-        image3.setImageResource(R.mipmap.sinacceso);
-        image4.setImageResource(R.mipmap.sinacceso);
-        image5.setImageResource(R.mipmap.sinacceso);
-        image6.setImageResource(R.mipmap.sinacceso);
-        image7.setImageResource(R.mipmap.sinacceso);
-
         galleryArrayList = new ArrayList<Integer>();
         galleryArrayList.add(R.mipmap.demon);
         galleryArrayList.add(R.mipmap.albedo);

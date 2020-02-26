@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -36,10 +38,13 @@ public class HomeActivity extends AppCompatActivity {
     private FragmentTransaction transaction;
     private Handler handler;
     private MyOpenHelper moh;
+    private SharedPreferences preferencesSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        preferencesSettings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
 
         //Delete Status Bar and insert Animation
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -162,6 +167,8 @@ public class HomeActivity extends AppCompatActivity {
     public MyOpenHelper getMoh() {
         return moh;
     }
+
+    public SharedPreferences getPreferencesSettings() { return preferencesSettings; }
 
     @Override
     public void onBackPressed() {
