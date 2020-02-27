@@ -16,4 +16,11 @@
     <string name="delete1">Delete Save 1</string>
     <string name="delete2">Delete Save 2</string>
     <string name="delete3">Delete Save 3</string>
+    <string name="musicVolume">MUSIC VOLUME</string>
+    <string name="musicONOFF">MUSIC</string>
+    <string name="soundVolume">SOUND VOLUME</string>
+    <string name="soundONOFF">SOUND</string>
+    <string name="explicitImageONOF">EXPLICIT IMAGES</string>
+    <string name="mute">MUTE</string>
+    <string name="OFF">OFF</string>
 </resources>

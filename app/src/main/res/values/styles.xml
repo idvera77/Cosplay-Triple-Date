@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
         <item name="android:textSize">20sp</item>

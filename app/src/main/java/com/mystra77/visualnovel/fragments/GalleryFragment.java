@@ -2,6 +2,7 @@ package com.mystra77.visualnovel.fragments;
 
 
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,7 +27,7 @@ public class GalleryFragment extends Fragment {
     private View view;
     private ArrayList<Integer> galleryArrayList;
     private ImageView image0, image1, image2, image3, image4, image5, image6, image7, bigImage;
-    private int unlockPoint;
+    private int unlockPointDB, unlockPointPreference;
 
     public GalleryFragment() {
         // Required empty public constructor
@@ -56,9 +57,15 @@ public class GalleryFragment extends Fragment {
         galleryArrayList.add(R.mipmap.shiranui);
         galleryArrayList.add(R.mipmap.selfie);
 
-        unlockPoint = activity.getMoh().unlockGallerySelect();
+        unlockPointDB = activity.getMoh().unlockGallerySelect();
+        if(unlockPointDB > activity.getPreferencesSettings().getInt("galleryUnlock", 0)){
+            SharedPreferences.Editor editor = activity.getPreferencesSettings().edit();
+            editor.putInt("galleryUnlock", unlockPointDB);
+            editor.commit();
+        }
+        unlockPointPreference = activity.getPreferencesSettings().getInt("galleryUnlock", 0);
 
-        if (unlockPoint >= 100) {
+        if (unlockPointPreference >= 100) {
             image0.setImageResource(galleryArrayList.get(0));
             image0.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -67,7 +74,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPoint >= 200) {
+        if (unlockPointPreference >= 200) {
             image1.setImageResource(galleryArrayList.get(1));
             image1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -76,7 +83,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPoint >= 300) {
+        if (unlockPointPreference >= 300) {
             image2.setImageResource(galleryArrayList.get(2));
             image2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,7 +93,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPoint >= 400) {
+        if (unlockPointPreference >= 400) {
             image3.setImageResource(galleryArrayList.get(3));
             image3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,7 +103,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPoint >= 500) {
+        if (unlockPointPreference >= 500) {
             image4.setImageResource(galleryArrayList.get(4));
             image4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -106,7 +113,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPoint >= 600) {
+        if (unlockPointPreference >= 600) {
             image5.setImageResource(galleryArrayList.get(5));
             image5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,7 +123,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPoint >= 700) {
+        if (unlockPointPreference >= 700) {
             image6.setImageResource(galleryArrayList.get(6));
             image6.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -126,7 +133,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPoint >= 800) {
+        if (unlockPointPreference >= 800) {
             image7.setImageResource(galleryArrayList.get(7));
             image7.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -143,11 +150,12 @@ public class GalleryFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         bigImage = new ImageView(view.getContext());
         bigImage.setImageResource(galleryArrayList.get(positionImage));
-        bigImage.setAdjustViewBounds(true);
         builder.setView(bigImage);
         AlertDialog alert = builder.create();
+        alert.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        alert.getWindow().getDecorView().setBackgroundResource(R.color.transparentBlack);
+        alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
         alert.show();
-        alert.getWindow().getDecorView().setBackgroundResource(android.R.color.transparent);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = alert.getWindow();
         lp.copyFrom(window.getAttributes());

@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -51,6 +52,14 @@ public class HomeActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         setContentView(R.layout.activity_home);
+
+        //Save initual values for preferences
+        this.getPreferencesSettings().getInt("galleryUnlock", 0);
+        this.getPreferencesSettings().getFloat("volumenMusic", 1.0f);
+        this.getPreferencesSettings().getInt("volumenMusicBar", 100);
+        this.getPreferencesSettings().getFloat("volumenSound", 1.0f);
+        this.getPreferencesSettings().getInt("volumenSoundBar", 100);
+        this.getPreferencesSettings().getBoolean("explicitImage", true);
 
         //Start Fragment
         gameStartFragment = new GameStartFragment();
@@ -168,7 +177,9 @@ public class HomeActivity extends AppCompatActivity {
         return moh;
     }
 
-    public SharedPreferences getPreferencesSettings() { return preferencesSettings; }
+    public SharedPreferences getPreferencesSettings() {
+        return preferencesSettings;
+    }
 
     @Override
     public void onBackPressed() {
