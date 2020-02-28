@@ -54,12 +54,12 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         //Save initual values for preferences
-        this.getPreferencesSettings().getInt("galleryUnlock", 0);
-        this.getPreferencesSettings().getFloat("volumenMusic", 1.0f);
-        this.getPreferencesSettings().getInt("volumenMusicBar", 100);
-        this.getPreferencesSettings().getFloat("volumenSound", 1.0f);
-        this.getPreferencesSettings().getInt("volumenSoundBar", 100);
-        this.getPreferencesSettings().getBoolean("explicitImage", true);
+        preferencesSettings.getInt("galleryUnlock", 0);
+        preferencesSettings.getFloat("volumenMusic", 1.0f);
+        preferencesSettings.getInt("volumenMusicBar", 100);
+        preferencesSettings.getFloat("volumenSound", 1.0f);
+        preferencesSettings.getInt("volumenSoundBar", 100);
+        preferencesSettings.getBoolean("explicitImage", true);
 
         //Start Fragment
         gameStartFragment = new GameStartFragment();

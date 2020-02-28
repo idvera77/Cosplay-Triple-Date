@@ -1,0 +1,13 @@
+package com.mystra77.visualnovel.stages;
+
+import android.media.MediaPlayer;
+
+import com.mystra77.visualnovel.R;
+
+public class Stage1 extends Stage{
+
+    public Stage1() {
+        setStageBackground(R.mipmap.strech);
+        setStageMusic(R.raw.test_music);
+    }
+}
