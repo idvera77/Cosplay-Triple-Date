@@ -4,7 +4,6 @@ package com.mystra77.visualnovel.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -137,14 +136,17 @@ public class ContinueFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         activity.getMoh().deleteSaveGame(deleteSaveId);
                         if (deleteSaveId == 1) {
+                            dialog.dismiss();
                             load1.setText(R.string.empty);
                             load1.setEnabled(false);
                             delete1.setEnabled(false);
                         } else if (deleteSaveId == 2) {
+                            dialog.dismiss();
                             load2.setText(R.string.empty);
                             load2.setEnabled(false);
                             delete2.setEnabled(false);
                         } else if (deleteSaveId == 3) {
+                            dialog.dismiss();
                             load3.setText(R.string.empty);
                             load3.setEnabled(false);
                             delete3.setEnabled(false);

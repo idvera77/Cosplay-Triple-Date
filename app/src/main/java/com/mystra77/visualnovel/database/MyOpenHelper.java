@@ -68,7 +68,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         return player;
     }
 
-    public void deleteSaveGame(int id){
+    public void deleteSaveGame(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(Constants.getTableGame(), Constants.getKeyId() + "=" + id, null);
         db.execSQL("INSERT INTO " + Constants.getTableGame() + "(" + Constants.getKeyId() + ") VALUES (" + id + ")");

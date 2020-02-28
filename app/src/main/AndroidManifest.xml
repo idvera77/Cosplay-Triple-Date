@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".Game"
-            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Game"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="landscape" />
@@ -24,7 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:enabled="true" android:name="com.mystra77.visualnovel.services.ServiceGallery" android:stopWithTask="true" />
+
+        <service
+            android:name="com.mystra77.visualnovel.services.ServiceGallery"
+            android:enabled="true"
+            android:stopWithTask="true" />
     </application>
 
 </manifest>

@@ -42,7 +42,7 @@ public class GameStartFragment extends Fragment {
         unlockLastSave = activity.getMoh().fillLoadButton();
 
         for (String lastSave : unlockLastSave) {
-            if(!lastSave.equals(".")){
+            if (!lastSave.equals(".")) {
                 loadLastSave.setEnabled(true);
             }
         }
@@ -72,7 +72,6 @@ public class GameStartFragment extends Fragment {
                 startActivity(intentNewGame);
             }
         });
-
 
         return view;
     }

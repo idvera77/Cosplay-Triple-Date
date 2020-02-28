@@ -5,7 +5,8 @@
     <string name="CONTINUE">CONTINUE</string>
     <string name="gallery">GALLERY</string>
     <string name="settings">SETTINGS</string>
-    <string name="exit">Exit</string>
+    <string name="exit">EXIT</string>
+    <string name="log">LOG</string>
     <string name="exitQuestion">Do you really want to exit?</string>
     <string name="saveGame">Do you want to save?</string>
     <string name="deleteSaveGame">Are you sure you want to delete this save?</string>

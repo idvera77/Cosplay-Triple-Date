@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 import com.mystra77.visualnovel.characters.GirlCharacters;
 import com.mystra77.visualnovel.characters.Mature;
@@ -29,10 +30,11 @@ public class Game extends AppCompatActivity {
     private Player player;
     private SharedPreferences preferencesSettings;
     private ConstraintLayout layoutBackground;
-    private MediaPlayer mediaPlayerMusic, mediaPlayerSound;
+    private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
     private float volumenMusic, volumenSound;
     private boolean explicitImage;
     private String textGirl;
+    private Button buttonLog, buttonExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,13 @@ public class Game extends AppCompatActivity {
         volumenSound = preferencesSettings.getFloat("volumenSound", 100);
         explicitImage = preferencesSettings.getBoolean("explicitImage", true);
 
+
         layoutBackground = findViewById(R.id.stageID);
+        buttonLog = findViewById(R.id.btnLog);
+        buttonExit = findViewById(R.id.btnExit);
+
+        soundClick = MediaPlayer.create(this, R.raw.sound_click);
+        soundClick.setVolume(0.4f, 0.4f);
 
         //Open database
         moh = new MyOpenHelper(this);
@@ -63,10 +71,10 @@ public class Game extends AppCompatActivity {
         }
 
         //Load all
-        if(player.getStage() >= 1 && player.getStage() < 2){
+        if (player.getStage() >= 1 && player.getStage() < 2) {
             Stage1 stage1 = new Stage1();
             loadStage(stage1, 0, 0);
-        } else if (player.getStage() >= 2){
+        } else if (player.getStage() >= 2) {
             Stage2 stage2 = new Stage2();
             loadStage(stage2, 0, 1);
         }
@@ -105,17 +113,8 @@ public class Game extends AppCompatActivity {
                 .show();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        mediaPlayerMusic.stop();
-        mediaPlayerMusic.release();
-        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        startActivity(new Intent(this, HomeActivity.class));
-    }
-
     //SEGUIR CON LA GRAN MADRE DE LAS FUNCIONES
-    public void loadStage(Stage stage, int selectGirl, int selectStageText){
+    public void loadStage(Stage stage, int selectGirl, int selectStageText) {
         //Image Background
         layoutBackground.setBackground(getDrawable(stage.getStageBackground()));
         //Music Background
@@ -124,55 +123,90 @@ public class Game extends AppCompatActivity {
         mediaPlayerMusic.setLooping(true);
         mediaPlayerMusic.start();
 
-        if(selectGirl == 0){
+        if (selectGirl == 0) {
             Tsundere tsundere = new Tsundere();
             selectGirlDialog(tsundere, selectStageText);
-        } if(selectGirl == 1){
+        }
+        if (selectGirl == 1) {
             Neko neko = new Neko();
             selectGirlDialog(neko, selectStageText);
-        } if(selectGirl == 2){
+        }
+        if (selectGirl == 2) {
             Mature mature = new Mature();
             selectGirlDialog(mature, selectStageText);
         }
     }
 
-    public void selectGirlDialog(GirlCharacters girlCharacters, int selectStage){
-        if(selectStage == 1){
+    public void selectGirlDialog(GirlCharacters girlCharacters, int selectStage) {
+        if (selectStage == 1) {
             textGirl = girlCharacters.getTextStage1();
         }
-        if(selectStage == 2){
+        if (selectStage == 2) {
             textGirl = girlCharacters.getTextStage2();
         }
-        if(selectStage == 3){
+        if (selectStage == 3) {
             textGirl = girlCharacters.getTextStage3();
         }
-        if(selectStage == 4){
+        if (selectStage == 4) {
             textGirl = girlCharacters.getTextStage4();
         }
     }
 
-    public void loadSound(GirlCharacters girl, int emotion){
-        if(emotion == 0){
+    public void loadSound(GirlCharacters girl, int emotion) {
+        if (emotion == 0) {
             mediaPlayerSound = MediaPlayer.create(this, girl.getImageNormal());
         }
-        if (emotion == 1){
-            mediaPlayerSound = MediaPlayer.create(this, girl.getImageLaught() );
+        if (emotion == 1) {
+            mediaPlayerSound = MediaPlayer.create(this, girl.getImageLaught());
         }
-        if (emotion == 2){
-            mediaPlayerSound = MediaPlayer.create(this, girl.getImageLaught() );
+        if (emotion == 2) {
+            mediaPlayerSound = MediaPlayer.create(this, girl.getImageLaught());
         }
         mediaPlayerSound.setVolume(volumenMusic, volumenMusic);
         mediaPlayerSound.setLooping(true);
         mediaPlayerSound.start();
     }
 
+    public void openLog(View view) {
+    }
+
+    public void backToMainMenu(View view) {
+        soundClick.start();
+        new AlertDialog.Builder(this, R.style.AlertDialogCustom)
+                .setMessage(R.string.exitQuestion)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        back();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
+    }
+
+    public void back() {
+        this.finish();
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
+
     public void onDestroy() {
         super.onDestroy();
         if (mediaPlayerMusic != null) {
+            mediaPlayerMusic.stop();
             mediaPlayerMusic.release();
         }
         if (mediaPlayerSound != null) {
+            mediaPlayerSound.stop();
             mediaPlayerSound.release();
+        }
+        if (soundClick != null) {
+            soundClick.release();
         }
     }
 }

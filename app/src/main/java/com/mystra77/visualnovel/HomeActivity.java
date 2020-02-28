@@ -122,6 +122,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                         moveTaskToBack(true);
                         android.os.Process.killProcess(android.os.Process.myPid());
                         System.exit(1);
@@ -138,6 +139,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.patreon.com/mystra77")));
                     }
                 })
@@ -152,6 +154,7 @@ public class HomeActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/mystra77")));
                     }
                 })
@@ -192,18 +195,14 @@ public class HomeActivity extends AppCompatActivity {
         return preferencesSettings;
     }
 
-    public MediaPlayer getSoundClick() {
-        return soundClick;
-    }
+    public MediaPlayer getSoundClick() { return soundClick; }
 
     public MediaPlayer getSoundSaveLoad() {
         return soundSaveLoad;
     }
 
     @Override
-    public void onBackPressed() {
-
-    }
+    public void onBackPressed() { }
 
     public void onDestroy() {
         super.onDestroy();
