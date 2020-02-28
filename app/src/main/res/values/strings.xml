@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Mystra77VN</string>
     <string name="newGame">New Game</string>
+    <string name="start">START</string>
+    <string name="CONTINUE">CONTINUE</string>
+    <string name="gallery">GALLERY</string>
+    <string name="settings">SETTINGS</string>
     <string name="exit">Exit</string>
     <string name="exitQuestion">Do you really want to exit?</string>
     <string name="saveGame">Do you want to save?</string>
@@ -18,8 +22,8 @@
     <string name="delete3">Delete Save 3</string>
     <string name="musicVolume">MUSIC VOLUME</string>
     <string name="musicONOFF">MUSIC</string>
-    <string name="soundVolume">SOUND VOLUME</string>
-    <string name="soundONOFF">SOUND</string>
+    <string name="soundVolume">VOICE VOLUME</string>
+    <string name="soundONOFF">VOICE</string>
     <string name="explicitImageONOF">EXPLICIT IMAGES</string>
     <string name="mute">MUTE</string>
     <string name="OFF">OFF</string>

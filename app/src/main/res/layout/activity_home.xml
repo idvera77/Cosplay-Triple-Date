@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_menu"
             android:onClick="Start"
-            android:text="Start" />
+            android:text="@string/start" />
 
         <Button
             android:id="@+id/btnContinue"
@@ -63,7 +63,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_menu"
             android:onClick="Continue"
-            android:text="Continue" />
+            android:text="@string/CONTINUE" />
 
         <Button
             android:id="@+id/btnGallery"
@@ -72,7 +72,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_menu"
             android:onClick="Gallery"
-            android:text="Gallery" />
+            android:text="@string/gallery" />
 
         <Button
             android:id="@+id/btnSettings"
@@ -81,7 +81,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_menu"
             android:onClick="Settings"
-            android:text="Settings" />
+            android:text="@string/settings" />
 
         <Button
             android:id="@+id/btnExit"

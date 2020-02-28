@@ -1,24 +1,22 @@
 package com.mystra77.visualnovel.stages;
 
+import com.mystra77.visualnovel.characters.Mature;
+import com.mystra77.visualnovel.characters.Neko;
+import com.mystra77.visualnovel.characters.Tsundere;
+
 public abstract class Stage {
     private int stageMusic;
     private int stageBackground;
     private String intro;
-    private String tsundere;
-    private String neko;
-    private String mature;
 
     public Stage(){
 
     }
 
-    public Stage(int stageMusic, int stageBackground, String intro, String tsundere, String neko, String mature) {
+    public Stage(int stageMusic, int stageBackground, String intro, Tsundere tsundere, Neko neko, Mature mature) {
         this.stageMusic = stageMusic;
         this.stageBackground = stageBackground;
         this.intro = intro;
-        this.tsundere = tsundere;
-        this.neko = neko;
-        this.mature = mature;
     }
 
     public int getStageMusic() {
@@ -45,27 +43,4 @@ public abstract class Stage {
         this.intro = intro;
     }
 
-    public String getTsundere() {
-        return tsundere;
-    }
-
-    public void setTsundere(String tsundere) {
-        this.tsundere = tsundere;
-    }
-
-    public String getNeko() {
-        return neko;
-    }
-
-    public void setNeko(String neko) {
-        this.neko = neko;
-    }
-
-    public String getMature() {
-        return mature;
-    }
-
-    public void setMature(String mature) {
-        this.mature = mature;
-    }
 }

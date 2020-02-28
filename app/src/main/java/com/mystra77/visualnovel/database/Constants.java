@@ -16,7 +16,7 @@ public class Constants {
 
     private static final String CREATE_TABLE_GAME = "CREATE TABLE " + TABLE_GAME + "("
             + KEY_ID + " INTEGER PRIMARY KEY NOT NULL, " + TIME + " TIMESTAMP DEFAULT 0, "
-            + STAGE + " INTEGER," + TSUNDERE + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
+            + STAGE + " INTEGER DEFAULT 1," + TSUNDERE + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
 
     private static final String UPDATE_TIME_TRIGGER = "CREATE TRIGGER update_time_trigger " +
             "AFTER UPDATE ON " + TABLE_GAME + " BEGIN " +

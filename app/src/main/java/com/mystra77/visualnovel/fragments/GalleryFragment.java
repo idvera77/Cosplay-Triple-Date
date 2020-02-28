@@ -19,8 +19,6 @@ import com.mystra77.visualnovel.R;
 
 import java.util.ArrayList;
 
-import static android.view.View.GONE;
-
 
 public class GalleryFragment extends Fragment {
     private HomeActivity activity;
@@ -58,7 +56,7 @@ public class GalleryFragment extends Fragment {
         galleryArrayList.add(R.mipmap.selfie);
 
         unlockPointDB = activity.getMoh().unlockGallerySelect();
-        if(unlockPointDB > activity.getPreferencesSettings().getInt("galleryUnlock", 0)){
+        if (unlockPointDB > activity.getPreferencesSettings().getInt("galleryUnlock", 0)) {
             SharedPreferences.Editor editor = activity.getPreferencesSettings().edit();
             editor.putInt("galleryUnlock", unlockPointDB);
             editor.commit();
@@ -99,7 +97,6 @@ public class GalleryFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     showImage(3);
-
                 }
             });
         }
@@ -147,6 +144,7 @@ public class GalleryFragment extends Fragment {
     }
 
     public void showImage(int positionImage) {
+        activity.getSoundClick().start();
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         bigImage = new ImageView(view.getContext());
         bigImage.setImageResource(galleryArrayList.get(positionImage));

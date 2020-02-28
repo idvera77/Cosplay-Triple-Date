@@ -55,6 +55,19 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         return player;
     }
 
+    public Player loadLastSave() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Player player;
+        Cursor result = db.query(Constants.getTableGame(), null, null, null, null, null, Constants.getTIME() + " DESC");
+        result.moveToFirst();
+        player = new Player(result.getInt(result.getColumnIndex(Constants.getSTAGE())),
+                result.getInt(result.getColumnIndex(Constants.getTSUNDERE())),
+                result.getInt(result.getColumnIndex(Constants.getNEKO())),
+                result.getInt(result.getColumnIndex(Constants.getMATURE())),
+                result.getInt(result.getColumnIndex(Constants.getSCORE())));
+        return player;
+    }
+
     public void deleteSaveGame(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(Constants.getTableGame(), Constants.getKeyId() + "=" + id, null);

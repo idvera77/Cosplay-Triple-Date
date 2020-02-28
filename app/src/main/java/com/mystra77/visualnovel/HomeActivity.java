@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     private Handler handler;
     private MyOpenHelper moh;
     private SharedPreferences preferencesSettings;
+    private MediaPlayer soundClick, soundSaveLoad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,12 @@ public class HomeActivity extends AppCompatActivity {
         preferencesSettings.getFloat("volumenSound", 1.0f);
         preferencesSettings.getInt("volumenSoundBar", 100);
         preferencesSettings.getBoolean("explicitImage", true);
+
+        //SoundClick
+        soundClick = MediaPlayer.create(this, R.raw.sound_click);
+        soundClick.setVolume(0.4f, 0.4f);
+        soundSaveLoad = MediaPlayer.create(this, R.raw.start_save_load);
+        soundSaveLoad.setVolume(0.4f, 0.4f);
 
         //Start Fragment
         gameStartFragment = new GameStartFragment();
@@ -109,6 +116,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void Exit(View view) {
+        soundClick.start();
         new AlertDialog.Builder(this, R.style.AlertDialogCustom)
                 .setMessage(R.string.exitQuestion)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -124,6 +132,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void goToPatreon(View view) {
+        soundClick.start();
         new AlertDialog.Builder(this, R.style.AlertDialogCustom)
                 .setMessage(R.string.moveToPatreon)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -137,6 +146,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void goToTwitter(View view) {
+        soundClick.start();
         new AlertDialog.Builder(this, R.style.AlertDialogCustom)
                 .setMessage(R.string.moveToTwitter)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -150,6 +160,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void disableButton(Button button) {
+        soundClick.start();
         final Button lockButton = button;
         for (Button buttonPosition : arrayButtons) {
             buttonPosition.setEnabled(false);
@@ -181,9 +192,28 @@ public class HomeActivity extends AppCompatActivity {
         return preferencesSettings;
     }
 
+    public MediaPlayer getSoundClick() {
+        return soundClick;
+    }
+
+    public MediaPlayer getSoundSaveLoad() {
+        return soundSaveLoad;
+    }
+
     @Override
     public void onBackPressed() {
 
     }
 
+    public void onDestroy() {
+        super.onDestroy();
+        if (soundClick != null) {
+            soundClick.stop();
+            soundClick.release();
+        }
+        if (soundSaveLoad != null) {
+            soundSaveLoad.stop();
+            soundSaveLoad.release();
+        }
+    }
 }

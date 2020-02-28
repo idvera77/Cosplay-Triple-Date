@@ -10,7 +10,7 @@ public class Player implements Serializable {
     private int score;
 
     public Player() {
-        this.stage = 0;
+        this.stage = 1;
         this.tsundere = 0;
         this.neko = 0;
         this.mature = 0;

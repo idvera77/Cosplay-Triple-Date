@@ -68,6 +68,7 @@ public class ContinueFragment extends Fragment {
         load1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                activity.getSoundSaveLoad().start();
                 Bundle bundle = new Bundle();
                 Player player = activity.getMoh().loadGame(1);
                 bundle.putSerializable("player", player);
@@ -80,6 +81,7 @@ public class ContinueFragment extends Fragment {
         load2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                activity.getSoundSaveLoad().start();
                 Bundle bundle = new Bundle();
                 Player player = activity.getMoh().loadGame(2);
                 bundle.putSerializable("player", player);
@@ -92,6 +94,7 @@ public class ContinueFragment extends Fragment {
         load3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                activity.getSoundSaveLoad().start();
                 Bundle bundle = new Bundle();
                 Player player = activity.getMoh().loadGame(3);
                 bundle.putSerializable("player", player);
@@ -126,6 +129,7 @@ public class ContinueFragment extends Fragment {
     }
 
     public void deleteAlert(final int deleteSaveId) {
+        activity.getSoundClick().start();
         new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
                 .setMessage(R.string.deleteSaveGame)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {

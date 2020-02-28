@@ -1,8 +1,8 @@
 package com.mystra77.visualnovel.characters;
 
-public class Neko extends GirlCharacters {
+public class Tsundere extends GirlCharacters {
 
-    public Neko() {
+    public Tsundere() {
         //setImageAngry();
         //setImageNormal();
         //setImageLaught();
