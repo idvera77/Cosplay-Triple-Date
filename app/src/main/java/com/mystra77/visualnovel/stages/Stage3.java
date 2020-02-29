@@ -5,7 +5,7 @@ import com.mystra77.visualnovel.R;
 public class Stage3 extends Stage{
 
     public Stage3() {
-        setStageBackground(R.mipmap.strech);
+        setStageBackground(R.mipmap.stage3backgound);
         setStageMusic(R.raw.test_music);
     }
 }

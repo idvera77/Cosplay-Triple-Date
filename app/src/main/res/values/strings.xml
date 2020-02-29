@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Mystra77VN</string>
     <string name="newGame">New Game</string>
+    <string name="next">NEXT</string>
     <string name="start">START</string>
     <string name="CONTINUE">CONTINUE</string>
     <string name="gallery">GALLERY</string>

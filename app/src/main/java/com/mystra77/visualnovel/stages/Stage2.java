@@ -6,7 +6,7 @@ public class Stage2 extends Stage {
 
 
     public Stage2() {
-        setStageBackground(R.mipmap.demon);
+        setStageBackground(R.mipmap.stage2background);
         setStageMusic(R.raw.test_sound);
     }
 }
