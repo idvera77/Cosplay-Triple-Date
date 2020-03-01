@@ -72,11 +72,10 @@
                 android:layout_height="wrap_content"
                 android:onClick="save1"
                 android:text="@string/save1"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/btnSave2"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnExitGame"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
@@ -85,8 +84,7 @@
                 android:layout_height="wrap_content"
                 android:onClick="save2"
                 android:text="@string/save2"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/btnSave3"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btnSave1"
@@ -98,9 +96,8 @@
                 android:layout_height="wrap_content"
                 android:onClick="save3"
                 android:text="@string/save3"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/btnLog"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btnSave2"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -184,6 +181,7 @@
         android:scaleX="0.5"
         android:scaleY="0.5"
         android:text="@string/next"
+        android:onClick="clickNext"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

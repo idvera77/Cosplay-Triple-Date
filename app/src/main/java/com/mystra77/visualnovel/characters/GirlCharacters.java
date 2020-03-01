@@ -6,17 +6,17 @@ public abstract class GirlCharacters {
     private int imageLaughtLeft, imageLaughtRight;
     private int soundAngry;
     private int soundNormal;
-    private int soundLaught;
+    private int soundHappy;
     private String textStage1;
     private String textStage2;
     private String textStage3;
     private String textStage4;
 
-    public GirlCharacters(){
+    public GirlCharacters() {
 
     }
 
-    public GirlCharacters(int imageAngryLeft, int imageAngryRight, int imageNormaLeft, int imageNormalRight, int imageLaughtLeft, int imageLaughtRight, int soundAngry, int soundNormal, int soundLaught, String textStage1, String textStage2, String textStage3, String textStage4) {
+    public GirlCharacters(int imageAngryLeft, int imageAngryRight, int imageNormaLeft, int imageNormalRight, int imageLaughtLeft, int imageLaughtRight, int soundAngry, int soundNormal, int soundHappy, String textStage1, String textStage2, String textStage3, String textStage4) {
         this.imageAngryLeft = imageAngryLeft;
         this.imageAngryRight = imageAngryRight;
         this.imageNormaLeft = imageNormaLeft;
@@ -25,7 +25,7 @@ public abstract class GirlCharacters {
         this.imageLaughtRight = imageLaughtRight;
         this.soundAngry = soundAngry;
         this.soundNormal = soundNormal;
-        this.soundLaught = soundLaught;
+        this.soundHappy = soundHappy;
         this.textStage1 = textStage1;
         this.textStage2 = textStage2;
         this.textStage3 = textStage3;
@@ -64,8 +64,8 @@ public abstract class GirlCharacters {
         return soundNormal;
     }
 
-    public int getSoundLaught() {
-        return soundLaught;
+    public int getSoundHappy() {
+        return soundHappy;
     }
 
     public String getTextStage1() {
@@ -116,8 +116,8 @@ public abstract class GirlCharacters {
         this.soundNormal = soundNormal;
     }
 
-    public void setSoundLaught(int soundLaught) {
-        this.soundLaught = soundLaught;
+    public void setSoundHappy(int soundHappy) {
+        this.soundHappy = soundHappy;
     }
 
     public void setTextStage1(String textStage1) {

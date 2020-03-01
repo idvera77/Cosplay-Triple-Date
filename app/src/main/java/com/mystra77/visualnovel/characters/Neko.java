@@ -12,6 +12,10 @@ public class Neko extends GirlCharacters {
         setImageAngryLeft(R.mipmap.left_neko_angry);
         setImageAngryRight(R.mipmap.right_neko_angry);
 
+        setSoundNormal(R.raw.neko_sound_normal);
+        setSoundHappy(R.raw.neko_sound_happy);
+        setSoundAngry(R.raw.neko_sound_angry);
+
         setTextStage1("NEKO 1");
         setTextStage2("NEKO 2");
     }

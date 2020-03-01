@@ -65,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
         //SoundClick
         soundClick = MediaPlayer.create(this, R.raw.sound_click);
         soundClick.setVolume(0.4f, 0.4f);
-        soundSaveLoad = MediaPlayer.create(this, R.raw.start_save_load);
+        soundSaveLoad = MediaPlayer.create(this, R.raw.sound_load);
         soundSaveLoad.setVolume(0.4f, 0.4f);
 
         //Start Fragment
@@ -195,14 +195,17 @@ public class HomeActivity extends AppCompatActivity {
         return preferencesSettings;
     }
 
-    public MediaPlayer getSoundClick() { return soundClick; }
+    public MediaPlayer getSoundClick() {
+        return soundClick;
+    }
 
     public MediaPlayer getSoundSaveLoad() {
         return soundSaveLoad;
     }
 
     @Override
-    public void onBackPressed() { }
+    public void onBackPressed() {
+    }
 
     public void onDestroy() {
         super.onDestroy();

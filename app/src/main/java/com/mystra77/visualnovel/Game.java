@@ -1,6 +1,5 @@
 package com.mystra77.visualnovel;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -22,7 +20,7 @@ import android.widget.TextView;
 import com.mystra77.visualnovel.characters.GirlCharacters;
 import com.mystra77.visualnovel.characters.Mature;
 import com.mystra77.visualnovel.characters.Neko;
-import com.mystra77.visualnovel.characters.Tsundere;
+import com.mystra77.visualnovel.characters.Angel;
 import com.mystra77.visualnovel.classes.Player;
 import com.mystra77.visualnovel.database.MyOpenHelper;
 import com.mystra77.visualnovel.stages.Stage;
@@ -38,12 +36,12 @@ public class Game extends AppCompatActivity {
     private float volumenMusic, volumenSound;
     private boolean explicitImage;
     private String textGirl;
-    private Button buttonLog, buttonExit;
     private int lengthMusic;
     private ImageView leftImage, centerImage, rightImage;
     private TextView textDialogBox, textDialogLog, textCharacterName;
     private ScrollView containerText;
     private int counterLog;
+    private GirlCharacters mature, neko, angel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +60,7 @@ public class Game extends AppCompatActivity {
         volumenSound = preferencesSettings.getFloat("volumenSound", 100);
         explicitImage = preferencesSettings.getBoolean("explicitImage", true);
 
-
         layoutBackground = findViewById(R.id.stageID);
-        buttonLog = findViewById(R.id.btnLog);
-        buttonExit = findViewById(R.id.btnExit);
         leftImage = findViewById(R.id.leftPosition);
         centerImage = findViewById(R.id.centerPosition);
         rightImage = findViewById(R.id.rightPosition);
@@ -77,6 +72,10 @@ public class Game extends AppCompatActivity {
 
         soundClick = MediaPlayer.create(this, R.raw.sound_click);
         soundClick.setVolume(0.4f, 0.4f);
+
+        neko = new Neko();
+        angel = new Angel();
+        mature = new Mature();
 
         //Open database
         moh = new MyOpenHelper(this);
@@ -106,14 +105,17 @@ public class Game extends AppCompatActivity {
     }
 
     public void save1(View view) {
+        soundClick.start();
         saveFile(1);
     }
 
     public void save2(View view) {
+        soundClick.start();
         saveFile(2);
     }
 
     public void save3(View view) {
+        soundClick.start();
         saveFile(3);
     }
 
@@ -141,26 +143,25 @@ public class Game extends AppCompatActivity {
         mediaPlayerMusic.start();
 
         if (selectGirl == 0) {
-            Tsundere tsundere = new Tsundere();
-            selectGirlDialog(tsundere, selectStageText);
+            selectGirlDialog(angel, selectStageText);
             textDialogLog.setText(textGirl);
         }
         if (selectGirl == 1) {
-            Neko neko = new Neko();
             selectGirlDialog(neko, selectStageText);
             centerImage.setBackground(getDrawable(neko.getImageNormalRight()));
             textDialogLog.setText(textGirl);
             textCharacterName.setText("Neko");
         }
         if (selectGirl == 2) {
-            Mature mature = new Mature();
-            Neko neko = new Neko();
             selectGirlDialog(mature, selectStageText);
             rightImage.setBackground(getDrawable(mature.getImageNormaLeft()));
             leftImage.setBackground(getDrawable(neko.getImageLaughtRight()));
             textDialogLog.setText(textGirl);
             textCharacterName.setText("Mature");
         }
+
+        //SELECT 3 ES EL INICIO DEL JUEGO
+        // SE CARGAN LOS 3 PERSONAJES, SUS SONIDOS Y SUS IMAGENES
     }
 
     public void selectGirlDialog(GirlCharacters girlCharacters, int selectStage) {
@@ -180,7 +181,6 @@ public class Game extends AppCompatActivity {
             textGirl = girlCharacters.getTextStage4();
             textDialogBox.setText(textGirl);
         }
-
     }
 
     public void loadSound(GirlCharacters girl, int emotion) {
@@ -188,7 +188,7 @@ public class Game extends AppCompatActivity {
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
         }
         if (emotion == 1) {
-            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundLaught());
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
         }
         if (emotion == 2) {
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
@@ -200,9 +200,9 @@ public class Game extends AppCompatActivity {
 
     public void openLog(View view) {
         soundClick.start();
-        if(counterLog % 2 == 0){
+        if (counterLog % 2 == 0) {
             containerText.setVisibility(view.INVISIBLE);
-        }else{
+        } else {
             containerText.setVisibility(view.VISIBLE);
         }
         counterLog++;
@@ -215,6 +215,7 @@ public class Game extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        mediaPlayerMusic.stop();
                         dialog.dismiss();
                         back();
                     }
@@ -223,11 +224,12 @@ public class Game extends AppCompatActivity {
                 .show();
     }
 
+
     public void back() {
         this.finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY );
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
@@ -248,6 +250,7 @@ public class Game extends AppCompatActivity {
         super.onResume();
         mediaPlayerMusic.seekTo(lengthMusic);
         mediaPlayerMusic.start();
+        mediaPlayerMusic.setLooping(true);
 
     }
 
@@ -264,5 +267,12 @@ public class Game extends AppCompatActivity {
         if (soundClick != null) {
             soundClick.release();
         }
+    }
+
+    public void clickNext(View view) {
+        soundClick.start();
+        //if (textGirl)
+        //textDialogBox.setText(textGirl);
+        //textDialogLog.setText(textGirl);
     }
 }

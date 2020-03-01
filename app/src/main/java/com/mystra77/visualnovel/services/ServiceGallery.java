@@ -22,13 +22,10 @@ import com.mystra77.visualnovel.R;
 
 public class ServiceGallery extends Service {
 
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {
         //ARREGLAR
-
-
         NotificationManager nmanager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationChannel channel = new NotificationChannel("principal", "principal", NotificationManager.IMPORTANCE_DEFAULT);
         nmanager.createNotificationChannel(channel);
@@ -60,8 +57,6 @@ public class ServiceGallery extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);
     }
-
-
 
     @Override
     public void onDestroy() {

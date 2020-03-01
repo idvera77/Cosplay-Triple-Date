@@ -12,7 +12,11 @@ public class Mature extends GirlCharacters {
         setImageAngryLeft(R.mipmap.left_mature_angry);
         setImageAngryRight(R.mipmap.right_mature_angry);
 
-        setTextStage1("^_^ Jose, vente con nosotras que queremos darte calorcito. ^_^ Jose, vente con nosotras que queremos darte calorcito. ^_^ Jose, vente con nosotras que queremos darte calorcito. ^_^ Jose, vente con nosotras que queremos darte calorcito. ^_^ Jose, vente con nosotras que queremos darte calorcito.");
+        setSoundNormal(R.raw.mature_sound_normal);
+        setSoundHappy(R.raw.mature_sound_happy);
+        setSoundAngry(R.raw.mature_sound_angry);
+
+        setTextStage1("^_^ Jose, vente con nosotras que queremos darte calorcito.");
         setTextStage2("MATURE 2");
     }
 }

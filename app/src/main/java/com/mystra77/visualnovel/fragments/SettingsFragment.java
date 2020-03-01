@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
-
 import com.mystra77.visualnovel.HomeActivity;
 import com.mystra77.visualnovel.R;
 
@@ -31,7 +30,6 @@ public class SettingsFragment extends Fragment {
     public SettingsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

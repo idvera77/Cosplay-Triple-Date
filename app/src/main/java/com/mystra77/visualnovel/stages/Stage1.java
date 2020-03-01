@@ -4,10 +4,11 @@ import android.media.MediaPlayer;
 
 import com.mystra77.visualnovel.R;
 
-public class Stage1 extends Stage{
+
+public class Stage1 extends Stage {
 
     public Stage1() {
         setStageBackground(R.mipmap.stage1background);
-        setStageMusic(R.raw.test_music);
+        setStageMusic(R.raw.theme_stage1);
     }
 }
