@@ -10,9 +10,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -27,6 +30,13 @@ import com.mystra77.visualnovel.stages.Stage;
 import com.mystra77.visualnovel.stages.Stage1;
 import com.mystra77.visualnovel.stages.Stage2;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Game extends AppCompatActivity {
     private MyOpenHelper moh;
     private Player player;
@@ -35,13 +45,16 @@ public class Game extends AppCompatActivity {
     private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
     private float volumenMusic, volumenSound;
     private boolean explicitImage;
-    private String textGirl;
+    private String allText;
     private int lengthMusic;
     private ImageView leftImage, centerImage, rightImage;
     private TextView textDialogBox, textDialogLog, textCharacterName;
     private ScrollView containerText;
     private int counterLog;
     private GirlCharacters mature, neko, angel;
+    private int counterLines;
+    private Button btnNext, btnExit;
+    private ConstraintLayout layoutTextBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +80,12 @@ public class Game extends AppCompatActivity {
         textDialogBox = findViewById(R.id.textBox);
         textDialogLog = findViewById(R.id.textBoxLog);
         textCharacterName = findViewById(R.id.nameCharacterText);
+        btnNext = findViewById(R.id.btnNext);
+        btnExit = findViewById(R.id.btnExitGame);
         containerText = findViewById(R.id.containerDialog);
+        layoutTextBox = findViewById(R.id.layoutText);
         counterLog = 1;
+        counterLines = 0;
 
         soundClick = MediaPlayer.create(this, R.raw.sound_click);
         soundClick.setVolume(0.4f, 0.4f);
@@ -89,10 +106,14 @@ public class Game extends AppCompatActivity {
         //Load all
         if (player.getStage() >= 1 && player.getStage() < 2) {
             Stage1 stage1 = new Stage1();
-            loadStage(stage1, 2, 1);
+            loadStage(stage1, R.raw.script1);
+            rightImage.setBackground(getDrawable(mature.getImageNormaLeft()));
+            leftImage.setBackground(getDrawable(neko.getImageNormalRight()));
         } else if (player.getStage() >= 2) {
             Stage2 stage2 = new Stage2();
-            loadStage(stage2, 1, 2);
+            loadStage(stage2, R.raw.script1);
+            rightImage.setBackground(getDrawable(mature.getImageNormaLeft()));
+            leftImage.setBackground(getDrawable(neko.getImageNormalRight()));
         }
 
         /*
@@ -132,78 +153,18 @@ public class Game extends AppCompatActivity {
                 .show();
     }
 
-    //SEGUIR CON LA GRAN MADRE DE LAS FUNCIONES
-    public void loadStage(Stage stage, int selectGirl, int selectStageText) {
-        //Image Background
-        layoutBackground.setBackground(getDrawable(stage.getStageBackground()));
-        //Music Background
-        mediaPlayerMusic = MediaPlayer.create(this, stage.getStageMusic());
-        mediaPlayerMusic.setVolume(volumenMusic, volumenMusic);
-        mediaPlayerMusic.setLooping(true);
-        mediaPlayerMusic.start();
-
-        if (selectGirl == 0) {
-            selectGirlDialog(angel, selectStageText);
-            textDialogLog.setText(textGirl);
-        }
-        if (selectGirl == 1) {
-            selectGirlDialog(neko, selectStageText);
-            centerImage.setBackground(getDrawable(neko.getImageNormalRight()));
-            textDialogLog.setText(textGirl);
-            textCharacterName.setText("Neko");
-        }
-        if (selectGirl == 2) {
-            selectGirlDialog(mature, selectStageText);
-            rightImage.setBackground(getDrawable(mature.getImageNormaLeft()));
-            leftImage.setBackground(getDrawable(neko.getImageLaughtRight()));
-            textDialogLog.setText(textGirl);
-            textCharacterName.setText("Mature");
-        }
-
-        //SELECT 3 ES EL INICIO DEL JUEGO
-        // SE CARGAN LOS 3 PERSONAJES, SUS SONIDOS Y SUS IMAGENES
-    }
-
-    public void selectGirlDialog(GirlCharacters girlCharacters, int selectStage) {
-        if (selectStage == 1) {
-            textGirl = girlCharacters.getTextStage1();
-            textDialogBox.setText(textGirl);
-        }
-        if (selectStage == 2) {
-            textGirl = girlCharacters.getTextStage2();
-            textDialogBox.setText(textGirl);
-        }
-        if (selectStage == 3) {
-            textGirl = girlCharacters.getTextStage3();
-            textDialogBox.setText(textGirl);
-        }
-        if (selectStage == 4) {
-            textGirl = girlCharacters.getTextStage4();
-            textDialogBox.setText(textGirl);
-        }
-    }
-
-    public void loadSound(GirlCharacters girl, int emotion) {
-        if (emotion == 0) {
-            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
-        }
-        if (emotion == 1) {
-            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
-        }
-        if (emotion == 2) {
-            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
-        }
-        mediaPlayerSound.setVolume(volumenMusic, volumenMusic);
-        mediaPlayerSound.setLooping(true);
-        mediaPlayerSound.start();
-    }
-
     public void openLog(View view) {
         soundClick.start();
         if (counterLog % 2 == 0) {
             containerText.setVisibility(view.INVISIBLE);
+            layoutTextBox.setVisibility(View.VISIBLE);
+            btnExit.setVisibility(View.VISIBLE);
+            btnNext.setVisibility(View.VISIBLE);
         } else {
             containerText.setVisibility(view.VISIBLE);
+            layoutTextBox.setVisibility(View.GONE);
+            btnExit.setVisibility(View.GONE);
+            btnNext.setVisibility(View.GONE);
         }
         counterLog++;
     }
@@ -224,13 +185,81 @@ public class Game extends AppCompatActivity {
                 .show();
     }
 
-
     public void back() {
         this.finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
+    }
+
+    public void loadStage(Stage stage, int File) {
+        //Image Background
+        layoutBackground.setBackground(getDrawable(stage.getStageBackground()));
+        //Music Background
+        mediaPlayerMusic = MediaPlayer.create(this, stage.getStageMusic());
+        mediaPlayerMusic.setVolume(volumenMusic, volumenMusic);
+        mediaPlayerMusic.setLooping(true);
+        mediaPlayerMusic.start();
+        //Load all text
+        InputStream stream = getResources().openRawResource(File);
+        allText = convertStreamToString(stream);
+    }
+    //todo
+    //todo
+    public void clickNext(View view) {
+        soundClick.start();
+        String[] lines = allText.split(System.getProperty("line.separator"));
+        if(counterLines < lines.length){
+            if(lines[counterLines].equals("*lameruzo")){
+                loadVoice(neko, 1);
+                leftImage.setBackground(getDrawable(neko.getImageLaughtRight()));
+                rightImage.setBackground(getDrawable(mature.getImageLaughtLeft()));
+                textCharacterName.setText(neko.getName());
+                counterLines++;
+            }else{
+                textDialogBox.setText(lines[counterLines]);
+                textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+                textCharacterName.setText(mature.getName());
+                counterLines++;
+            }
+        }
+    }
+
+    public void loadVoice(GirlCharacters girl, int emotion) {
+        if(mediaPlayerSound != null){
+            mediaPlayerSound.stop();
+            mediaPlayerSound.release();
+        }
+        if (emotion == 0) {
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
+        }
+        if (emotion == 1) {
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
+        }
+        if (emotion == 2) {
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
+        }
+        mediaPlayerSound.setVolume(volumenMusic, volumenMusic);
+        mediaPlayerSound.start();
+    }
+
+    private static String convertStreamToString(InputStream is) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        try {
+            while ((line = reader.readLine()) != null) {
+                sb.append((line + "\n"));
+            }
+        } catch (IOException e) {
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+            }
+        }
+        return sb.toString();
     }
 
     @Override
@@ -251,7 +280,6 @@ public class Game extends AppCompatActivity {
         mediaPlayerMusic.seekTo(lengthMusic);
         mediaPlayerMusic.start();
         mediaPlayerMusic.setLooping(true);
-
     }
 
     public void onDestroy() {
@@ -267,12 +295,5 @@ public class Game extends AppCompatActivity {
         if (soundClick != null) {
             soundClick.release();
         }
-    }
-
-    public void clickNext(View view) {
-        soundClick.start();
-        //if (textGirl)
-        //textDialogBox.setText(textGirl);
-        //textDialogLog.setText(textGirl);
     }
 }

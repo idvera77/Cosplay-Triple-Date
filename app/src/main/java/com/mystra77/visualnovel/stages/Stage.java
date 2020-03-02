@@ -1,22 +1,32 @@
 package com.mystra77.visualnovel.stages;
 
+import android.os.Environment;
+
+import com.mystra77.visualnovel.R;
 import com.mystra77.visualnovel.characters.Mature;
 import com.mystra77.visualnovel.characters.Neko;
 import com.mystra77.visualnovel.characters.Angel;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+
+
 public abstract class Stage {
     private int stageMusic;
     private int stageBackground;
-    private String intro;
+    private String scriptPlot;
 
     public Stage() {
 
     }
 
-    public Stage(int stageMusic, int stageBackground, String intro, Angel angel, Neko neko, Mature mature) {
+    public Stage(int stageMusic, int stageBackground, String scriptPlot, Angel angel, Neko neko, Mature mature) {
         this.stageMusic = stageMusic;
         this.stageBackground = stageBackground;
-        this.intro = intro;
+        this.scriptPlot = scriptPlot;
     }
 
     public int getStageMusic() {
@@ -35,12 +45,13 @@ public abstract class Stage {
         this.stageBackground = stageBackground;
     }
 
-    public String getIntro() {
-        return intro;
+    public String getScriptPlot() {
+        return scriptPlot;
     }
 
-    public void setIntro(String intro) {
-        this.intro = intro;
+    public void setScriptPlot(String scriptPlot) {
+        this.scriptPlot = scriptPlot;
     }
+
 
 }

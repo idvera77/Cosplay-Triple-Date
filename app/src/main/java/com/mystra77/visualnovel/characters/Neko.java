@@ -5,6 +5,8 @@ import com.mystra77.visualnovel.R;
 public class Neko extends GirlCharacters {
 
     public Neko() {
+        setName("Neko:");
+
         setImageNormaLeft(R.mipmap.left_neko_normal);
         setImageNormalRight(R.mipmap.right_neko_normal);
         setImageLaughtLeft(R.mipmap.left_neko_happy);
@@ -16,7 +18,5 @@ public class Neko extends GirlCharacters {
         setSoundHappy(R.raw.neko_sound_happy);
         setSoundAngry(R.raw.neko_sound_angry);
 
-        setTextStage1("NEKO 1");
-        setTextStage2("NEKO 2");
     }
 }
