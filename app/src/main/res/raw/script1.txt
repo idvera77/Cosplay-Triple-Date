@@ -1,32 +1,61 @@
+*neko*
+cambio el nombre
+*normalVoice*
+voz normal
+*happyVoice*
+voz happy
+*angryVoice*
+voz angry
+*normalLeftPosition*
+normal izquierda
+*normalCenterPosition*
+normal centro
+*normalRightPosition*
+normal derecha
+*happyLeftPosition*
+happy izquierda
+*happyCenterPosition*
+happy centro
+*happyRightPosition*
+happy derecha
+*angryLeftPosition*
+angry izquierda
+*angryCenterPosition*
+angry centro
+*angryRightPosition*
+angry derecha
+*angel*
+cambio el nombre
+*normalVoice*
+voz normal
+*happyVoice*
+voz happy
+*angryVoice*
+voz angry
+*mature*
+cambio el nombre
+*normalVoice*
+voz normal
+*happyVoice*
+voz happy
+*angryVoice*
+voz angry
+*normalLeftPosition*
+normal izquierda
+*normalCenterPosition*
+normal centro
+*normalRightPosition*
+normal derecha
+*happyLeftPosition*
+happy izquierda
+*happyCenterPosition*
+happy centro
+*happyRightPosition*
+happy derecha
+*angryLeftPosition*
+angry izquierda
+*angryCenterPosition*
+angry centro
+*angryRightPosition*
+angry derecha
 hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola
-pollo
-siete
-*lameruzo
-
-
-*leftPosition*
-*centerPosition*
-*rightPosition*
-
-*leftPosition*
-*centerPosition*
-*rightPosition*
-
-*leftPosition*
-*centerPosition*
-*rightPosition*
-
-*nekoName*
-*nekoSoundNormal*
-*nekoSoundHappy*
-*nekoSoundAngry*
-
-*angelName*
-*angelSoundNormal*
-*angelSoundHappy*
-*angelSoundAngry*
-
-*matureName*
-*matureSoundNormal*
-*matureSoundHappy*
-*matureSoundAngry*

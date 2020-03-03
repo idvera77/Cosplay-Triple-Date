@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -24,6 +23,7 @@ import com.mystra77.visualnovel.characters.GirlCharacters;
 import com.mystra77.visualnovel.characters.Mature;
 import com.mystra77.visualnovel.characters.Neko;
 import com.mystra77.visualnovel.characters.Angel;
+import com.mystra77.visualnovel.classes.KeyWords;
 import com.mystra77.visualnovel.classes.Player;
 import com.mystra77.visualnovel.database.MyOpenHelper;
 import com.mystra77.visualnovel.stages.Stage;
@@ -34,8 +34,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Game extends AppCompatActivity {
     private MyOpenHelper moh;
@@ -52,9 +50,12 @@ public class Game extends AppCompatActivity {
     private ScrollView containerText;
     private int counterLog;
     private GirlCharacters mature, neko, angel;
+    private KeyWords keyWords;
     private int counterLines;
     private Button btnNext, btnExit;
     private ConstraintLayout layoutTextBox;
+    private String characterSelect;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,8 @@ public class Game extends AppCompatActivity {
         soundClick = MediaPlayer.create(this, R.raw.sound_click);
         soundClick.setVolume(0.4f, 0.4f);
 
+        keyWords = new KeyWords();
+        handler = new Handler();
         neko = new Neko();
         angel = new Angel();
         mature = new Mature();
@@ -116,13 +119,6 @@ public class Game extends AppCompatActivity {
             leftImage.setBackground(getDrawable(neko.getImageNormalRight()));
         }
 
-        /*
-         if(player.getScore() < 800){
-            startService(new Intent(this, ServiceGallery.class));
-        }
-        */
-        player.setScore(player.getScore() + 200);
-        player.setStage(player.getStage() + 1);
     }
 
     public void save1(View view) {
@@ -208,21 +204,144 @@ public class Game extends AppCompatActivity {
     //todo
     //todo
     public void clickNext(View view) {
-        soundClick.start();
         String[] lines = allText.split(System.getProperty("line.separator"));
-        if(counterLines < lines.length){
-            if(lines[counterLines].equals("*lameruzo")){
-                loadVoice(neko, 1);
-                leftImage.setBackground(getDrawable(neko.getImageLaughtRight()));
-                rightImage.setBackground(getDrawable(mature.getImageLaughtLeft()));
+        if (counterLines < lines.length) {
+            if (lines[counterLines].equals(keyWords.getKeyNeko())) {
+                characterSelect = keyWords.getKeyNeko();
                 textCharacterName.setText(neko.getName());
+                textDialogLog.setText(textDialogLog.getText() + neko.getName() + "\n");
                 counterLines++;
+                clickNext(view);
+            } else if (lines[counterLines].equals(keyWords.getKeyAngel())) {
+                characterSelect = keyWords.getKeyAngel();
+                textCharacterName.setText(angel.getName());
+                textDialogLog.setText(textDialogLog.getText() + angel.getName() + "\n");
+                counterLines++;
+                clickNext(view);
+            } else if (lines[counterLines].equals(keyWords.getKeyMature())) {
+                characterSelect = keyWords.getKeyMature();
+                textCharacterName.setText(mature.getName());
+                textDialogLog.setText(textDialogLog.getText() + mature.getName() + "\n");
+                counterLines++;
+                clickNext(view);
+            } else if (lines[counterLines].equals(keyWords.getKeyNormalVoice())) {
+                loadVoice(girlSelection(characterSelect), 0);
+                counterLines++;
+                clickNext(view);
+            } else if (lines[counterLines].equals(keyWords.getKeyHappyVoice())) {
+                loadVoice(girlSelection(characterSelect), 1);
+                counterLines++;
+                clickNext(view);
+            } else if (lines[counterLines].equals(keyWords.getKeyAngryVoice())) {
+                loadVoice(girlSelection(characterSelect), 2);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
+                drawLeftGirl(girlSelection(characterSelect), 0);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
+                drawCenterGirl(girlSelection(characterSelect), 0);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyNormalRightPosition())) {
+                drawRightGirl(girlSelection(characterSelect), 0);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyHappyLeftPosition())) {
+                drawLeftGirl(girlSelection(characterSelect), 1);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyHappyCenterPosition())) {
+                drawCenterGirl(girlSelection(characterSelect), 1);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyHappyRightPosition())) {
+                drawRightGirl(girlSelection(characterSelect), 1);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyAngryLeftPosition())) {
+                drawLeftGirl(girlSelection(characterSelect), 2);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyAngryCenterPosition())) {
+                drawCenterGirl(girlSelection(characterSelect), 2);
+                counterLines++;
+                clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyAngryRightPosition())) {
+                drawRightGirl(girlSelection(characterSelect), 2);
+                counterLines++;
+                clickNext(view);
             }else{
                 textDialogBox.setText(lines[counterLines]);
                 textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
-                textCharacterName.setText(mature.getName());
                 counterLines++;
             }
+        }else{
+            /*
+         if(player.getScore() < 800){
+            startService(new Intent(this, ServiceGallery.class));
+        }
+        */
+            player.setScore(player.getScore() + 200);
+            player.setStage(player.getStage() + 1);
+        }
+        disableButtonNext();
+    }
+
+    public void disableButtonNext(){
+        soundClick.start();
+        btnNext.setEnabled(false);
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                btnNext.setEnabled(true);
+            }
+        }, 1300);
+    }
+
+    public GirlCharacters girlSelection(String character){
+        if(characterSelect.equals(keyWords.getKeyNeko())){
+            return neko;
+        }else if(characterSelect.equals(keyWords.getKeyAngel())){
+            return angel;
+        }else{
+            return mature;
+        }
+    }
+
+    public void drawLeftGirl(GirlCharacters girl, int emotion){
+        if (emotion == 0) {
+            leftImage.setBackground(getDrawable(girl.getImageNormalRight()));
+        }
+        if (emotion == 1) {
+            leftImage.setBackground(getDrawable(girl.getImageLaughtRight()));
+        }
+        if (emotion == 2) {
+            leftImage.setBackground(getDrawable(girl.getImageAngryRight()));
+        }
+    }
+
+    public void drawCenterGirl(GirlCharacters girl, int emotion){
+        if (emotion == 0) {
+            centerImage.setBackground(getDrawable(girl.getImageNormaLeft()));
+        }
+        if (emotion == 1) {
+            centerImage.setBackground(getDrawable(girl.getImageLaughtLeft()));
+        }
+        if (emotion == 2) {
+            centerImage.setBackground(getDrawable(girl.getImageAngryLeft()));
+        }
+    }
+
+    public void drawRightGirl(GirlCharacters girl, int emotion){
+        if (emotion == 0) {
+            rightImage.setBackground(getDrawable(girl.getImageNormaLeft()));
+        }
+        if (emotion == 1) {
+            rightImage.setBackground(getDrawable(girl.getImageLaughtLeft()));
+        }
+        if (emotion == 2) {
+            rightImage.setBackground(getDrawable(girl.getImageAngryLeft()));
         }
     }
 
