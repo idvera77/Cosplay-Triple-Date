@@ -1,13 +1,14 @@
+Aqui empieza el juego.
+Entra la neko
 *neko*
-cambio el nombre
-*normalVoice*
-voz normal
-*happyVoice*
-voz happy
-*angryVoice*
-voz angry
 *normalLeftPosition*
-normal izquierda
+Hola ^_^
+Entra la mature
+*mature*
+*normalRightPosition*
+Hola Owo
+
+
 *normalCenterPosition*
 normal centro
 *normalRightPosition*

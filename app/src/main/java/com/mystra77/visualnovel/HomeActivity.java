@@ -15,7 +15,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -27,10 +26,6 @@ import com.mystra77.visualnovel.fragments.GalleryFragment;
 import com.mystra77.visualnovel.fragments.GameStartFragment;
 import com.mystra77.visualnovel.fragments.SettingsFragment;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 

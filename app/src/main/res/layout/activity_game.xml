@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:layout_weight="4"
+                android:includeFontPadding="false"
                 android:textColor="@color/textColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -145,14 +145,16 @@
                 android:layout_marginStart="64dp"
                 android:layout_marginEnd="64dp"
                 android:layout_marginBottom="24dp"
-                android:layout_weight="1"
+                android:includeFontPadding="true"
+                android:paddingBottom="10dp"
+                android:textAlignment="gravity"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
-                app:letterDuration="25"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameCharacterText" />
+                app:layout_constraintTop_toBottomOf="@+id/nameCharacterText"
+                app:letterDuration="25" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

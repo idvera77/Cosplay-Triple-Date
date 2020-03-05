@@ -39,22 +39,18 @@ public class Game extends AppCompatActivity {
     private MyOpenHelper moh;
     private Player player;
     private SharedPreferences preferencesSettings;
-    private ConstraintLayout layoutBackground;
+    private ConstraintLayout layoutBackground, layoutTextBox;
     private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
     private float volumenMusic, volumenSound;
     private boolean explicitImage;
-    private String allText;
-    private int lengthMusic;
+    private String allText, characterSelect;
+    private int lengthMusic, counterLog, counterLines;
     private ImageView leftImage, centerImage, rightImage;
     private TextView textDialogBox, textDialogLog, textCharacterName;
     private ScrollView containerText;
-    private int counterLog;
     private GirlCharacters mature, neko, angel;
     private KeyWords keyWords;
-    private int counterLines;
     private Button btnNext, btnExit;
-    private ConstraintLayout layoutTextBox;
-    private String characterSelect;
     private Handler handler;
 
     @Override
@@ -110,13 +106,9 @@ public class Game extends AppCompatActivity {
         if (player.getStage() >= 1 && player.getStage() < 2) {
             Stage1 stage1 = new Stage1();
             loadStage(stage1, R.raw.script1);
-            rightImage.setBackground(getDrawable(mature.getImageNormaLeft()));
-            leftImage.setBackground(getDrawable(neko.getImageNormalRight()));
         } else if (player.getStage() >= 2) {
             Stage2 stage2 = new Stage2();
-            loadStage(stage2, R.raw.script1);
-            rightImage.setBackground(getDrawable(mature.getImageNormaLeft()));
-            leftImage.setBackground(getDrawable(neko.getImageNormalRight()));
+            loadStage(stage2, R.raw.script2);
         }
 
     }
@@ -209,31 +201,19 @@ public class Game extends AppCompatActivity {
             if (lines[counterLines].equals(keyWords.getKeyNeko())) {
                 characterSelect = keyWords.getKeyNeko();
                 textCharacterName.setText(neko.getName());
-                textDialogLog.setText(textDialogLog.getText() + neko.getName() + "\n");
+                textDialogLog.setText(textDialogLog.getText()  + "\n" + neko.getName() + "\n");
                 counterLines++;
                 clickNext(view);
             } else if (lines[counterLines].equals(keyWords.getKeyAngel())) {
                 characterSelect = keyWords.getKeyAngel();
                 textCharacterName.setText(angel.getName());
-                textDialogLog.setText(textDialogLog.getText() + angel.getName() + "\n");
+                textDialogLog.setText(textDialogLog.getText() + "\n" + angel.getName() + "\n");
                 counterLines++;
                 clickNext(view);
             } else if (lines[counterLines].equals(keyWords.getKeyMature())) {
                 characterSelect = keyWords.getKeyMature();
                 textCharacterName.setText(mature.getName());
-                textDialogLog.setText(textDialogLog.getText() + mature.getName() + "\n");
-                counterLines++;
-                clickNext(view);
-            } else if (lines[counterLines].equals(keyWords.getKeyNormalVoice())) {
-                loadVoice(girlSelection(characterSelect), 0);
-                counterLines++;
-                clickNext(view);
-            } else if (lines[counterLines].equals(keyWords.getKeyHappyVoice())) {
-                loadVoice(girlSelection(characterSelect), 1);
-                counterLines++;
-                clickNext(view);
-            } else if (lines[counterLines].equals(keyWords.getKeyAngryVoice())) {
-                loadVoice(girlSelection(characterSelect), 2);
+                textDialogLog.setText(textDialogLog.getText() + "\n" + mature.getName() + "\n");
                 counterLines++;
                 clickNext(view);
             }else if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
@@ -274,7 +254,7 @@ public class Game extends AppCompatActivity {
                 clickNext(view);
             }else{
                 textDialogBox.setText(lines[counterLines]);
-                textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+                textDialogLog.setText(textDialogLog.getText() + " - " +lines[counterLines] + "\n");
                 counterLines++;
             }
         }else{
@@ -283,7 +263,7 @@ public class Game extends AppCompatActivity {
             startService(new Intent(this, ServiceGallery.class));
         }
         */
-            player.setScore(player.getScore() + 200);
+            player.setScore(player.getScore() + 250);
             player.setStage(player.getStage() + 1);
         }
         disableButtonNext();
@@ -310,56 +290,65 @@ public class Game extends AppCompatActivity {
     }
 
     public void drawLeftGirl(GirlCharacters girl, int emotion){
-        if (emotion == 0) {
-            leftImage.setBackground(getDrawable(girl.getImageNormalRight()));
-        }
-        if (emotion == 1) {
-            leftImage.setBackground(getDrawable(girl.getImageLaughtRight()));
-        }
-        if (emotion == 2) {
-            leftImage.setBackground(getDrawable(girl.getImageAngryRight()));
-        }
-    }
-
-    public void drawCenterGirl(GirlCharacters girl, int emotion){
-        if (emotion == 0) {
-            centerImage.setBackground(getDrawable(girl.getImageNormaLeft()));
-        }
-        if (emotion == 1) {
-            centerImage.setBackground(getDrawable(girl.getImageLaughtLeft()));
-        }
-        if (emotion == 2) {
-            centerImage.setBackground(getDrawable(girl.getImageAngryLeft()));
-        }
-    }
-
-    public void drawRightGirl(GirlCharacters girl, int emotion){
-        if (emotion == 0) {
-            rightImage.setBackground(getDrawable(girl.getImageNormaLeft()));
-        }
-        if (emotion == 1) {
-            rightImage.setBackground(getDrawable(girl.getImageLaughtLeft()));
-        }
-        if (emotion == 2) {
-            rightImage.setBackground(getDrawable(girl.getImageAngryLeft()));
-        }
-    }
-
-    public void loadVoice(GirlCharacters girl, int emotion) {
         if(mediaPlayerSound != null){
             mediaPlayerSound.stop();
             mediaPlayerSound.release();
         }
         if (emotion == 0) {
+            leftImage.setBackground(getDrawable(girl.getImageNormalRight()));
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
         }
         if (emotion == 1) {
+            leftImage.setBackground(getDrawable(girl.getImageLaughtRight()));
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
         }
         if (emotion == 2) {
+            leftImage.setBackground(getDrawable(girl.getImageAngryRight()));
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
         }
-        mediaPlayerSound.setVolume(volumenMusic, volumenMusic);
+        mediaPlayerSound.setVolume(volumenSound, volumenSound);
+        mediaPlayerSound.start();
+    }
+
+    public void drawCenterGirl(GirlCharacters girl, int emotion){
+        if(mediaPlayerSound != null){
+            mediaPlayerSound.stop();
+            mediaPlayerSound.release();
+        }
+        if (emotion == 0) {
+            centerImage.setBackground(getDrawable(girl.getImageNormaLeft()));
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
+        }
+        if (emotion == 1) {
+            centerImage.setBackground(getDrawable(girl.getImageLaughtLeft()));
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
+        }
+        if (emotion == 2) {
+            centerImage.setBackground(getDrawable(girl.getImageAngryLeft()));
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
+        }
+        mediaPlayerSound.setVolume(volumenSound, volumenSound);
+        mediaPlayerSound.start();
+    }
+
+    public void drawRightGirl(GirlCharacters girl, int emotion){
+        if(mediaPlayerSound != null){
+            mediaPlayerSound.stop();
+            mediaPlayerSound.release();
+        }
+        if (emotion == 0) {
+            rightImage.setBackground(getDrawable(girl.getImageNormaLeft()));
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
+        }
+        if (emotion == 1) {
+            rightImage.setBackground(getDrawable(girl.getImageLaughtLeft()));
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
+        }
+        if (emotion == 2) {
+            rightImage.setBackground(getDrawable(girl.getImageAngryLeft()));
+            mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
+        }
+        mediaPlayerSound.setVolume(volumenSound, volumenSound);
         mediaPlayerSound.start();
     }
 
@@ -415,4 +404,5 @@ public class Game extends AppCompatActivity {
             soundClick.release();
         }
     }
+
 }

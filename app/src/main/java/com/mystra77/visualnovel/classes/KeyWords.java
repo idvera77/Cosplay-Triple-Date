@@ -19,9 +19,6 @@ public class KeyWords {
         this.keyAngryLeftPosition =  "*angryLeftPosition*";
         this.keyAngryCenterPosition =  "*angryCenterPosition*";
         this.keyAngryRightPosition =  "*angryRightPosition*";
-        this.keyNormalVoice = "*normalVoice*";
-        this.keyHappyVoice = "*happyVoice*";
-        this.keyAngryVoice = "*angryVoice*";
     }
 
     public String getKeyAngel() {

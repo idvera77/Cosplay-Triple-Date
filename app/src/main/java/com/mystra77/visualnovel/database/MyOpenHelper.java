@@ -92,10 +92,9 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         if (result.moveToFirst()) {
             do {
                 stageData = "STAGE: " + result.getString(result.getColumnIndex(Constants.getSTAGE()));
-                scoreData = "SCORE: " + result.getString(result.getColumnIndex(Constants.getSCORE()));
                 timeData = result.getString(result.getColumnIndex(Constants.getTIME()));
                 if (!timeData.equals("0")) {
-                    dateLoadString.add(stageData + "\n\n" + scoreData + "\n\n" + timeData);
+                    dateLoadString.add(stageData + "\n\n" + timeData);
                 } else {
                     dateLoadString.add(".");
                 }

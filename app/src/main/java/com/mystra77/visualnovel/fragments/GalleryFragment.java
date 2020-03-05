@@ -63,7 +63,7 @@ public class GalleryFragment extends Fragment {
         }
         unlockPointPreference = activity.getPreferencesSettings().getInt("galleryUnlock", 0);
 
-        if (unlockPointPreference >= 100) {
+        if (unlockPointPreference >= 250) {
             image0.setImageResource(galleryArrayList.get(0));
             image0.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,8 +71,6 @@ public class GalleryFragment extends Fragment {
                     showImage(0);
                 }
             });
-        }
-        if (unlockPointPreference >= 200) {
             image1.setImageResource(galleryArrayList.get(1));
             image1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,7 +79,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPointPreference >= 300) {
+        if (unlockPointPreference >=500) {
             image2.setImageResource(galleryArrayList.get(2));
             image2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,8 +88,6 @@ public class GalleryFragment extends Fragment {
 
                 }
             });
-        }
-        if (unlockPointPreference >= 400) {
             image3.setImageResource(galleryArrayList.get(3));
             image3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -100,7 +96,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPointPreference >= 500) {
+        if (unlockPointPreference >= 750) {
             image4.setImageResource(galleryArrayList.get(4));
             image4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -109,8 +105,6 @@ public class GalleryFragment extends Fragment {
 
                 }
             });
-        }
-        if (unlockPointPreference >= 600) {
             image5.setImageResource(galleryArrayList.get(5));
             image5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -120,7 +114,7 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPointPreference >= 700) {
+        if (unlockPointPreference >= 1000) {
             image6.setImageResource(galleryArrayList.get(6));
             image6.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -129,8 +123,6 @@ public class GalleryFragment extends Fragment {
 
                 }
             });
-        }
-        if (unlockPointPreference >= 800) {
             image7.setImageResource(galleryArrayList.get(7));
             image7.setOnClickListener(new View.OnClickListener() {
                 @Override

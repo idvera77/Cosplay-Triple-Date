@@ -29,4 +29,5 @@
     <string name="explicitImageONOF">EXPLICIT IMAGES</string>
     <string name="mute">MUTE</string>
     <string name="OFF">OFF</string>
+    <string name="dialogSpace">\u0020\u0020\u0020\u0020</string>
 </resources>
