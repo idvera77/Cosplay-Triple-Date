@@ -24,10 +24,15 @@
     <string name="delete3">Delete Save 3</string>
     <string name="musicVolume">MUSIC VOLUME</string>
     <string name="musicONOFF">MUSIC</string>
-    <string name="soundVolume">VOICE VOLUME</string>
-    <string name="soundONOFF">VOICE</string>
+    <string name="soundVolume">SOUND VOLUME</string>
+    <string name="soundONOFF">SOUND</string>
     <string name="explicitImageONOF">EXPLICIT IMAGES</string>
     <string name="mute">MUTE</string>
     <string name="OFF">OFF</string>
+    <string name="gameCompleted">GAME COMPLETED</string>
+    <string name="thanksMessage">THANKS FOR PLAYING ^_^</string>
+
+    <string name="messageGameComplted">Try a new game and discover a new route!!!</string>
+    <string name="stage">STAGE:\u0020</string>
     <string name="dialogSpace">\u0020\u0020\u0020\u0020</string>
 </resources>

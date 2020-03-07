@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 public class Player implements Serializable {
     private int stage;
-    private int tsundere;
+    private int angel;
     private int neko;
     private int mature;
     private int score;
 
     public Player() {
         this.stage = 1;
-        this.tsundere = 0;
+        this.angel = 0;
         this.neko = 0;
         this.mature = 0;
         this.score = 0;
     }
 
-    public Player(int stage, int tsundere, int neko, int mature, int score) {
+    public Player(int stage, int angel, int neko, int mature, int score) {
         this.stage = stage;
-        this.tsundere = tsundere;
+        this.angel = angel;
         this.neko = neko;
         this.mature = mature;
         this.score = score;
@@ -33,12 +33,12 @@ public class Player implements Serializable {
         this.stage = stage;
     }
 
-    public int getTsundere() {
-        return tsundere;
+    public int getAngel() {
+        return angel;
     }
 
-    public void setTsundere(int tsundere) {
-        this.tsundere = tsundere;
+    public void setAngel(int angel) {
+        this.angel = angel;
     }
 
     public int getNeko() {
@@ -69,7 +69,7 @@ public class Player implements Serializable {
     public String toString() {
         return "Player{" +
                 "stage=" + stage +
-                ", tsundere=" + tsundere +
+                ", angel=" + angel +
                 ", neko=" + neko +
                 ", mature=" + mature +
                 ", score=" + score +

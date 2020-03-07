@@ -16,6 +16,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -39,14 +40,17 @@ public class Game extends AppCompatActivity {
     private MyOpenHelper moh;
     private Player player;
     private SharedPreferences preferencesSettings;
-    private ConstraintLayout layoutBackground, layoutTextBox;
+    private ConstraintLayout layoutBackground, layoutTextBox, layoutEndOfStage;
+    private LinearLayout layoutScenario, layoutButtons;
     private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
+    private Button buttonLog, buttonOption1, buttonOption2, buttonOption3;
     private float volumenMusic, volumenSound;
     private boolean explicitImage;
     private String allText, characterSelect;
+    private String[] lines;
     private int lengthMusic, counterLog, counterLines;
     private ImageView leftImage, centerImage, rightImage;
-    private TextView textDialogBox, textDialogLog, textCharacterName;
+    private TextView textDialogBox, textDialogLog, textCharacterName, finalMessage;
     private ScrollView containerText;
     private GirlCharacters mature, neko, angel;
     private KeyWords keyWords;
@@ -67,16 +71,24 @@ public class Game extends AppCompatActivity {
         //Load preferences
         preferencesSettings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         volumenMusic = preferencesSettings.getFloat("volumenMusic", 100);
-        volumenSound = preferencesSettings.getFloat("volumenSound", 100);
+        volumenSound = preferencesSettings.getFloat("volumenSound", 1.0f);
         explicitImage = preferencesSettings.getBoolean("explicitImage", true);
 
+        layoutEndOfStage = findViewById(R.id.containerEndStage);
         layoutBackground = findViewById(R.id.stageID);
+        layoutScenario = findViewById(R.id.scenario);
+        layoutButtons = findViewById(R.id.containerButtons);
+        buttonLog = findViewById(R.id.btnLog);
+        buttonOption1 = findViewById(R.id.btnOption1);
+        buttonOption2 = findViewById(R.id.btnOption2);
+        buttonOption3 = findViewById(R.id.btnOption3);
         leftImage = findViewById(R.id.leftPosition);
         centerImage = findViewById(R.id.centerPosition);
         rightImage = findViewById(R.id.rightPosition);
         textDialogBox = findViewById(R.id.textBox);
         textDialogLog = findViewById(R.id.textBoxLog);
         textCharacterName = findViewById(R.id.nameCharacterText);
+        finalMessage = findViewById(R.id.finalMessage);
         btnNext = findViewById(R.id.btnNext);
         btnExit = findViewById(R.id.btnExitGame);
         containerText = findViewById(R.id.containerDialog);
@@ -85,7 +97,7 @@ public class Game extends AppCompatActivity {
         counterLines = 0;
 
         soundClick = MediaPlayer.create(this, R.raw.sound_click);
-        soundClick.setVolume(0.4f, 0.4f);
+        soundClick.setVolume(volumenSound, volumenSound);
 
         keyWords = new KeyWords();
         handler = new Handler();
@@ -103,10 +115,11 @@ public class Game extends AppCompatActivity {
         }
 
         //Load all
-        if (player.getStage() >= 1 && player.getStage() < 2) {
+        if (player.getStage() == 1) {
             Stage1 stage1 = new Stage1();
             loadStage(stage1, R.raw.script1);
-        } else if (player.getStage() >= 2) {
+        }
+        if (player.getStage() >= 2) {
             Stage2 stage2 = new Stage2();
             loadStage(stage2, R.raw.script2);
         }
@@ -134,7 +147,7 @@ public class Game extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        moh.saveGame(saveFileId, player.getStage(), player.getTsundere(), player.getNeko(), player.getMature(), player.getScore());
+                        moh.saveGame(saveFileId, player.getStage(), player.getAngel(), player.getNeko(), player.getMature(), player.getScore());
                     }
                 })
                 .setNegativeButton(R.string.no, null)
@@ -144,7 +157,7 @@ public class Game extends AppCompatActivity {
     public void openLog(View view) {
         soundClick.start();
         if (counterLog % 2 == 0) {
-            containerText.setVisibility(view.INVISIBLE);
+            containerText.setVisibility(view.GONE);
             layoutTextBox.setVisibility(View.VISIBLE);
             btnExit.setVisibility(View.VISIBLE);
             btnNext.setVisibility(View.VISIBLE);
@@ -193,10 +206,9 @@ public class Game extends AppCompatActivity {
         InputStream stream = getResources().openRawResource(File);
         allText = convertStreamToString(stream);
     }
-    //todo
-    //todo
+
     public void clickNext(View view) {
-        String[] lines = allText.split(System.getProperty("line.separator"));
+        lines = allText.split(System.getProperty("line.separator"));
         if (counterLines < lines.length) {
             if (lines[counterLines].equals(keyWords.getKeyNeko())) {
                 characterSelect = keyWords.getKeyNeko();
@@ -252,31 +264,130 @@ public class Game extends AppCompatActivity {
                 drawRightGirl(girlSelection(characterSelect), 2);
                 counterLines++;
                 clickNext(view);
+            }else if (lines[counterLines].equals(keyWords.getKeyButtons())){
+                counterLines++;
+                buttonOption1.setText(lines[counterLines]);
+                counterLines++;
+                buttonOption2.setText(lines[counterLines]);
+                counterLines++;
+                buttonOption3.setText(lines[counterLines]);
+                layoutButtons.setVisibility(View.VISIBLE);
+                btnNext.setVisibility(View.GONE);
             }else{
                 textDialogBox.setText(lines[counterLines]);
-                textDialogLog.setText(textDialogLog.getText() + " - " +lines[counterLines] + "\n");
+                textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
                 counterLines++;
             }
         }else{
-            /*
-         if(player.getScore() < 800){
-            startService(new Intent(this, ServiceGallery.class));
-        }
-        */
-            player.setScore(player.getScore() + 250);
-            player.setStage(player.getStage() + 1);
+            if(player.getStage()==4){
+                player.setScore(player.getScore() + 250);
+                player.setStage(player.getStage() + 1);
+                sexScene();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        finalMessage.setText(R.string.thanksMessage);
+                        layoutEndOfStage.setVisibility(View.VISIBLE);
+                    }
+                }, 20000);
+            }else{
+                player.setScore(player.getScore() + 250);
+                player.setStage(player.getStage() + 1);
+                endOfStage();
+            }
         }
         disableButtonNext();
     }
 
+    public void clickOption1(View view) {
+        counterLines+=1;
+        textDialogBox.setText(lines[counterLines]);
+        textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+        counterLines+=3;
+        layoutButtons.setVisibility(View.GONE);
+        btnNext.setVisibility(View.VISIBLE);
+        afinityGirl(10);
+    }
+
+    public void clickOption2(View view) {
+        counterLines+=2;
+        textDialogBox.setText(lines[counterLines]);
+        textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+        counterLines+=2;
+        layoutButtons.setVisibility(View.GONE);
+        btnNext.setVisibility(View.VISIBLE);
+        afinityGirl(0);
+    }
+
+    public void clickOption3(View view) {
+        counterLines+=3;
+        textDialogBox.setText(lines[counterLines]);
+        textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+        counterLines++;
+        layoutButtons.setVisibility(View.GONE);
+        btnNext.setVisibility(View.VISIBLE);
+        afinityGirl(-10);
+    }
+
+    public void afinityGirl(int points){
+        if(characterSelect.equals(keyWords.getKeyNeko())){
+            player.setNeko(player.getNeko() + points + 5);
+            System.out.println(player.getNeko());
+        }
+        if(characterSelect.equals(keyWords.getKeyAngel())){
+            player.setAngel(player.getAngel() + points);
+            System.out.println(player.getAngel());
+        }
+        if(characterSelect.equals(keyWords.getKeyMature())){
+            player.setMature(player.getMature() + points);
+            System.out.println(player.getMature());
+        }
+    }
+
     public void disableButtonNext(){
+        //TODO GONE
         soundClick.start();
         btnNext.setEnabled(false);
         handler.postDelayed(new Runnable() {
             public void run() {
                 btnNext.setEnabled(true);
             }
-        }, 1300);
+        }, 1000);
+    }
+
+    public void endOfStage(){
+        layoutEndOfStage.setVisibility(View.VISIBLE);
+        layoutScenario.setVisibility(View.GONE);
+        layoutTextBox.setVisibility(View.GONE);
+        buttonLog.setVisibility(View.GONE);
+    }
+
+    public void sexScene(){
+        layoutScenario.setVisibility(View.GONE);
+        layoutTextBox.setVisibility(View.GONE);
+        buttonLog.setVisibility(View.GONE);
+
+        //TODO INSERTAR MUSICA
+        if(characterSelect.equals(keyWords.getKeyNeko())){
+            if(explicitImage){
+                layoutBackground.setBackground(getDrawable(neko.getSceneSexUncensored()));
+            }else{
+                layoutBackground.setBackground(getDrawable(neko.getSceneCensored()));
+            }
+        }
+        if(characterSelect.equals(keyWords.getKeyAngel())){
+            if(explicitImage){
+                layoutBackground.setBackground(getDrawable(angel.getSceneSexUncensored()));
+            }else{
+                layoutBackground.setBackground(getDrawable(angel.getSceneCensored()));
+            }
+        }
+        if(characterSelect.equals(keyWords.getKeyMature())){
+            if(explicitImage){
+                layoutBackground.setBackground(getDrawable(mature.getSceneSexUncensored()));
+            }else{
+                layoutBackground.setBackground(getDrawable(mature.getSceneCensored()));
+            }
+        }
     }
 
     public GirlCharacters girlSelection(String character){
@@ -404,5 +515,4 @@ public class Game extends AppCompatActivity {
             soundClick.release();
         }
     }
-
 }

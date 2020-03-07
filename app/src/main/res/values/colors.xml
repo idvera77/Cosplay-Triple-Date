@@ -11,8 +11,9 @@
     <color name="backgroundHome">#704A3F</color>
     <color name="baseButton">#D39889</color>
     <color name="loadButton">#CEA4A8</color>
-    <color name="nameCharacter">#CC744949</color>
     <color name="activeLoadButton">#FFD3E7</color>
+    <color name="characterName">#EE9EC1</color>
+    <color name="textLog">#F5D2B4</color>
     <color name="deleteButton">#9B5B61</color>
     <color name="activeDeleteButton">#DB858E</color>
     <color name="activeButton">#ECE4B7</color>

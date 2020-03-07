@@ -5,6 +5,7 @@ public abstract class GirlCharacters {
     private int imageAngryLeft, imageAngryRight;
     private int imageNormaLeft, imageNormalRight;
     private int imageLaughtLeft, imageLaughtRight;
+    private int sceneSexUncensored, sceneCensored;
     private int soundAngry;
     private int soundNormal;
     private int soundHappy;
@@ -13,7 +14,7 @@ public abstract class GirlCharacters {
 
     }
 
-    public GirlCharacters(String name, int imageAngryLeft, int imageAngryRight, int imageNormaLeft, int imageNormalRight, int imageLaughtLeft, int imageLaughtRight, int soundAngry, int soundNormal, int soundHappy) {
+    public GirlCharacters(String name, int imageAngryLeft, int imageAngryRight, int imageNormaLeft, int imageNormalRight, int imageLaughtLeft, int imageLaughtRight, int soundAngry, int soundNormal, int soundHappy, int sceneSexUncensored, int sceneCensored) {
         this.name = name;
         this.imageAngryLeft = imageAngryLeft;
         this.imageAngryRight = imageAngryRight;
@@ -24,6 +25,8 @@ public abstract class GirlCharacters {
         this.soundAngry = soundAngry;
         this.soundNormal = soundNormal;
         this.soundHappy = soundHappy;
+        this.sceneSexUncensored = sceneSexUncensored;
+        this.sceneCensored = sceneCensored;
     }
 
     public String getName() {
@@ -104,5 +107,21 @@ public abstract class GirlCharacters {
 
     public void setSoundHappy(int soundHappy) {
         this.soundHappy = soundHappy;
+    }
+
+    public int getSceneSexUncensored() {
+        return sceneSexUncensored;
+    }
+
+    public void setSceneSexUncensored(int sceneSexUncensored) {
+        this.sceneSexUncensored = sceneSexUncensored;
+    }
+
+    public int getSceneCensored() {
+        return sceneCensored;
+    }
+
+    public void setSceneCensored(int sceneCensored) {
+        this.sceneCensored = sceneCensored;
     }
 }

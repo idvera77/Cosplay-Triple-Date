@@ -41,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     private MyOpenHelper moh;
     private SharedPreferences preferencesSettings;
     private MediaPlayer soundClick, soundSaveLoad;
+    private Float volumenSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,15 +59,15 @@ public class HomeActivity extends AppCompatActivity {
         preferencesSettings.getInt("galleryUnlock", 0);
         preferencesSettings.getFloat("volumenMusic", 1.0f);
         preferencesSettings.getInt("volumenMusicBar", 100);
-        preferencesSettings.getFloat("volumenSound", 1.0f);
+        volumenSound = preferencesSettings.getFloat("volumenSound", 1.0f);
         preferencesSettings.getInt("volumenSoundBar", 100);
         preferencesSettings.getBoolean("explicitImage", true);
 
         //SoundClick
         soundClick = MediaPlayer.create(this, R.raw.sound_click);
-        soundClick.setVolume(0.4f, 0.4f);
+        soundClick.setVolume(volumenSound, volumenSound);
         soundSaveLoad = MediaPlayer.create(this, R.raw.sound_load);
-        soundSaveLoad.setVolume(0.4f, 0.4f);
+        soundSaveLoad.setVolume(volumenSound, volumenSound);
 
         //Start Fragment
         gameStartFragment = new GameStartFragment();

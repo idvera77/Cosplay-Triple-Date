@@ -107,6 +107,7 @@ public class SettingsFragment extends Fragment {
                 } else {
                     soundOff.setChecked(false);
                 }
+                soundChanges();
                 mediaPlayerSound.setVolume(volumenSound, volumenSound);
                 mediaPlayerSound.setLooping(true);
             }
@@ -119,6 +120,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 mediaPlayerSound.pause();
+                soundChanges();
             }
         });
 
@@ -155,11 +157,20 @@ public class SettingsFragment extends Fragment {
                     SharedPreferences.Editor editor = activity.getPreferencesSettings().edit();
                     editor.putBoolean("explicitImage", false);
                     editor.commit();
+                }else{
+                    SharedPreferences.Editor editor = activity.getPreferencesSettings().edit();
+                    editor.putBoolean("explicitImage", true);
+                    editor.commit();
                 }
             }
         });
 
         return view;
+    }
+
+    public void soundChanges(){
+        activity.getSoundClick().setVolume(volumenSound, volumenSound);
+        activity.getSoundSaveLoad().setVolume(volumenSound, volumenSound);
     }
 
     @Override

@@ -14,6 +14,9 @@ public class Angel extends GirlCharacters {
         //setImageAngryLeft();
         //setImageAngryRight();
 
+        //setSceneCensored(R.mipmap.right_neko_normal);
+        //setSceneSexUncensored(R.mipmap.right_neko_happy);
+
         setSoundNormal(R.raw.angel_sound_normal);
         setSoundHappy(R.raw.angel_sound_happy);
         setSoundAngry(R.raw.angel_sound_angry);

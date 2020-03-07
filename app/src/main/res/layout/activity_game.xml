@@ -44,6 +44,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/containerResource"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -57,6 +58,37 @@
             android:layout_height="match_parent"
             android:layout_weight="0.45">
 
+            <LinearLayout
+                android:id="@+id/containerButtons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/btnOption1"
+                    android:onClick="clickOption1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:id="@+id/btnOption2"
+                    android:onClick="clickOption2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <Button
+                    android:id="@+id/btnOption3"
+                    android:onClick="clickOption3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
             <Button
                 android:id="@+id/btnExitGame"
                 android:layout_width="wrap_content"
@@ -64,42 +96,6 @@
                 android:onClick="backToMainMenu"
                 android:text="@string/exit"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnSave1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="save1"
-                android:text="@string/save1"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/btnSave2"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnExitGame"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnSave2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="save2"
-                android:text="@string/save2"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/btnSave3"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnSave1"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnSave3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="save3"
-                android:text="@string/save3"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/btnLog"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/btnSave2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
@@ -131,7 +127,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:includeFontPadding="false"
-                android:textColor="@color/textColor"
+                android:textColor="@color/characterName"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +140,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="64dp"
                 android:layout_marginEnd="64dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="20dp"
                 android:includeFontPadding="true"
                 android:paddingBottom="10dp"
                 android:textAlignment="gravity"
@@ -156,8 +152,83 @@
                 app:layout_constraintTop_toBottomOf="@+id/nameCharacterText"
                 app:letterDuration="25" />
 
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="clickNext"
+                android:scaleX="0.5"
+                android:scaleY="0.5"
+                android:text="@string/next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerEndStage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="90dp"
+        android:background="@drawable/log_border"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/finalMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnSave1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="save1"
+            android:text="@string/save1"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSave2"
+            app:layout_constraintEnd_toStartOf="@+id/btnSave2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnSave2" />
+
+        <Button
+            android:id="@+id/btnSave2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="save2"
+            android:text="@string/save2"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnSave3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnSave1"
+            app:layout_constraintTop_toBottomOf="@+id/finalMessage" />
+
+        <Button
+            android:id="@+id/btnSave3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="save3"
+            android:text="@string/save3"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSave2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnSave2"
+            app:layout_constraintTop_toTopOf="@+id/btnSave2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:id="@+id/containerDialog"
@@ -177,20 +248,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:textColor="@color/textColor"
-            android:textSize="16sp"
+            android:textColor="@color/textLog"
+            android:textSize="17sp"
             android:textStyle="italic" />
     </ScrollView>
-
-    <Button
-        android:id="@+id/btnNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="0.5"
-        android:scaleY="0.5"
-        android:text="@string/next"
-        android:onClick="clickNext"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

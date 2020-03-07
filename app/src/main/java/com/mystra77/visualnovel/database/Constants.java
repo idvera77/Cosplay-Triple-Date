@@ -9,14 +9,14 @@ public class Constants {
     private static final String KEY_ID = "id";
     private static final String TIME = "time";
     private static final String STAGE = "stage";
-    private static final String TSUNDERE = "tsundere";
+    private static final String ANGEL = "angel";
     private static final String NEKO = "neko";
     private static final String MATURE = "mature";
     private static final String SCORE = "score";
 
     private static final String CREATE_TABLE_GAME = "CREATE TABLE " + TABLE_GAME + "("
             + KEY_ID + " INTEGER PRIMARY KEY NOT NULL, " + TIME + " TIMESTAMP DEFAULT 0, "
-            + STAGE + " INTEGER DEFAULT 1," + TSUNDERE + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
+            + STAGE + " INTEGER DEFAULT 1," + ANGEL + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
 
     private static final String UPDATE_TIME_TRIGGER = "CREATE TRIGGER update_time_trigger " +
             "AFTER UPDATE ON " + TABLE_GAME + " BEGIN " +
@@ -49,8 +49,8 @@ public class Constants {
         return STAGE;
     }
 
-    public static String getTSUNDERE() {
-        return TSUNDERE;
+    public static String getANGEL() {
+        return ANGEL;
     }
 
     public static String getNEKO() {

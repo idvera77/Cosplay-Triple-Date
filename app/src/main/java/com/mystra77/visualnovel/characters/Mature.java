@@ -14,6 +14,9 @@ public class Mature extends GirlCharacters {
         setImageAngryLeft(R.mipmap.left_mature_angry);
         setImageAngryRight(R.mipmap.right_mature_angry);
 
+        setSceneCensored(R.mipmap.right_mature_normal);
+        setSceneSexUncensored(R.mipmap.right_mature_happy);
+
         setSoundNormal(R.raw.mature_sound_normal);
         setSoundHappy(R.raw.mature_sound_happy);
         setSoundAngry(R.raw.mature_sound_angry);

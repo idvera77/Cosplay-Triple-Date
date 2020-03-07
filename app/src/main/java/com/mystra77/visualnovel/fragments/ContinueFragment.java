@@ -27,6 +27,8 @@ public class ContinueFragment extends Fragment {
     private Button load1, load2, load3, delete1, delete2, delete3;
     private Intent intentContinueGame;
     private ArrayList<String> fillButton;
+    private Bundle bundle;
+    private Player player;
 
     public ContinueFragment() {
         // Required empty public constructor
@@ -66,39 +68,27 @@ public class ContinueFragment extends Fragment {
         load1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                load1.setEnabled(false);
                 activity.getSoundSaveLoad().start();
-                Bundle bundle = new Bundle();
-                Player player = activity.getMoh().loadGame(1);
-                bundle.putSerializable("player", player);
-                intentContinueGame = new Intent(view.getContext(), Game.class);
-                intentContinueGame.putExtras(bundle);
-                startActivity(intentContinueGame);
+                loadGame(1);
             }
         });
 
         load2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                load2.setEnabled(false);
                 activity.getSoundSaveLoad().start();
-                Bundle bundle = new Bundle();
-                Player player = activity.getMoh().loadGame(2);
-                bundle.putSerializable("player", player);
-                intentContinueGame = new Intent(view.getContext(), Game.class);
-                intentContinueGame.putExtras(bundle);
-                startActivity(intentContinueGame);
+                loadGame(2);
             }
         });
 
         load3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                load3.setEnabled(false);
                 activity.getSoundSaveLoad().start();
-                Bundle bundle = new Bundle();
-                Player player = activity.getMoh().loadGame(3);
-                bundle.putSerializable("player", player);
-                intentContinueGame = new Intent(view.getContext(), Game.class);
-                intentContinueGame.putExtras(bundle);
-                startActivity(intentContinueGame);
+                loadGame(3);
             }
         });
 
@@ -154,6 +144,21 @@ public class ContinueFragment extends Fragment {
                 })
                 .setNegativeButton(R.string.no, null)
                 .show();
+    }
+
+    public void loadGame(int loadFile){
+        bundle = new Bundle();
+        player = activity.getMoh().loadGame(loadFile);
+        bundle.putSerializable("player", player);
+        if(player.getStage() != 5){
+            intentContinueGame = new Intent(view.getContext(), Game.class);
+            intentContinueGame.putExtras(bundle);
+            startActivity(intentContinueGame);
+        }else{
+            new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
+                    .setMessage(R.string.messageGameComplted)
+                    .show();
+        }
     }
 
 }

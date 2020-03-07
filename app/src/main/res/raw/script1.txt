@@ -1,62 +1,21 @@
-Aqui empieza el juego.
-Entra la neko
+hola
 *neko*
-*normalLeftPosition*
-Hola ^_^
-Entra la mature
+¿Te gusta pollo?
+*buttons*
+boton1
+boton2
+boton3
+respuesta1
+respuesta2
+respuesta3
+siguiente:
 *mature*
-*normalRightPosition*
-Hola Owo
-
-
-*normalCenterPosition*
-normal centro
-*normalRightPosition*
-normal derecha
-*happyLeftPosition*
-happy izquierda
-*happyCenterPosition*
-happy centro
-*happyRightPosition*
-happy derecha
-*angryLeftPosition*
-angry izquierda
-*angryCenterPosition*
-angry centro
-*angryRightPosition*
-angry derecha
-*angel*
-cambio el nombre
-*normalVoice*
-voz normal
-*happyVoice*
-voz happy
-*angryVoice*
-voz angry
-*mature*
-cambio el nombre
-*normalVoice*
-voz normal
-*happyVoice*
-voz happy
-*angryVoice*
-voz angry
-*normalLeftPosition*
-normal izquierda
-*normalCenterPosition*
-normal centro
-*normalRightPosition*
-normal derecha
-*happyLeftPosition*
-happy izquierda
-*happyCenterPosition*
-happy centro
-*happyRightPosition*
-happy derecha
-*angryLeftPosition*
-angry izquierda
-*angryCenterPosition*
-angry centro
-*angryRightPosition*
-angry derecha
-hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola hola
+¿Te gusta golfilla?
+*buttons*
+- boton1
+- boton2
+- boton3
+- respuesta1
+- respuesta2
+- respuesta3
+adios

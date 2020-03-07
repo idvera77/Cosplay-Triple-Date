@@ -1,10 +1,9 @@
 package com.mystra77.visualnovel.classes;
 
 public class KeyWords {
-    private String keyAngel, keyNeko, keyMature, keyNormalVoice, keyHappyVoice, keyAngryVoice,
-            keyNormalLeftPosition, keyNormalCenterPosition, keyNormalRightPosition,
-            keyHappyLeftPosition, keyHappyCenterPosition, keyHappyRightPosition,
-            keyAngryLeftPosition, keyAngryCenterPosition, keyAngryRightPosition;
+    private String keyAngel, keyNeko, keyMature, keyNormalLeftPosition, keyNormalCenterPosition, keyNormalRightPosition,
+            keyHappyLeftPosition, keyHappyCenterPosition, keyHappyRightPosition, keyAngryLeftPosition,
+            keyAngryCenterPosition, keyAngryRightPosition, keyButtons;
 
     public KeyWords() {
         this.keyAngel = "*angel*";
@@ -19,6 +18,7 @@ public class KeyWords {
         this.keyAngryLeftPosition =  "*angryLeftPosition*";
         this.keyAngryCenterPosition =  "*angryCenterPosition*";
         this.keyAngryRightPosition =  "*angryRightPosition*";
+        this.keyButtons = "*buttons*";
     }
 
     public String getKeyAngel() {
@@ -31,18 +31,6 @@ public class KeyWords {
 
     public String getKeyMature() {
         return keyMature;
-    }
-
-    public String getKeyNormalVoice() {
-        return keyNormalVoice;
-    }
-
-    public String getKeyHappyVoice() {
-        return keyHappyVoice;
-    }
-
-    public String getKeyAngryVoice() {
-        return keyAngryVoice;
     }
 
     public String getKeyNormalLeftPosition() {
@@ -80,4 +68,6 @@ public class KeyWords {
     public String getKeyAngryRightPosition() {
         return keyAngryRightPosition;
     }
+
+    public String getKeyButtons() { return keyButtons; }
 }

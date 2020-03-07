@@ -1,6 +1,7 @@
 package com.mystra77.visualnovel.fragments;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,6 +26,8 @@ public class GameStartFragment extends Fragment {
     private Button newGame, loadLastSave;
     private Intent intentNewGame;
     private ArrayList<String> unlockLastSave;
+    private Bundle bundle;
+    private Player player;
 
     public GameStartFragment() {
         // Required empty public constructor
@@ -49,6 +52,7 @@ public class GameStartFragment extends Fragment {
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                newGame.setEnabled(false);
                 activity.getSoundSaveLoad().start();
                 Bundle bundle = new Bundle();
                 Player player = new Player();
@@ -62,13 +66,20 @@ public class GameStartFragment extends Fragment {
         loadLastSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loadLastSave.setEnabled(false);
                 activity.getSoundSaveLoad().start();
-                Bundle bundle = new Bundle();
-                Player player = activity.getMoh().loadLastSave();
+                bundle = new Bundle();
+                player = activity.getMoh().loadLastSave();
                 bundle.putSerializable("player", player);
-                intentNewGame = new Intent(view.getContext(), Game.class);
-                intentNewGame.putExtras(bundle);
-                startActivity(intentNewGame);
+                if(player.getStage() != 5){
+                    intentNewGame = new Intent(view.getContext(), Game.class);
+                    intentNewGame.putExtras(bundle);
+                    startActivity(intentNewGame);
+                }else{
+                    new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
+                            .setMessage(R.string.messageGameComplted)
+                            .show();
+                }
             }
         });
 
