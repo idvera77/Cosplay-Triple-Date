@@ -1,15 +1,17 @@
 package com.mystra77.visualnovel.stages;
 
-import android.media.MediaPlayer;
-
 import com.mystra77.visualnovel.R;
-
 
 public class Stage1 extends Stage {
 
+    /**
+     * Empty builder
+     * Within this we include all the inherited setters, each one serves us to introduce the music,
+     * image background and script of the stage
+     */
     public Stage1() {
         setStageBackground(R.mipmap.stage1background);
         setStageMusic(R.raw.theme_stage1);
-        setScriptPlot("script1.txt");
+        setScriptPlot1(R.raw.script1);
     }
 }

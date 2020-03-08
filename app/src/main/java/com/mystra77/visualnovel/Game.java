@@ -56,6 +56,7 @@ public class Game extends AppCompatActivity {
     private KeyWords keyWords;
     private Button btnExit;
     private Handler handler;
+    private InputStream stream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,11 +117,11 @@ public class Game extends AppCompatActivity {
         //Load all
         if (player.getStage() == 1) {
             Stage1 stage1 = new Stage1();
-            loadStage(stage1, R.raw.script1);
+            loadStage(stage1, 1);
         }
         if (player.getStage() >= 2) {
             Stage2 stage2 = new Stage2();
-            loadStage(stage2, R.raw.script2);
+            loadStage(stage2, 1);
         }
 
         textDialogBox.setText(R.string.tap);
@@ -193,7 +194,7 @@ public class Game extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void loadStage(Stage stage, int File) {
+    public void loadStage(Stage stage, int scriptOption) {
         //Image Background
         layoutBackground.setBackground(getDrawable(stage.getStageBackground()));
         //Music Background
@@ -202,7 +203,15 @@ public class Game extends AppCompatActivity {
         mediaPlayerMusic.setLooping(true);
         mediaPlayerMusic.start();
         //Load all text
-        InputStream stream = getResources().openRawResource(File);
+        if (scriptOption == 1){
+            stream = getResources().openRawResource(stage.getScriptPlot1());
+        }
+        if (scriptOption == 2){
+            stream = getResources().openRawResource(stage.getScriptPlot2());
+        }
+        if (scriptOption == 3){
+            stream = getResources().openRawResource(stage.getScriptPlot3());
+        }
         allText = convertStreamToString(stream);
     }
 
@@ -301,10 +310,19 @@ public class Game extends AppCompatActivity {
     public void clickOption1(View view) {
         soundClick.start();
         textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption1.getText().toString() +"\"\n");
-        counterLines+=1;
+        counterLines++;
+        if (lines[counterLines].equals(keyWords.getKeyHappyLeftPosition())) {
+            drawLeftGirl(girlSelection(characterSelect), 1);
+        }else if (lines[counterLines].equals(keyWords.getKeyHappyCenterPosition())) {
+            drawCenterGirl(girlSelection(characterSelect), 1);
+
+        }else if (lines[counterLines].equals(keyWords.getKeyHappyRightPosition())) {
+            drawRightGirl(girlSelection(characterSelect), 1);
+        }
+        counterLines++;
         textDialogBox.setText(lines[counterLines]);
         textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
-        counterLines+=3;
+        counterLines+=5;
         layoutButtons.setVisibility(View.GONE);
         layoutTextBox.setClickable(true);
         layoutTextBox.setEnabled(true);
@@ -314,10 +332,18 @@ public class Game extends AppCompatActivity {
     public void clickOption2(View view) {
         soundClick.start();
         textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption2.getText().toString() +"\"\n");
-        counterLines+=2;
+        counterLines+=3;
+        if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
+            drawLeftGirl(girlSelection(characterSelect), 0);
+        }else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
+            drawCenterGirl(girlSelection(characterSelect), 0);
+        }else if (lines[counterLines].equals(keyWords.getKeyNormalRightPosition())) {
+            drawRightGirl(girlSelection(characterSelect), 0);
+        }
+        counterLines++;
         textDialogBox.setText(lines[counterLines]);
         textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
-        counterLines+=2;
+        counterLines+=3;
         layoutButtons.setVisibility(View.GONE);
         layoutTextBox.setClickable(true);
         layoutTextBox.setEnabled(true);
@@ -327,7 +353,15 @@ public class Game extends AppCompatActivity {
     public void clickOption3(View view) {
         soundClick.start();
         textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption3.getText().toString() +"\"\n");
-        counterLines+=3;
+        counterLines+=5;
+        if (lines[counterLines].equals(keyWords.getKeyAngryLeftPosition())) {
+            drawLeftGirl(girlSelection(characterSelect), 2);
+        }else if (lines[counterLines].equals(keyWords.getKeyAngryCenterPosition())) {
+            drawCenterGirl(girlSelection(characterSelect), 2);
+        }else if (lines[counterLines].equals(keyWords.getKeyAngryRightPosition())) {
+            drawRightGirl(girlSelection(characterSelect), 2);
+        }
+        counterLines++;
         textDialogBox.setText(lines[counterLines]);
         textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
         counterLines++;

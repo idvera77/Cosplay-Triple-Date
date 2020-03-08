@@ -4,22 +4,34 @@ hola
 Why, yes! Are you “kirito_senpai_69”?
 …
 *happyCenterPosition*
-¿Te gusta pollo?
+Well, tell me, which character are you cosplaying?
 *buttons*
 A drama/romantic visual novel hero
 The protagonist of an adventure anime
 The bringer of death and destruction
-respuesta1
-respuesta2
-respuesta3
-siguiente:
+*happyCenterPosition*
+Really?! You have to tell me which one it is. I absolutely love those!
+*normalCenterPosition*
+Oh, now that you mention it, it does seem familiar
+*angryCenterPosition*
+W-why would anyone cosplay that?
+*normalCenterPosition*
+Nevermind, I’d like to know more about you
 *mature*
-¿Te gusta golfilla?
+*normalCenterPosition*
+Why, yes! Are you “kirito_senpai_69”?
+…
+*happyCenterPosition*
+Well, tell me, which character are you cosplaying?
 *buttons*
-- boton1
-- boton2
-- boton3
-- respuesta1
-- respuesta2
-- respuesta3
+A drama/romantic visual novel hero
+The protagonist of an adventure anime
+The bringer of death and destruction
+*happyCenterPosition*
+Really?! You have to tell me which one it is. I absolutely love those!
+*normalCenterPosition*
+Oh, now that you mention it, it does seem familiar
+*angryCenterPosition*
+W-why would anyone cosplay that?
+*normalCenterPosition*
 adios

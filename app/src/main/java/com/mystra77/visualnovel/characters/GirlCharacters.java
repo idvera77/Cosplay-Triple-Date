@@ -1,19 +1,26 @@
 package com.mystra77.visualnovel.characters;
 
 public abstract class GirlCharacters {
-    private String name;
-    private int imageAngryLeft, imageAngryRight;
-    private int imageNormaLeft, imageNormalRight;
-    private int imageLaughtLeft, imageLaughtRight;
-    private int sceneSexUncensored, sceneCensored;
-    private int soundAngry;
-    private int soundNormal;
-    private int soundHappy;
+    private String name; //String type variable, indicates the name of the girl
+    private int imageAngryLeft, imageAngryRight, imageNormaLeft, imageNormalRight,
+            imageLaughtLeft, imageLaughtRight, sceneSexUncensored, sceneCensored;  //Integer type variable, indicates the image of each girl and her position
+    private int soundAngry, soundNormal, soundHappy; //Integer type variable, indicates the sound of each girl and her emotion
 
+    /**
+     * Empty builder
+     * The GirlCharacter object is used to save the names, pictures and sounds of the girls who appear in the game.
+     */
     public GirlCharacters() {
 
     }
 
+    /**
+     * GETTERS AND SETTERS that returns or modify the value in each field
+     *
+     * We will use the getters to receive the necessary images or sounds
+     *
+     * The setters will be used in the class you inherit and we will insert the necessary images and sounds
+     */
     public String getName() {
         return name;
     }
