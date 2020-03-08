@@ -3,12 +3,15 @@ package com.mystra77.visualnovel.classes;
 import java.io.Serializable;
 
 public class Player implements Serializable {
-    private int stage;
-    private int angel;
-    private int neko;
-    private int mature;
-    private int score;
+    private int stage; //Integer type variable, indicates the chapter in the game
+    private int angel; //Integer type variable, indicates the point obtained by the character angel
+    private int neko; //Integer type variable, indicates the point obtained by the character neko
+    private int mature; //Integer type variable, indicates the point obtained by the character mature
+    private int score;  //Integer type variable, indicates the score to save to unlock images
 
+    /**
+     * Empty builder we use to start a game from 0
+     */
     public Player() {
         this.stage = 1;
         this.angel = 0;
@@ -17,6 +20,15 @@ public class Player implements Serializable {
         this.score = 0;
     }
 
+    /**
+     * Builder used when loading a game
+     *
+     * @param stage  //Integer type variable, indicates the chapter in the game
+     * @param angel  //Integer type variable, indicates the point obtained by the character angel
+     * @param neko   //Integer type variable, indicates the point obtained by the character neko
+     * @param mature //Integer type variable, indicates the point obtained by the character mature
+     * @param score  //Integer type variable, indicates the score to save to unlock images
+     */
     public Player(int stage, int angel, int neko, int mature, int score) {
         this.stage = stage;
         this.angel = angel;
@@ -25,6 +37,9 @@ public class Player implements Serializable {
         this.score = score;
     }
 
+    /*
+     * GETTERS AND SETTERS that returns or modify the value of the assigned Intenger in each field
+     */
     public int getStage() {
         return stage;
     }
@@ -65,15 +80,5 @@ public class Player implements Serializable {
         this.score = score;
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "stage=" + stage +
-                ", angel=" + angel +
-                ", neko=" + neko +
-                ", mature=" + mature +
-                ", score=" + score +
-                '}';
-    }
 }
 

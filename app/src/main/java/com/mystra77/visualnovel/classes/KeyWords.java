@@ -1,10 +1,14 @@
 package com.mystra77.visualnovel.classes;
 
 public class KeyWords {
+
     private String keyAngel, keyNeko, keyMature, keyNormalLeftPosition, keyNormalCenterPosition, keyNormalRightPosition,
             keyHappyLeftPosition, keyHappyCenterPosition, keyHappyRightPosition, keyAngryLeftPosition,
             keyAngryCenterPosition, keyAngryRightPosition, keyButtons;
 
+    /**
+     * Builder with all the keywords that help us to read the script and perform actions
+     */
     public KeyWords() {
         this.keyAngel = "*angel*";
         this.keyNeko = "*neko*";
@@ -12,15 +16,18 @@ public class KeyWords {
         this.keyNormalLeftPosition = "*normalLeftPosition*";
         this.keyNormalCenterPosition = "*normalCenterPosition*";
         this.keyNormalRightPosition = "*normalRightPosition*";
-        this.keyHappyLeftPosition =  "*happyLeftPosition*";
-        this.keyHappyCenterPosition =  "*happyCenterPosition*";
-        this.keyHappyRightPosition =  "*happyRightPosition*";
-        this.keyAngryLeftPosition =  "*angryLeftPosition*";
-        this.keyAngryCenterPosition =  "*angryCenterPosition*";
-        this.keyAngryRightPosition =  "*angryRightPosition*";
+        this.keyHappyLeftPosition = "*happyLeftPosition*";
+        this.keyHappyCenterPosition = "*happyCenterPosition*";
+        this.keyHappyRightPosition = "*happyRightPosition*";
+        this.keyAngryLeftPosition = "*angryLeftPosition*";
+        this.keyAngryCenterPosition = "*angryCenterPosition*";
+        this.keyAngryRightPosition = "*angryRightPosition*";
         this.keyButtons = "*buttons*";
     }
 
+    /**
+     * GETTERS that returns the value of the assigned String in each field
+     */
     public String getKeyAngel() {
         return keyAngel;
     }
@@ -69,5 +76,7 @@ public class KeyWords {
         return keyAngryRightPosition;
     }
 
-    public String getKeyButtons() { return keyButtons; }
+    public String getKeyButtons() {
+        return keyButtons;
+    }
 }

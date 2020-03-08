@@ -54,7 +54,7 @@ public class Game extends AppCompatActivity {
     private ScrollView containerText;
     private GirlCharacters mature, neko, angel;
     private KeyWords keyWords;
-    private Button btnNext, btnExit;
+    private Button btnExit;
     private Handler handler;
 
     @Override
@@ -89,7 +89,6 @@ public class Game extends AppCompatActivity {
         textDialogLog = findViewById(R.id.textBoxLog);
         textCharacterName = findViewById(R.id.nameCharacterText);
         finalMessage = findViewById(R.id.finalMessage);
-        btnNext = findViewById(R.id.btnNext);
         btnExit = findViewById(R.id.btnExitGame);
         containerText = findViewById(R.id.containerDialog);
         layoutTextBox = findViewById(R.id.layoutText);
@@ -123,6 +122,8 @@ public class Game extends AppCompatActivity {
             Stage2 stage2 = new Stage2();
             loadStage(stage2, R.raw.script2);
         }
+
+        textDialogBox.setText(R.string.tap);
 
     }
 
@@ -160,12 +161,10 @@ public class Game extends AppCompatActivity {
             containerText.setVisibility(view.GONE);
             layoutTextBox.setVisibility(View.VISIBLE);
             btnExit.setVisibility(View.VISIBLE);
-            btnNext.setVisibility(View.VISIBLE);
         } else {
             containerText.setVisibility(view.VISIBLE);
             layoutTextBox.setVisibility(View.GONE);
             btnExit.setVisibility(View.GONE);
-            btnNext.setVisibility(View.GONE);
         }
         counterLog++;
     }
@@ -208,6 +207,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void clickNext(View view) {
+        soundClick.start();
         lines = allText.split(System.getProperty("line.separator"));
         if (counterLines < lines.length) {
             if (lines[counterLines].equals(keyWords.getKeyNeko())) {
@@ -272,7 +272,8 @@ public class Game extends AppCompatActivity {
                 counterLines++;
                 buttonOption3.setText(lines[counterLines]);
                 layoutButtons.setVisibility(View.VISIBLE);
-                btnNext.setVisibility(View.GONE);
+                layoutTextBox.setClickable(false);
+                layoutTextBox.setEnabled(false);
             }else{
                 textDialogBox.setText(lines[counterLines]);
                 textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
@@ -295,36 +296,44 @@ public class Game extends AppCompatActivity {
                 endOfStage();
             }
         }
-        disableButtonNext();
     }
 
     public void clickOption1(View view) {
+        soundClick.start();
+        textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption1.getText().toString() +"\"\n");
         counterLines+=1;
         textDialogBox.setText(lines[counterLines]);
         textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
         counterLines+=3;
         layoutButtons.setVisibility(View.GONE);
-        btnNext.setVisibility(View.VISIBLE);
+        layoutTextBox.setClickable(true);
+        layoutTextBox.setEnabled(true);
         afinityGirl(10);
     }
 
     public void clickOption2(View view) {
+        soundClick.start();
+        textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption2.getText().toString() +"\"\n");
         counterLines+=2;
         textDialogBox.setText(lines[counterLines]);
         textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
         counterLines+=2;
         layoutButtons.setVisibility(View.GONE);
-        btnNext.setVisibility(View.VISIBLE);
+        layoutTextBox.setClickable(true);
+        layoutTextBox.setEnabled(true);
         afinityGirl(0);
     }
 
     public void clickOption3(View view) {
+        soundClick.start();
+        textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption3.getText().toString() +"\"\n");
         counterLines+=3;
         textDialogBox.setText(lines[counterLines]);
         textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
         counterLines++;
         layoutButtons.setVisibility(View.GONE);
-        btnNext.setVisibility(View.VISIBLE);
+        layoutTextBox.setClickable(true);
+        layoutTextBox.setEnabled(true);
         afinityGirl(-10);
     }
 
@@ -341,17 +350,6 @@ public class Game extends AppCompatActivity {
             player.setMature(player.getMature() + points);
             System.out.println(player.getMature());
         }
-    }
-
-    public void disableButtonNext(){
-        //TODO GONE
-        soundClick.start();
-        btnNext.setEnabled(false);
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                btnNext.setEnabled(true);
-            }
-        }, 1000);
     }
 
     public void endOfStage(){

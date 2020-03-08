@@ -15,9 +15,9 @@
     <string name="moveToTwitter">^_^ Move to Twitter?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="save1">Save 1</string>
-    <string name="save2">Save 2</string>
-    <string name="save3">Save 3</string>
+    <string name="save1">SAVE 1</string>
+    <string name="save2">SAVE 2</string>
+    <string name="save3">SAVE 3</string>
     <string name="empty">EMPTY</string>
     <string name="delete1">Delete Save 1</string>
     <string name="delete2">Delete Save 2</string>
@@ -31,8 +31,9 @@
     <string name="OFF">OFF</string>
     <string name="gameCompleted">GAME COMPLETED</string>
     <string name="thanksMessage">THANKS FOR PLAYING ^_^</string>
-
+    <string name="chapterComplete">CHAPTER COMPLETE\nNew images unlocked in gallery ^_^</string>
     <string name="messageGameComplted">Try a new game and discover a new route!!!</string>
-    <string name="stage">STAGE:\u0020</string>
+    <string name="chapter">CHAPTER:\u0020</string>
+    <string name="tap">Tap to Continue...</string>
     <string name="dialogSpace">\u0020\u0020\u0020\u0020</string>
 </resources>

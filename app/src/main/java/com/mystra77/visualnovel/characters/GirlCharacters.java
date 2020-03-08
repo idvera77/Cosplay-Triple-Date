@@ -14,21 +14,6 @@ public abstract class GirlCharacters {
 
     }
 
-    public GirlCharacters(String name, int imageAngryLeft, int imageAngryRight, int imageNormaLeft, int imageNormalRight, int imageLaughtLeft, int imageLaughtRight, int soundAngry, int soundNormal, int soundHappy, int sceneSexUncensored, int sceneCensored) {
-        this.name = name;
-        this.imageAngryLeft = imageAngryLeft;
-        this.imageAngryRight = imageAngryRight;
-        this.imageNormaLeft = imageNormaLeft;
-        this.imageNormalRight = imageNormalRight;
-        this.imageLaughtLeft = imageLaughtLeft;
-        this.imageLaughtRight = imageLaughtRight;
-        this.soundAngry = soundAngry;
-        this.soundNormal = soundNormal;
-        this.soundHappy = soundHappy;
-        this.sceneSexUncensored = sceneSexUncensored;
-        this.sceneCensored = sceneCensored;
-    }
-
     public String getName() {
         return name;
     }

@@ -1,10 +1,14 @@
 hola
 *neko*
+*normalCenterPosition*
+Why, yes! Are you “kirito_senpai_69”?
+…
+*happyCenterPosition*
 ¿Te gusta pollo?
 *buttons*
-boton1
-boton2
-boton3
+A drama/romantic visual novel hero
+The protagonist of an adventure anime
+The bringer of death and destruction
 respuesta1
 respuesta2
 respuesta3
