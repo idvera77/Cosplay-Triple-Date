@@ -1,5 +1,6 @@
 package com.mystra77.visualnovel.characters;
 
+
 public abstract class GirlCharacters {
     private String name; //String type variable, indicates the name of the girl
     private int imageAngryLeft, imageAngryRight, imageNormaLeft, imageNormalRight,

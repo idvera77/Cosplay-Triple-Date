@@ -117,25 +117,33 @@ public class HomeActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    //This function activates gameStartFragment and blocks the button
+    /**
+     * This function activates gameStartFragment and blocks the button
+     */
     public void Start(final View view) {
         disableButton(btnStart);
         activeFragment(gameStartFragment);
     }
 
-    //This function activates continueFragment and blocks the button
+    /**
+     * This function activates continueFragment and blocks the button
+     */
     public void Continue(View view) {
         disableButton(btnContinue);
         activeFragment(continueFragment);
     }
 
-    //This function activates galleryFragment and blocks the button
+    /**
+     * This function activates galleryFragment and blocks the button
+     */
     public void Gallery(View view) {
         disableButton(btnGallery);
         activeFragment(galleryFragment);
     }
 
-    //This function activates settingsFragment and blocks the button
+    /**
+     * This function activates settingsFragment and blocks the button
+     */
     public void Settings(View view) {
         disableButton(btnSettings);
         activeFragment(settingsFragment);

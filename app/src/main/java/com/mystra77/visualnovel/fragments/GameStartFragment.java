@@ -35,20 +35,30 @@ public class GameStartFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        activity = (HomeActivity) getActivity();
+
+        //Establish the view
         view = inflater.inflate(R.layout.fragment_game_start, container, false);
 
+        //add the activity of HomeActivity
+        activity = (HomeActivity) getActivity();
+
+        //Linking Buttons to variables
         newGame = view.findViewById(R.id.btnNewGame);
         loadLastSave = view.findViewById(R.id.btnLastSave);
 
+        //Using the lastSave function of the database we unlock the loadLastSave button
         unlockLastSave = activity.getMoh().fillLoadButton();
-
         for (String lastSave : unlockLastSave) {
             if (!lastSave.equals(".")) {
                 loadLastSave.setEnabled(true);
             }
         }
 
+        /**
+         * Create a new player object
+         * The player object is entered into a Bundle that will be called in the game
+         * If the game is already completed, an alert will appear warning us of this
+         */
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +73,12 @@ public class GameStartFragment extends Fragment {
             }
         });
 
+        /**
+         * Call the database to use the function loadGame
+         * It retrieves the saved data and creates a player with it
+         * The player object is entered into a Bundle that will be called in the game
+         * If the game is already completed, an alert will appear warning us of this
+         */
         loadLastSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,13 +87,13 @@ public class GameStartFragment extends Fragment {
                 bundle = new Bundle();
                 player = activity.getMoh().loadLastSave();
                 bundle.putSerializable("player", player);
-                if(player.getStage() != 5){
+                if (player.getStage() != 5) {
                     intentNewGame = new Intent(view.getContext(), Game.class);
                     intentNewGame.putExtras(bundle);
                     startActivity(intentNewGame);
-                }else{
+                } else {
                     new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
-                            .setMessage(R.string.messageGameComplted)
+                            .setMessage(R.string.messageGameCompleted)
                             .show();
                 }
             }
@@ -85,5 +101,4 @@ public class GameStartFragment extends Fragment {
 
         return view;
     }
-
 }

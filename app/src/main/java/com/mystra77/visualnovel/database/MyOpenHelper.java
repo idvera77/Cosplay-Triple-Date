@@ -153,6 +153,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
                 if (stageData.equals(stage + "5")) {
                     dateLoadString.add(gameCompleted);
                 } else {
+                    //little trick that will help us when we call the function in the ContinueFragment
                     if (!timeData.equals("0")) {
                         dateLoadString.add(stageData + "\n\n" + timeData);
                     } else {

@@ -1,23 +1,23 @@
 package com.mystra77.visualnovel.fragments;
 
 
-import android.app.AlertDialog;
-import android.content.SharedPreferences;
-import android.os.Bundle;
+        import android.app.AlertDialog;
+        import android.content.SharedPreferences;
+        import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+        import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.view.Window;
+        import android.view.WindowManager;
+        import android.widget.ImageView;
 
-import com.mystra77.visualnovel.HomeActivity;
-import com.mystra77.visualnovel.R;
+        import com.mystra77.visualnovel.HomeActivity;
+        import com.mystra77.visualnovel.R;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 
 public class GalleryFragment extends Fragment {
@@ -33,9 +33,14 @@ public class GalleryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        activity = (HomeActivity) getActivity();
+
+        //Establish the view
         view = inflater.inflate(R.layout.fragment_gallery, container, false);
 
+        //add the activity of HomeActivity
+        activity = (HomeActivity) getActivity();
+
+        //Linking ImageView to variables
         image0 = view.findViewById(R.id.imageGallery0);
         image1 = view.findViewById(R.id.imageGallery1);
         image2 = view.findViewById(R.id.imageGallery2);
@@ -45,6 +50,7 @@ public class GalleryFragment extends Fragment {
         image6 = view.findViewById(R.id.imageGallery6);
         image7 = view.findViewById(R.id.imageGallery7);
 
+        //Load the galleryArrayList with images save in the app
         galleryArrayList = new ArrayList<Integer>();
         galleryArrayList.add(R.mipmap.demon);
         galleryArrayList.add(R.mipmap.albedo);
@@ -55,14 +61,21 @@ public class GalleryFragment extends Fragment {
         galleryArrayList.add(R.mipmap.shiranui);
         galleryArrayList.add(R.mipmap.selfie);
 
+        /*
+        Call the database to use the function unlockGallery
+        The maximum number of points is stored in the variable unlockPointDB
+        */
         unlockPointDB = activity.getMoh().unlockGallerySelect();
+        //If unlockPointDB has more points than those saved in the program preferences, it updates this preference
         if (unlockPointDB > activity.getPreferencesSettings().getInt("galleryUnlock", 0)) {
             SharedPreferences.Editor editor = activity.getPreferencesSettings().edit();
             editor.putInt("galleryUnlock", unlockPointDB);
             editor.commit();
         }
-        unlockPointPreference = activity.getPreferencesSettings().getInt("galleryUnlock", 0);
 
+        // Store the points saved in preferences
+        unlockPointPreference = activity.getPreferencesSettings().getInt("galleryUnlock", 0);
+        // Every 250 points 2 images of the gallery are unlocked, the buttons are enabled to access them
         if (unlockPointPreference >= 250) {
             image0.setImageResource(galleryArrayList.get(0));
             image0.setOnClickListener(new View.OnClickListener() {
@@ -79,13 +92,12 @@ public class GalleryFragment extends Fragment {
                 }
             });
         }
-        if (unlockPointPreference >=500) {
+        if (unlockPointPreference >= 500) {
             image2.setImageResource(galleryArrayList.get(2));
             image2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     showImage(2);
-
                 }
             });
             image3.setImageResource(galleryArrayList.get(3));
@@ -102,7 +114,6 @@ public class GalleryFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     showImage(4);
-
                 }
             });
             image5.setImageResource(galleryArrayList.get(5));
@@ -110,7 +121,6 @@ public class GalleryFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     showImage(5);
-
                 }
             });
         }
@@ -135,6 +145,11 @@ public class GalleryFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Function with a complex dialogue alert which shows the full image on almost the entire screen
+     *
+     * @param positionImage Indicates the position of the array that has the image
+     */
     public void showImage(int positionImage) {
         activity.getSoundClick().start();
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
@@ -153,5 +168,4 @@ public class GalleryFragment extends Fragment {
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(lp);
     }
-
 }

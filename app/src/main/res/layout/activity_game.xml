@@ -56,7 +56,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.45">
+            android:layout_weight="0.50">
 
             <LinearLayout
                 android:id="@+id/containerButtons"
@@ -156,20 +156,22 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:onClick="clickNext"
-            android:background="@drawable/border_menu"
             app:layout_constrainedWidth="false">
 
             <TextView
                 android:id="@+id/nameCharacterText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="8dp"
+                android:background="@drawable/border_name"
                 android:includeFontPadding="false"
+                android:paddingStart="10dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="2dp"
                 android:textColor="@color/characterName"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -177,12 +179,14 @@
                 android:id="@+id/textBox"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginEnd="64dp"
-                android:layout_marginBottom="20dp"
+                android:background="@drawable/border_menu"
+                android:gravity="center"
                 android:includeFontPadding="true"
+                android:paddingStart="64dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="64dp"
                 android:paddingBottom="10dp"
-                android:textAlignment="gravity"
+                android:textAlignment="viewStart"
                 android:textColor="@color/textColor"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -266,27 +270,27 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/containerDialog"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="50dp"
         android:background="@drawable/log_border"
-        android:padding="10dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/scenario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/scenario">
 
-        <TextView
+        <ListView
             android:id="@+id/textBoxLog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:textColor="@color/textLog"
-            android:textSize="17sp"
-            android:textStyle="italic" />
-    </ScrollView>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

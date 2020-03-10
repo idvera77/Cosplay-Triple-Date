@@ -10,7 +10,7 @@ public class Mature extends GirlCharacters {
      * sound/emotion and image/position of the mature girl
      */
     public Mature() {
-        setName("Mature:");
+        setName("Mature");
         setImageNormaLeft(R.mipmap.left_mature_normal);
         setImageNormalRight(R.mipmap.right_mature_normal);
         setImageLaughtLeft(R.mipmap.left_mature_happy);

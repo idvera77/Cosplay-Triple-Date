@@ -39,7 +39,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/sinacceso" />
 
             <ImageView
                 android:id="@+id/imageGallery1"
@@ -52,7 +53,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/sinacceso" />
 
             <ImageView
                 android:id="@+id/imageGallery2"
@@ -65,7 +67,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/sinacceso" />
 
             <ImageView
                 android:id="@+id/imageGallery3"
@@ -78,7 +81,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/sinacceso" />
 
         </LinearLayout>
 
@@ -103,7 +107,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/sinacceso" />
 
             <ImageView
                 android:id="@+id/imageGallery5"
@@ -116,7 +121,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/sinacceso" />
 
             <ImageView
                 android:id="@+id/imageGallery6"
@@ -129,7 +135,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/sinacceso" />
 
             <ImageView
                 android:id="@+id/imageGallery7"
@@ -142,7 +149,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/sinacceso" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

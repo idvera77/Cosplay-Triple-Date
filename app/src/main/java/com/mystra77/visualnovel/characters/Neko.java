@@ -10,7 +10,7 @@ public class Neko extends GirlCharacters {
      * sound/emotion and image/position of the neko girl
      */
     public Neko() {
-        setName("Neko:");
+        setName("Neko");
         setImageNormaLeft(R.mipmap.left_neko_normal);
         setImageNormalRight(R.mipmap.right_neko_normal);
         setImageLaughtLeft(R.mipmap.left_neko_happy);

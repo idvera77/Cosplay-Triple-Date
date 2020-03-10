@@ -14,9 +14,11 @@ import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -35,12 +37,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Game extends AppCompatActivity {
     private MyOpenHelper moh;
     private Player player;
     private SharedPreferences preferencesSettings;
-    private ConstraintLayout layoutBackground, layoutTextBox, layoutEndOfStage;
+    private ConstraintLayout layoutBackground, layoutTextBox, layoutEndOfStage, containerText;
     private LinearLayout layoutScenario, layoutButtons;
     private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
     private Button buttonLog, buttonOption1, buttonOption2, buttonOption3;
@@ -50,8 +53,10 @@ public class Game extends AppCompatActivity {
     private String[] lines;
     private int lengthMusic, counterLog, counterLines;
     private ImageView leftImage, centerImage, rightImage;
-    private TextView textDialogBox, textDialogLog, textCharacterName, finalMessage;
-    private ScrollView containerText;
+    private TextView textDialogBox, textCharacterName, finalMessage;
+    private ListView textDialogLog;
+    private ArrayList<String> logsLines;
+    private ArrayAdapter<String> adapterLog;
     private GirlCharacters mature, neko, angel;
     private KeyWords keyWords;
     private Button btnExit;
@@ -98,6 +103,10 @@ public class Game extends AppCompatActivity {
 
         soundClick = MediaPlayer.create(this, R.raw.sound_click);
         soundClick.setVolume(volumenSound, volumenSound);
+
+        logsLines=new ArrayList<String>();
+        adapterLog = new ArrayAdapter<String>(this,R.layout.log_adapter,logsLines);
+        textDialogLog.setAdapter(adapterLog);
 
         keyWords = new KeyWords();
         handler = new Handler();
@@ -222,19 +231,22 @@ public class Game extends AppCompatActivity {
             if (lines[counterLines].equals(keyWords.getKeyNeko())) {
                 characterSelect = keyWords.getKeyNeko();
                 textCharacterName.setText(neko.getName());
-                textDialogLog.setText(textDialogLog.getText()  + "\n" + neko.getName() + "\n");
+                logsLines.add(neko.getName());
+                adapterLog.notifyDataSetChanged();
                 counterLines++;
                 clickNext(view);
             } else if (lines[counterLines].equals(keyWords.getKeyAngel())) {
                 characterSelect = keyWords.getKeyAngel();
                 textCharacterName.setText(angel.getName());
-                textDialogLog.setText(textDialogLog.getText() + "\n" + angel.getName() + "\n");
+                logsLines.add(angel.getName());
+                adapterLog.notifyDataSetChanged();
                 counterLines++;
                 clickNext(view);
             } else if (lines[counterLines].equals(keyWords.getKeyMature())) {
                 characterSelect = keyWords.getKeyMature();
                 textCharacterName.setText(mature.getName());
-                textDialogLog.setText(textDialogLog.getText() + "\n" + mature.getName() + "\n");
+                logsLines.add(mature.getName());
+                adapterLog.notifyDataSetChanged();
                 counterLines++;
                 clickNext(view);
             }else if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
@@ -284,8 +296,9 @@ public class Game extends AppCompatActivity {
                 layoutTextBox.setClickable(false);
                 layoutTextBox.setEnabled(false);
             }else{
-                textDialogBox.setText(lines[counterLines]);
-                textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+                textDialogBox.setText(lines[counterLines]+" ");
+                logsLines.add(lines[counterLines]);
+                adapterLog.notifyDataSetChanged();
                 counterLines++;
             }
         }else{
@@ -309,7 +322,7 @@ public class Game extends AppCompatActivity {
 
     public void clickOption1(View view) {
         soundClick.start();
-        textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption1.getText().toString() +"\"\n");
+        logsLines.add(buttonOption1.getText().toString());
         counterLines++;
         if (lines[counterLines].equals(keyWords.getKeyHappyLeftPosition())) {
             drawLeftGirl(girlSelection(characterSelect), 1);
@@ -320,8 +333,9 @@ public class Game extends AppCompatActivity {
             drawRightGirl(girlSelection(characterSelect), 1);
         }
         counterLines++;
-        textDialogBox.setText(lines[counterLines]);
-        textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+        textDialogBox.setText(lines[counterLines]+" ");
+        logsLines.add("\"" + lines[counterLines] + "\"");
+        adapterLog.notifyDataSetChanged();
         counterLines+=5;
         layoutButtons.setVisibility(View.GONE);
         layoutTextBox.setClickable(true);
@@ -331,7 +345,7 @@ public class Game extends AppCompatActivity {
 
     public void clickOption2(View view) {
         soundClick.start();
-        textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption2.getText().toString() +"\"\n");
+        logsLines.add(buttonOption2.getText().toString());
         counterLines+=3;
         if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
             drawLeftGirl(girlSelection(characterSelect), 0);
@@ -341,8 +355,9 @@ public class Game extends AppCompatActivity {
             drawRightGirl(girlSelection(characterSelect), 0);
         }
         counterLines++;
-        textDialogBox.setText(lines[counterLines]);
-        textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+        textDialogBox.setText(lines[counterLines]+" ");
+        logsLines.add("\"" + lines[counterLines] + "\"");
+        adapterLog.notifyDataSetChanged();
         counterLines+=3;
         layoutButtons.setVisibility(View.GONE);
         layoutTextBox.setClickable(true);
@@ -352,7 +367,7 @@ public class Game extends AppCompatActivity {
 
     public void clickOption3(View view) {
         soundClick.start();
-        textDialogLog.setText(textDialogLog.getText() +"\"" + buttonOption3.getText().toString() +"\"\n");
+        logsLines.add(buttonOption3.getText().toString());
         counterLines+=5;
         if (lines[counterLines].equals(keyWords.getKeyAngryLeftPosition())) {
             drawLeftGirl(girlSelection(characterSelect), 2);
@@ -362,8 +377,9 @@ public class Game extends AppCompatActivity {
             drawRightGirl(girlSelection(characterSelect), 2);
         }
         counterLines++;
-        textDialogBox.setText(lines[counterLines]);
-        textDialogLog.setText(textDialogLog.getText() + lines[counterLines] + "\n");
+        textDialogBox.setText(lines[counterLines]+" ");
+        logsLines.add("\"" + lines[counterLines] + "\"");
+        adapterLog.notifyDataSetChanged();
         counterLines++;
         layoutButtons.setVisibility(View.GONE);
         layoutTextBox.setClickable(true);
@@ -373,15 +389,15 @@ public class Game extends AppCompatActivity {
 
     public void afinityGirl(int points){
         if(characterSelect.equals(keyWords.getKeyNeko())){
-            player.setNeko(player.getNeko() + points + 5);
+            player.setNeko(player.getNeko() + points);
             System.out.println(player.getNeko());
         }
         if(characterSelect.equals(keyWords.getKeyAngel())){
-            player.setAngel(player.getAngel() + points);
+            player.setAngel(player.getAngel() + points - 3);
             System.out.println(player.getAngel());
         }
         if(characterSelect.equals(keyWords.getKeyMature())){
-            player.setMature(player.getMature() + points);
+            player.setMature(player.getMature() + points + 5);
             System.out.println(player.getMature());
         }
     }

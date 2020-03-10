@@ -37,17 +37,13 @@ public abstract class Stage {
         this.stageBackground = stageBackground;
     }
 
-    public int getScriptPlot1() {
-        return scriptPlot1;
-    }
+    public int getScriptPlot1() { return scriptPlot1; }
 
     public void setScriptPlot1(int scriptPlot1) {
         this.scriptPlot1 = scriptPlot1;
     }
 
-    public int getScriptPlot2() {
-        return scriptPlot2;
-    }
+    public int getScriptPlot2() { return scriptPlot2; }
 
     public void setScriptPlot2(int scriptPlot2) {
         this.scriptPlot2 = scriptPlot2;

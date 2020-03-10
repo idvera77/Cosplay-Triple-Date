@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <inset xmlns:android="http://schemas.android.com/apk/res/android"
+            android:insetBottom="-2dp"
+            >
+            <shape xmlns:android="http://schemas.android.com/apk/res/android">
+                <stroke
+                    android:color="@color/border"
+                    android:width="2dp"/>
+            </shape>
+        </inset>
+    </item>
+    <item
+        android:top="2dp"
+        android:right="2dp"
+        android:bottom="0dp"
+        android:left="2dp">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/backgroundMenu"/>
+        </shape>
+    </item>
+</layer-list>

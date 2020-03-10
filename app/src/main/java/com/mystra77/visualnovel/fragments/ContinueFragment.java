@@ -36,9 +36,14 @@ public class ContinueFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        activity = (HomeActivity) getActivity();
+
+        //Establish the view
         view = inflater.inflate(R.layout.fragment_continue, container, false);
 
+        //add the activity of HomeActivity
+        activity = (HomeActivity) getActivity();
+
+        //Linking Buttons to variables
         load1 = view.findViewById(R.id.btnLoadSave1);
         load2 = view.findViewById(R.id.btnLoadSave2);
         load3 = view.findViewById(R.id.btnLoadSave3);
@@ -46,9 +51,14 @@ public class ContinueFragment extends Fragment {
         delete2 = view.findViewById(R.id.btnDeleteLoad2);
         delete3 = view.findViewById(R.id.btnDeleteLoad3);
 
-
+        //Call the database to use the function that fills in the text of the load buttons
         fillButton = activity.getMoh().fillLoadButton();
 
+        /*
+        If the bd detects that no game has been saved it will leave the default text on the buttons which is Empty,
+        otherwise it will fill it in with the data obtained.
+        It also unlocks the load and delete button
+        */
         if (!fillButton.get(0).equals(".")) {
             load1.setText(fillButton.get(0));
             load1.setEnabled(true);
@@ -65,6 +75,10 @@ public class ContinueFragment extends Fragment {
             delete3.setEnabled(true);
         }
 
+        /**
+         * Button1 Load event
+         * It disables itself, starts the load game sound and starts the loadGame function
+         */
         load1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +88,10 @@ public class ContinueFragment extends Fragment {
             }
         });
 
+        /**
+         * Button2 Load event
+         * It disables itself, starts the load game sound and starts the loadGame function
+         */
         load2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +101,10 @@ public class ContinueFragment extends Fragment {
             }
         });
 
+        /**
+         * Button3 Load event
+         * It disables itself, starts the load game sound and starts the loadGame function
+         */
         load3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +114,10 @@ public class ContinueFragment extends Fragment {
             }
         });
 
+        /**
+         * Button1 Delete event
+         * Activate the deleteAlert function
+         */
         delete1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +125,10 @@ public class ContinueFragment extends Fragment {
             }
         });
 
+        /**
+         * Button2 Delete event
+         * Activate the deleteAlert function
+         */
         delete2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,6 +136,10 @@ public class ContinueFragment extends Fragment {
             }
         });
 
+        /**
+         * Button3 Delete event
+         * Activate the deleteAlert function
+         */
         delete3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -116,6 +150,37 @@ public class ContinueFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Call the database to use the function loadGame
+     * It retrieves the saved data and creates a player with it
+     * The player object is entered into a Bundle that will be called in the game
+     * If the game is already completed, an alert will appear warning us of this
+     *
+     * @param loadFile Indicates the number of the save game to be loaded
+     */
+    public void loadGame(int loadFile) {
+        bundle = new Bundle();
+        player = activity.getMoh().loadGame(loadFile);
+        bundle.putSerializable("player", player);
+        if (player.getStage() != 5) {
+            intentContinueGame = new Intent(view.getContext(), Game.class);
+            intentContinueGame.putExtras(bundle);
+            startActivity(intentContinueGame);
+        } else {
+            new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
+                    .setMessage(R.string.messageGameCompleted)
+                    .show();
+        }
+    }
+
+    /**
+     * Call the database to use the function deleteSave
+     * Using the id recognizes the game and removes it
+     * It generates an alert dialog to confirm if we want to delete the saved game.
+     * When you accept, the dialog closes and the default text of the button
+     *
+     * @param deleteSaveId Indicates the id of the save game to be deleted
+     */
     public void deleteAlert(final int deleteSaveId) {
         activity.getSoundClick().start();
         new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
@@ -145,20 +210,4 @@ public class ContinueFragment extends Fragment {
                 .setNegativeButton(R.string.no, null)
                 .show();
     }
-
-    public void loadGame(int loadFile){
-        bundle = new Bundle();
-        player = activity.getMoh().loadGame(loadFile);
-        bundle.putSerializable("player", player);
-        if(player.getStage() != 5){
-            intentContinueGame = new Intent(view.getContext(), Game.class);
-            intentContinueGame.putExtras(bundle);
-            startActivity(intentContinueGame);
-        }else{
-            new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
-                    .setMessage(R.string.messageGameComplted)
-                    .show();
-        }
-    }
-
 }
