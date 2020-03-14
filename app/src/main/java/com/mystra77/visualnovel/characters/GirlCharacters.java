@@ -22,6 +22,7 @@ public abstract class GirlCharacters {
      *
      * The setters will be used in the class you inherit and we will insert the necessary images and sounds
      */
+
     public String getName() {
         return name;
     }

@@ -48,10 +48,10 @@ public class Game extends AppCompatActivity {
     private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
     private Button buttonLog, buttonOption1, buttonOption2, buttonOption3;
     private float volumenMusic, volumenSound;
-    private boolean explicitImage;
+    private boolean explicitImage, counterLog;
     private String allText, characterSelect;
     private String[] lines;
-    private int lengthMusic, counterLog, counterLines;
+    private int lengthMusic, counterLines;
     private ImageView leftImage, centerImage, rightImage;
     private TextView textDialogBox, textCharacterName, finalMessage;
     private ListView textDialogLog;
@@ -98,14 +98,14 @@ public class Game extends AppCompatActivity {
         btnExit = findViewById(R.id.btnExitGame);
         containerText = findViewById(R.id.containerDialog);
         layoutTextBox = findViewById(R.id.layoutText);
-        counterLog = 1;
+        counterLog = false;
         counterLines = 0;
 
         soundClick = MediaPlayer.create(this, R.raw.sound_click);
         soundClick.setVolume(volumenSound, volumenSound);
 
-        logsLines=new ArrayList<String>();
-        adapterLog = new ArrayAdapter<String>(this,R.layout.log_adapter,logsLines);
+        logsLines = new ArrayList<String>();
+        adapterLog = new ArrayAdapter<String>(this, R.layout.log_adapter, logsLines);
         textDialogLog.setAdapter(adapterLog);
 
         keyWords = new KeyWords();
@@ -167,16 +167,18 @@ public class Game extends AppCompatActivity {
 
     public void openLog(View view) {
         soundClick.start();
-        if (counterLog % 2 == 0) {
+        if (counterLog) {
             containerText.setVisibility(view.GONE);
             layoutTextBox.setVisibility(View.VISIBLE);
             btnExit.setVisibility(View.VISIBLE);
+            counterLog = false;
         } else {
+            textDialogLog.setSelection(textDialogLog.getAdapter().getCount()-1);
             containerText.setVisibility(view.VISIBLE);
             layoutTextBox.setVisibility(View.GONE);
             btnExit.setVisibility(View.GONE);
+            counterLog = true;
         }
-        counterLog++;
     }
 
     public void backToMainMenu(View view) {
@@ -212,13 +214,13 @@ public class Game extends AppCompatActivity {
         mediaPlayerMusic.setLooping(true);
         mediaPlayerMusic.start();
         //Load all text
-        if (scriptOption == 1){
+        if (scriptOption == 1) {
             stream = getResources().openRawResource(stage.getScriptPlot1());
         }
-        if (scriptOption == 2){
+        if (scriptOption == 2) {
             stream = getResources().openRawResource(stage.getScriptPlot2());
         }
-        if (scriptOption == 3){
+        if (scriptOption == 3) {
             stream = getResources().openRawResource(stage.getScriptPlot3());
         }
         allText = convertStreamToString(stream);
@@ -227,82 +229,48 @@ public class Game extends AppCompatActivity {
     public void clickNext(View view) {
         soundClick.start();
         lines = allText.split(System.getProperty("line.separator"));
+        counterLines++;
         if (counterLines < lines.length) {
             if (lines[counterLines].equals(keyWords.getKeyNeko())) {
                 characterSelect = keyWords.getKeyNeko();
-                textCharacterName.setText(neko.getName());
-                logsLines.add(neko.getName());
-                adapterLog.notifyDataSetChanged();
-                counterLines++;
-                clickNext(view);
+                changeCharacterName(neko);
             } else if (lines[counterLines].equals(keyWords.getKeyAngel())) {
                 characterSelect = keyWords.getKeyAngel();
-                textCharacterName.setText(angel.getName());
-                logsLines.add(angel.getName());
-                adapterLog.notifyDataSetChanged();
-                counterLines++;
-                clickNext(view);
+                changeCharacterName(angel);
             } else if (lines[counterLines].equals(keyWords.getKeyMature())) {
                 characterSelect = keyWords.getKeyMature();
-                textCharacterName.setText(mature.getName());
-                logsLines.add(mature.getName());
-                adapterLog.notifyDataSetChanged();
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
-                drawLeftGirl(girlSelection(characterSelect), 0);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
-                drawCenterGirl(girlSelection(characterSelect), 0);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyNormalRightPosition())) {
-                drawRightGirl(girlSelection(characterSelect), 0);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyHappyLeftPosition())) {
-                drawLeftGirl(girlSelection(characterSelect), 1);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyHappyCenterPosition())) {
-                drawCenterGirl(girlSelection(characterSelect), 1);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyHappyRightPosition())) {
-                drawRightGirl(girlSelection(characterSelect), 1);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyAngryLeftPosition())) {
-                drawLeftGirl(girlSelection(characterSelect), 2);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyAngryCenterPosition())) {
-                drawCenterGirl(girlSelection(characterSelect), 2);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyAngryRightPosition())) {
-                drawRightGirl(girlSelection(characterSelect), 2);
-                counterLines++;
-                clickNext(view);
-            }else if (lines[counterLines].equals(keyWords.getKeyButtons())){
+                changeCharacterName(mature);
+            } else if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
+                drawLeftGirl(girlSelection(characterSelect), 0, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
+                drawCenterGirl(girlSelection(characterSelect), 0, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyNormalRightPosition())) {
+                drawRightGirl(girlSelection(characterSelect), 0, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyHappyLeftPosition())) {
+                drawLeftGirl(girlSelection(characterSelect), 1, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyHappyCenterPosition())) {
+                drawCenterGirl(girlSelection(characterSelect), 1, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyHappyRightPosition())) {
+                drawRightGirl(girlSelection(characterSelect), 1, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyAngryLeftPosition())) {
+                drawLeftGirl(girlSelection(characterSelect), 2, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyAngryCenterPosition())) {
+                drawCenterGirl(girlSelection(characterSelect), 2, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyAngryRightPosition())) {
+                drawRightGirl(girlSelection(characterSelect), 2, false);
+            } else if (lines[counterLines].equals(keyWords.getKeyButtons())) {
                 counterLines++;
                 buttonOption1.setText(lines[counterLines]);
                 counterLines++;
                 buttonOption2.setText(lines[counterLines]);
                 counterLines++;
                 buttonOption3.setText(lines[counterLines]);
-                layoutButtons.setVisibility(View.VISIBLE);
-                layoutTextBox.setClickable(false);
-                layoutTextBox.setEnabled(false);
-            }else{
-                textDialogBox.setText(lines[counterLines]+" ");
-                logsLines.add(lines[counterLines]);
-                adapterLog.notifyDataSetChanged();
-                counterLines++;
+                enableDisableAnswerButtons(true);
+            } else {
+                updateText();
             }
-        }else{
-            if(player.getStage()==4){
+        } else {
+            if (player.getStage() == 4) {
                 player.setScore(player.getScore() + 250);
                 player.setStage(player.getStage() + 1);
                 sexScene();
@@ -312,7 +280,7 @@ public class Game extends AppCompatActivity {
                         layoutEndOfStage.setVisibility(View.VISIBLE);
                     }
                 }, 20000);
-            }else{
+            } else {
                 player.setScore(player.getScore() + 250);
                 player.setStage(player.getStage() + 1);
                 endOfStage();
@@ -320,136 +288,146 @@ public class Game extends AppCompatActivity {
         }
     }
 
+    public void updateText() {
+        textDialogBox.setText(lines[counterLines] + " ");
+        logsLines.add(lines[counterLines]);
+        adapterLog.notifyDataSetChanged();
+    }
+
+    public void changeCharacterName(GirlCharacters girl) {
+        textCharacterName.setVisibility(View.VISIBLE);
+        textCharacterName.setText(girl.getName());
+        logsLines.add(girl.getName());
+        adapterLog.notifyDataSetChanged();
+        clickNext(this.textDialogBox);
+    }
+
+    public void enableDisableAnswerButtons(boolean enable) {
+        if (enable) {
+            layoutButtons.setVisibility(View.VISIBLE);
+            layoutTextBox.setClickable(false);
+            layoutTextBox.setEnabled(false);
+        } else {
+            layoutButtons.setVisibility(View.GONE);
+            layoutTextBox.setClickable(true);
+            layoutTextBox.setEnabled(true);
+        }
+    }
+
     public void clickOption1(View view) {
         soundClick.start();
-        logsLines.add(buttonOption1.getText().toString());
+        logsLines.add("\"" + buttonOption1.getText().toString() + "\"");
         counterLines++;
         if (lines[counterLines].equals(keyWords.getKeyHappyLeftPosition())) {
-            drawLeftGirl(girlSelection(characterSelect), 1);
-        }else if (lines[counterLines].equals(keyWords.getKeyHappyCenterPosition())) {
-            drawCenterGirl(girlSelection(characterSelect), 1);
-
-        }else if (lines[counterLines].equals(keyWords.getKeyHappyRightPosition())) {
-            drawRightGirl(girlSelection(characterSelect), 1);
+            drawLeftGirl(girlSelection(characterSelect), 1, true);
+        } else if (lines[counterLines].equals(keyWords.getKeyHappyCenterPosition())) {
+            drawCenterGirl(girlSelection(characterSelect), 1, true);
+        } else if (lines[counterLines].equals(keyWords.getKeyHappyRightPosition())) {
+            drawRightGirl(girlSelection(characterSelect), 1, true);
         }
         counterLines++;
-        textDialogBox.setText(lines[counterLines]+" ");
-        logsLines.add("\"" + lines[counterLines] + "\"");
-        adapterLog.notifyDataSetChanged();
-        counterLines+=5;
-        layoutButtons.setVisibility(View.GONE);
-        layoutTextBox.setClickable(true);
-        layoutTextBox.setEnabled(true);
+        updateText();
+        counterLines += 4;
         afinityGirl(10);
+        enableDisableAnswerButtons(false);
     }
 
     public void clickOption2(View view) {
         soundClick.start();
-        logsLines.add(buttonOption2.getText().toString());
-        counterLines+=3;
+        logsLines.add("\"" + buttonOption2.getText().toString() + "\"");
+        adapterLog.notifyDataSetChanged();
+        counterLines += 3;
         if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
-            drawLeftGirl(girlSelection(characterSelect), 0);
-        }else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
-            drawCenterGirl(girlSelection(characterSelect), 0);
-        }else if (lines[counterLines].equals(keyWords.getKeyNormalRightPosition())) {
-            drawRightGirl(girlSelection(characterSelect), 0);
+            drawLeftGirl(girlSelection(characterSelect), 0, true);
+        } else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
+            drawCenterGirl(girlSelection(characterSelect), 0, true);
+        } else if (lines[counterLines].equals(keyWords.getKeyNormalRightPosition())) {
+            drawRightGirl(girlSelection(characterSelect), 0, true);
         }
         counterLines++;
-        textDialogBox.setText(lines[counterLines]+" ");
-        logsLines.add("\"" + lines[counterLines] + "\"");
-        adapterLog.notifyDataSetChanged();
-        counterLines+=3;
-        layoutButtons.setVisibility(View.GONE);
-        layoutTextBox.setClickable(true);
-        layoutTextBox.setEnabled(true);
+        updateText();
+        counterLines += 2;
         afinityGirl(0);
+        enableDisableAnswerButtons(false);
     }
 
     public void clickOption3(View view) {
         soundClick.start();
-        logsLines.add(buttonOption3.getText().toString());
-        counterLines+=5;
+        logsLines.add("\"" + buttonOption3.getText().toString() + "\"");
+        counterLines += 5;
         if (lines[counterLines].equals(keyWords.getKeyAngryLeftPosition())) {
-            drawLeftGirl(girlSelection(characterSelect), 2);
-        }else if (lines[counterLines].equals(keyWords.getKeyAngryCenterPosition())) {
-            drawCenterGirl(girlSelection(characterSelect), 2);
-        }else if (lines[counterLines].equals(keyWords.getKeyAngryRightPosition())) {
-            drawRightGirl(girlSelection(characterSelect), 2);
+            drawLeftGirl(girlSelection(characterSelect), 2, true);
+        } else if (lines[counterLines].equals(keyWords.getKeyAngryCenterPosition())) {
+            drawCenterGirl(girlSelection(characterSelect), 2, true);
+        } else if (lines[counterLines].equals(keyWords.getKeyAngryRightPosition())) {
+            drawRightGirl(girlSelection(characterSelect), 2, true);
         }
         counterLines++;
-        textDialogBox.setText(lines[counterLines]+" ");
-        logsLines.add("\"" + lines[counterLines] + "\"");
-        adapterLog.notifyDataSetChanged();
-        counterLines++;
-        layoutButtons.setVisibility(View.GONE);
-        layoutTextBox.setClickable(true);
-        layoutTextBox.setEnabled(true);
+        updateText();
         afinityGirl(-10);
+        enableDisableAnswerButtons(false);
     }
 
-    public void afinityGirl(int points){
-        if(characterSelect.equals(keyWords.getKeyNeko())){
+    public void afinityGirl(int points) {
+        if (characterSelect.equals(keyWords.getKeyNeko())) {
             player.setNeko(player.getNeko() + points);
-            System.out.println(player.getNeko());
         }
-        if(characterSelect.equals(keyWords.getKeyAngel())){
+        if (characterSelect.equals(keyWords.getKeyAngel())) {
             player.setAngel(player.getAngel() + points - 3);
-            System.out.println(player.getAngel());
         }
-        if(characterSelect.equals(keyWords.getKeyMature())){
+        if (characterSelect.equals(keyWords.getKeyMature())) {
             player.setMature(player.getMature() + points + 5);
-            System.out.println(player.getMature());
         }
     }
 
-    public void endOfStage(){
+    public void endOfStage() {
         layoutEndOfStage.setVisibility(View.VISIBLE);
         layoutScenario.setVisibility(View.GONE);
         layoutTextBox.setVisibility(View.GONE);
         buttonLog.setVisibility(View.GONE);
     }
 
-    public void sexScene(){
+    public void sexScene() {
         layoutScenario.setVisibility(View.GONE);
         layoutTextBox.setVisibility(View.GONE);
         buttonLog.setVisibility(View.GONE);
 
         //TODO INSERTAR MUSICA
-        if(characterSelect.equals(keyWords.getKeyNeko())){
-            if(explicitImage){
+        if (characterSelect.equals(keyWords.getKeyNeko())) {
+            if (explicitImage) {
                 layoutBackground.setBackground(getDrawable(neko.getSceneSexUncensored()));
-            }else{
+            } else {
                 layoutBackground.setBackground(getDrawable(neko.getSceneCensored()));
             }
         }
-        if(characterSelect.equals(keyWords.getKeyAngel())){
-            if(explicitImage){
+        if (characterSelect.equals(keyWords.getKeyAngel())) {
+            if (explicitImage) {
                 layoutBackground.setBackground(getDrawable(angel.getSceneSexUncensored()));
-            }else{
+            } else {
                 layoutBackground.setBackground(getDrawable(angel.getSceneCensored()));
             }
         }
-        if(characterSelect.equals(keyWords.getKeyMature())){
-            if(explicitImage){
+        if (characterSelect.equals(keyWords.getKeyMature())) {
+            if (explicitImage) {
                 layoutBackground.setBackground(getDrawable(mature.getSceneSexUncensored()));
-            }else{
+            } else {
                 layoutBackground.setBackground(getDrawable(mature.getSceneCensored()));
             }
         }
     }
 
-    public GirlCharacters girlSelection(String character){
-        if(characterSelect.equals(keyWords.getKeyNeko())){
+    public GirlCharacters girlSelection(String character) {
+        if (characterSelect.equals(keyWords.getKeyNeko())) {
             return neko;
-        }else if(characterSelect.equals(keyWords.getKeyAngel())){
+        } else if (characterSelect.equals(keyWords.getKeyAngel())) {
             return angel;
-        }else{
+        } else {
             return mature;
         }
     }
 
-    public void drawLeftGirl(GirlCharacters girl, int emotion){
-        if(mediaPlayerSound != null){
+    public void drawLeftGirl(GirlCharacters girl, int emotion, boolean answer) {
+        if (mediaPlayerSound != null) {
             mediaPlayerSound.stop();
             mediaPlayerSound.release();
         }
@@ -467,10 +445,13 @@ public class Game extends AppCompatActivity {
         }
         mediaPlayerSound.setVolume(volumenSound, volumenSound);
         mediaPlayerSound.start();
+        if (!answer) {
+            clickNext(this.layoutTextBox);
+        }
     }
 
-    public void drawCenterGirl(GirlCharacters girl, int emotion){
-        if(mediaPlayerSound != null){
+    public void drawCenterGirl(GirlCharacters girl, int emotion, boolean answer) {
+        if (mediaPlayerSound != null) {
             mediaPlayerSound.stop();
             mediaPlayerSound.release();
         }
@@ -488,10 +469,13 @@ public class Game extends AppCompatActivity {
         }
         mediaPlayerSound.setVolume(volumenSound, volumenSound);
         mediaPlayerSound.start();
+        if (!answer) {
+            clickNext(this.layoutTextBox);
+        }
     }
 
-    public void drawRightGirl(GirlCharacters girl, int emotion){
-        if(mediaPlayerSound != null){
+    public void drawRightGirl(GirlCharacters girl, int emotion, boolean answer) {
+        if (mediaPlayerSound != null) {
             mediaPlayerSound.stop();
             mediaPlayerSound.release();
         }
@@ -509,6 +493,9 @@ public class Game extends AppCompatActivity {
         }
         mediaPlayerSound.setVolume(volumenSound, volumenSound);
         mediaPlayerSound.start();
+        if (!answer) {
+            clickNext(this.layoutTextBox);
+        }
     }
 
     private static String convertStreamToString(InputStream is) {

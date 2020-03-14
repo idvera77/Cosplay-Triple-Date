@@ -172,6 +172,7 @@
                 android:textColor="@color/characterName"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -180,7 +181,6 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/border_menu"
-                android:gravity="center"
                 android:includeFontPadding="true"
                 android:paddingStart="64dp"
                 android:paddingTop="10dp"

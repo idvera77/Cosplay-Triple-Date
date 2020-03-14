@@ -21,9 +21,8 @@ public abstract class Stage {
      *
      * The setters will be used in the class you inherit and we will insert the necessary elements
      */
-    public int getStageMusic() {
-        return stageMusic;
-    }
+
+    public int getStageMusic() { return stageMusic; }
 
     public void setStageMusic(int stageMusic) {
         this.stageMusic = stageMusic;
