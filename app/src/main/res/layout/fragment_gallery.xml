@@ -107,8 +107,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/sinacceso" />
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/chapter3unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery5"
@@ -121,8 +121,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/sinacceso" />
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/chapter3unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery6"

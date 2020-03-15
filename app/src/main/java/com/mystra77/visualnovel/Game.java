@@ -1,48 +1,48 @@
 package com.mystra77.visualnovel;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
+        import android.app.AlertDialog;
+        import android.content.Context;
+        import android.content.DialogInterface;
+        import android.content.Intent;
+        import android.content.SharedPreferences;
+        import android.media.MediaPlayer;
+        import android.os.Bundle;
+        import android.os.Handler;
+        import android.view.View;
+        import android.view.Window;
+        import android.view.WindowManager;
+        import android.view.animation.Animation;
+        import android.view.animation.AnimationUtils;
+        import android.widget.ArrayAdapter;
+        import android.widget.Button;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.ListView;
+        import android.widget.TextView;
 
-import com.mystra77.visualnovel.characters.GirlCharacters;
-import com.mystra77.visualnovel.characters.Mature;
-import com.mystra77.visualnovel.characters.Neko;
-import com.mystra77.visualnovel.characters.Angel;
-import com.mystra77.visualnovel.classes.KeyWords;
-import com.mystra77.visualnovel.classes.Player;
-import com.mystra77.visualnovel.database.MyOpenHelper;
-import com.mystra77.visualnovel.stages.Stage;
-import com.mystra77.visualnovel.stages.Stage1;
-import com.mystra77.visualnovel.stages.Stage2;
+        import com.mystra77.visualnovel.characters.GirlCharacters;
+        import com.mystra77.visualnovel.characters.Mature;
+        import com.mystra77.visualnovel.characters.Neko;
+        import com.mystra77.visualnovel.characters.Angel;
+        import com.mystra77.visualnovel.classes.KeyWords;
+        import com.mystra77.visualnovel.classes.Player;
+        import com.mystra77.visualnovel.database.MyOpenHelper;
+        import com.mystra77.visualnovel.stages.Stage;
+        import com.mystra77.visualnovel.stages.Stage1;
+        import com.mystra77.visualnovel.stages.Stage2;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+        import java.io.BufferedReader;
+        import java.io.IOException;
+        import java.io.InputStream;
+        import java.io.InputStreamReader;
+        import java.util.ArrayList;
 
 public class Game extends AppCompatActivity {
     private MyOpenHelper moh;
     private Player player;
-    private SharedPreferences preferencesSettings;
     private ConstraintLayout layoutBackground, layoutTextBox, layoutEndOfStage, containerText;
     private LinearLayout layoutScenario, layoutButtons;
     private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
@@ -62,6 +62,7 @@ public class Game extends AppCompatActivity {
     private Button btnExit;
     private Handler handler;
     private InputStream stream;
+    private Animation animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         //Load preferences
-        preferencesSettings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
+        SharedPreferences preferencesSettings = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE);
         volumenMusic = preferencesSettings.getFloat("volumenMusic", 100);
         volumenSound = preferencesSettings.getFloat("volumenSound", 1.0f);
         explicitImage = preferencesSettings.getBoolean("explicitImage", true);
@@ -108,6 +109,9 @@ public class Game extends AppCompatActivity {
         adapterLog = new ArrayAdapter<String>(this, R.layout.log_adapter, logsLines);
         textDialogLog.setAdapter(adapterLog);
 
+        //Load Animation
+        animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+
         keyWords = new KeyWords();
         handler = new Handler();
         neko = new Neko();
@@ -130,7 +134,20 @@ public class Game extends AppCompatActivity {
         }
         if (player.getStage() >= 2) {
             Stage2 stage2 = new Stage2();
-            loadStage(stage2, 1);
+            if (player.getNeko() > player.getMature()){
+                if (player.getMature() > player.getAngel()){
+                    loadStage(stage2, 1);
+                }else{
+                    loadStage(stage2, 2);
+                }
+            }
+            if (player.getNeko() < player.getMature()){
+                if (player.getNeko() > player.getAngel()){
+                    loadStage(stage2, 1);
+                }else{
+                    loadStage(stage2, 3);
+                }
+            }
         }
 
         textDialogBox.setText(R.string.tap);
@@ -173,7 +190,7 @@ public class Game extends AppCompatActivity {
             btnExit.setVisibility(View.VISIBLE);
             counterLog = false;
         } else {
-            textDialogLog.setSelection(textDialogLog.getAdapter().getCount()-1);
+            textDialogLog.setSelection(textDialogLog.getAdapter().getCount() - 1);
             containerText.setVisibility(view.VISIBLE);
             layoutTextBox.setVisibility(View.GONE);
             btnExit.setVisibility(View.GONE);
@@ -188,7 +205,6 @@ public class Game extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mediaPlayerMusic.stop();
                         dialog.dismiss();
                         back();
                     }
@@ -241,23 +257,23 @@ public class Game extends AppCompatActivity {
                 characterSelect = keyWords.getKeyMature();
                 changeCharacterName(mature);
             } else if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
-                drawLeftGirl(girlSelection(characterSelect), 0, false);
+                drawLeftGirl(girlSelection(), 0, false);
             } else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
-                drawCenterGirl(girlSelection(characterSelect), 0, false);
+                drawCenterGirl(girlSelection(), 0, false);
             } else if (lines[counterLines].equals(keyWords.getKeyNormalRightPosition())) {
-                drawRightGirl(girlSelection(characterSelect), 0, false);
+                drawRightGirl(girlSelection(), 0, false);
             } else if (lines[counterLines].equals(keyWords.getKeyHappyLeftPosition())) {
-                drawLeftGirl(girlSelection(characterSelect), 1, false);
+                drawLeftGirl(girlSelection(), 1, false);
             } else if (lines[counterLines].equals(keyWords.getKeyHappyCenterPosition())) {
-                drawCenterGirl(girlSelection(characterSelect), 1, false);
+                drawCenterGirl(girlSelection(), 1, false);
             } else if (lines[counterLines].equals(keyWords.getKeyHappyRightPosition())) {
-                drawRightGirl(girlSelection(characterSelect), 1, false);
+                drawRightGirl(girlSelection(), 1, false);
             } else if (lines[counterLines].equals(keyWords.getKeyAngryLeftPosition())) {
-                drawLeftGirl(girlSelection(characterSelect), 2, false);
+                drawLeftGirl(girlSelection(), 2, false);
             } else if (lines[counterLines].equals(keyWords.getKeyAngryCenterPosition())) {
-                drawCenterGirl(girlSelection(characterSelect), 2, false);
+                drawCenterGirl(girlSelection(), 2, false);
             } else if (lines[counterLines].equals(keyWords.getKeyAngryRightPosition())) {
-                drawRightGirl(girlSelection(characterSelect), 2, false);
+                drawRightGirl(girlSelection(), 2, false);
             } else if (lines[counterLines].equals(keyWords.getKeyButtons())) {
                 counterLines++;
                 buttonOption1.setText(lines[counterLines]);
@@ -289,7 +305,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void updateText() {
-        textDialogBox.setText(lines[counterLines] + " ");
+        textDialogBox.setText(lines[counterLines] + getString(R.string.whiteSpace));
         logsLines.add(lines[counterLines]);
         adapterLog.notifyDataSetChanged();
     }
@@ -319,11 +335,11 @@ public class Game extends AppCompatActivity {
         logsLines.add("\"" + buttonOption1.getText().toString() + "\"");
         counterLines++;
         if (lines[counterLines].equals(keyWords.getKeyHappyLeftPosition())) {
-            drawLeftGirl(girlSelection(characterSelect), 1, true);
+            drawLeftGirl(girlSelection(), 1, true);
         } else if (lines[counterLines].equals(keyWords.getKeyHappyCenterPosition())) {
-            drawCenterGirl(girlSelection(characterSelect), 1, true);
+            drawCenterGirl(girlSelection(), 1, true);
         } else if (lines[counterLines].equals(keyWords.getKeyHappyRightPosition())) {
-            drawRightGirl(girlSelection(characterSelect), 1, true);
+            drawRightGirl(girlSelection(), 1, true);
         }
         counterLines++;
         updateText();
@@ -338,11 +354,11 @@ public class Game extends AppCompatActivity {
         adapterLog.notifyDataSetChanged();
         counterLines += 3;
         if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
-            drawLeftGirl(girlSelection(characterSelect), 0, true);
+            drawLeftGirl(girlSelection(), 0, true);
         } else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
-            drawCenterGirl(girlSelection(characterSelect), 0, true);
+            drawCenterGirl(girlSelection(), 0, true);
         } else if (lines[counterLines].equals(keyWords.getKeyNormalRightPosition())) {
-            drawRightGirl(girlSelection(characterSelect), 0, true);
+            drawRightGirl(girlSelection(), 0, true);
         }
         counterLines++;
         updateText();
@@ -356,11 +372,11 @@ public class Game extends AppCompatActivity {
         logsLines.add("\"" + buttonOption3.getText().toString() + "\"");
         counterLines += 5;
         if (lines[counterLines].equals(keyWords.getKeyAngryLeftPosition())) {
-            drawLeftGirl(girlSelection(characterSelect), 2, true);
+            drawLeftGirl(girlSelection(), 2, true);
         } else if (lines[counterLines].equals(keyWords.getKeyAngryCenterPosition())) {
-            drawCenterGirl(girlSelection(characterSelect), 2, true);
+            drawCenterGirl(girlSelection(), 2, true);
         } else if (lines[counterLines].equals(keyWords.getKeyAngryRightPosition())) {
-            drawRightGirl(girlSelection(characterSelect), 2, true);
+            drawRightGirl(girlSelection(), 2, true);
         }
         counterLines++;
         updateText();
@@ -391,8 +407,6 @@ public class Game extends AppCompatActivity {
         layoutScenario.setVisibility(View.GONE);
         layoutTextBox.setVisibility(View.GONE);
         buttonLog.setVisibility(View.GONE);
-
-        //TODO INSERTAR MUSICA
         if (characterSelect.equals(keyWords.getKeyNeko())) {
             if (explicitImage) {
                 layoutBackground.setBackground(getDrawable(neko.getSceneSexUncensored()));
@@ -416,7 +430,7 @@ public class Game extends AppCompatActivity {
         }
     }
 
-    public GirlCharacters girlSelection(String character) {
+    public GirlCharacters girlSelection() {
         if (characterSelect.equals(keyWords.getKeyNeko())) {
             return neko;
         } else if (characterSelect.equals(keyWords.getKeyAngel())) {
@@ -427,20 +441,21 @@ public class Game extends AppCompatActivity {
     }
 
     public void drawLeftGirl(GirlCharacters girl, int emotion, boolean answer) {
-        if (mediaPlayerSound != null) {
-            mediaPlayerSound.stop();
-            mediaPlayerSound.release();
-        }
+        stopSound();
+        leftImage.setAnimation(animation);
         if (emotion == 0) {
             leftImage.setBackground(getDrawable(girl.getImageNormalRight()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
         }
         if (emotion == 1) {
             leftImage.setBackground(getDrawable(girl.getImageLaughtRight()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
         }
         if (emotion == 2) {
             leftImage.setBackground(getDrawable(girl.getImageAngryRight()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
         }
         mediaPlayerSound.setVolume(volumenSound, volumenSound);
@@ -451,20 +466,21 @@ public class Game extends AppCompatActivity {
     }
 
     public void drawCenterGirl(GirlCharacters girl, int emotion, boolean answer) {
-        if (mediaPlayerSound != null) {
-            mediaPlayerSound.stop();
-            mediaPlayerSound.release();
-        }
+        stopSound();
+        centerImage.setAnimation(animation);
         if (emotion == 0) {
             centerImage.setBackground(getDrawable(girl.getImageNormaLeft()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
         }
         if (emotion == 1) {
             centerImage.setBackground(getDrawable(girl.getImageLaughtLeft()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
         }
         if (emotion == 2) {
             centerImage.setBackground(getDrawable(girl.getImageAngryLeft()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
         }
         mediaPlayerSound.setVolume(volumenSound, volumenSound);
@@ -475,20 +491,21 @@ public class Game extends AppCompatActivity {
     }
 
     public void drawRightGirl(GirlCharacters girl, int emotion, boolean answer) {
-        if (mediaPlayerSound != null) {
-            mediaPlayerSound.stop();
-            mediaPlayerSound.release();
-        }
+        stopSound();
+        rightImage.setAnimation(animation);
         if (emotion == 0) {
             rightImage.setBackground(getDrawable(girl.getImageNormaLeft()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundNormal());
         }
         if (emotion == 1) {
             rightImage.setBackground(getDrawable(girl.getImageLaughtLeft()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundHappy());
         }
         if (emotion == 2) {
             rightImage.setBackground(getDrawable(girl.getImageAngryLeft()));
+            animation.start();
             mediaPlayerSound = MediaPlayer.create(this, girl.getSoundAngry());
         }
         mediaPlayerSound.setVolume(volumenSound, volumenSound);
@@ -514,6 +531,13 @@ public class Game extends AppCompatActivity {
             }
         }
         return sb.toString();
+    }
+
+    public void stopSound() {
+        if (mediaPlayerSound != null) {
+            mediaPlayerSound.stop();
+            mediaPlayerSound.release();
+        }
     }
 
     @Override
@@ -542,10 +566,7 @@ public class Game extends AppCompatActivity {
             mediaPlayerMusic.stop();
             mediaPlayerMusic.release();
         }
-        if (mediaPlayerSound != null) {
-            mediaPlayerSound.stop();
-            mediaPlayerSound.release();
-        }
+        stopSound();
         if (soundClick != null) {
             soundClick.release();
         }

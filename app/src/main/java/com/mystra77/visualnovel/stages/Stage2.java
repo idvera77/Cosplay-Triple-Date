@@ -12,8 +12,8 @@ public class Stage2 extends Stage {
     public Stage2() {
         setStageBackground(R.mipmap.stage2background);
         setStageMusic(R.raw.theme_stage2);
-        setScriptPlot1(R.raw.script2);
-        setScriptPlot2(R.raw.script2);
-        setScriptPlot3(R.raw.script2);
+        setScriptPlot1(R.raw.chapter2nekomature);
+        //setScriptPlot2(R.raw.chapter2nekoangel);
+        setScriptPlot3(R.raw.chapter2angelmature);
     }
 }

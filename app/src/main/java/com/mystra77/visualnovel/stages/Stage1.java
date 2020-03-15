@@ -12,6 +12,6 @@ public class Stage1 extends Stage {
     public Stage1() {
         setStageBackground(R.mipmap.stage1background);
         setStageMusic(R.raw.theme_stage1);
-        setScriptPlot1(R.raw.script1);
+        setScriptPlot1(R.raw.chapter1);
     }
 }
