@@ -39,8 +39,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/sinacceso" />
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/chapter1unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery1"
@@ -53,8 +53,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/sinacceso" />
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/chapter1unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery2"
@@ -67,8 +67,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/sinacceso" />
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/chapter2unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery3"
@@ -81,8 +81,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/sinacceso" />
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/chapter2unlock" />
 
         </LinearLayout>
 
@@ -135,8 +135,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/sinacceso" />
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/chapter4unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery7"
@@ -149,8 +149,8 @@
                 android:baselineAlignBottom="false"
                 android:cropToPadding="true"
                 android:padding="3dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@mipmap/sinacceso" />
+                android:scaleType="fitXY"
+                app:srcCompat="@mipmap/chapter4unlock" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

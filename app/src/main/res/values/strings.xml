@@ -33,7 +33,10 @@
     <string name="thanksMessage">THANKS FOR PLAYING ^_^</string>
     <string name="chapterComplete">CHAPTER COMPLETE\nNew images unlocked in gallery ^_^</string>
     <string name="messageGameCompleted">Try a new game and discover a new route!!!</string>
-    <string name="whiteSpace">\u0020</string>
     <string name="chapter">CHAPTER:\u0020</string>
-    <string name="tap">Tap to Continue...</string>
+    <string name="tap">Tap to Continue...\u0020\u00BB\u0020</string>
+    <string name="nextDraw">\u0020\u00BB\u0020</string>
+    <string name="nameGirlLog">\u0020\u2386\u000A</string>
+    <string name="you">You\u0020\u2386\u000A</string>
+    <string name="system">system</string>
 </resources>

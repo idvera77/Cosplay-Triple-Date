@@ -77,6 +77,7 @@ public class GalleryFragment extends Fragment {
         unlockPointPreference = activity.getPreferencesSettings().getInt("galleryUnlock", 0);
         // Every 250 points 2 images of the gallery are unlocked, the buttons are enabled to access them
         if (unlockPointPreference >= 250) {
+            image0.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image0.setImageResource(galleryArrayList.get(0));
             image0.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,6 +85,7 @@ public class GalleryFragment extends Fragment {
                     showImage(0);
                 }
             });
+            image1.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image1.setImageResource(galleryArrayList.get(1));
             image1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,6 +95,7 @@ public class GalleryFragment extends Fragment {
             });
         }
         if (unlockPointPreference >= 500) {
+            image2.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image2.setImageResource(galleryArrayList.get(2));
             image2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -100,6 +103,7 @@ public class GalleryFragment extends Fragment {
                     showImage(2);
                 }
             });
+            image3.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image3.setImageResource(galleryArrayList.get(3));
             image3.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -109,6 +113,7 @@ public class GalleryFragment extends Fragment {
             });
         }
         if (unlockPointPreference >= 750) {
+            image4.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image4.setImageResource(galleryArrayList.get(4));
             image4.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,6 +121,7 @@ public class GalleryFragment extends Fragment {
                     showImage(4);
                 }
             });
+            image5.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image5.setImageResource(galleryArrayList.get(5));
             image5.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -125,6 +131,7 @@ public class GalleryFragment extends Fragment {
             });
         }
         if (unlockPointPreference >= 1000) {
+            image6.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image6.setImageResource(galleryArrayList.get(6));
             image6.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -133,6 +140,7 @@ public class GalleryFragment extends Fragment {
 
                 }
             });
+            image7.setScaleType(ImageView.ScaleType.CENTER_CROP);
             image7.setImageResource(galleryArrayList.get(7));
             image7.setOnClickListener(new View.OnClickListener() {
                 @Override

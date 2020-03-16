@@ -167,3 +167,4 @@ Should we ask around for directions then?
 *neko*
 *angryLeftPosition*
 Uh… *sobs*
+Tap to finish...

@@ -23,4 +23,7 @@
     <color name="colorEgg">#F1E8BA</color>
     <color name="colorGameButton">#BFD39889</color>
     <color name="transparentBlack">#80000000</color>
+    <color name="neko">#DB858E</color>
+    <color name="angel">#EBDEE2</color>
+    <color name="mature">#B19CC5</color>
 </resources>
