@@ -46,7 +46,7 @@ public class Game extends AppCompatActivity {
     private ConstraintLayout layoutBackground, layoutTextBox, layoutEndOfStage, containerText;
     private LinearLayout layoutScenario, layoutButtons;
     private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
-    private Button buttonLog, buttonOption1, buttonOption2, buttonOption3;
+    private Button buttonLog, buttonOption1, buttonOption2, buttonOption3, buttonContinue;
     private float volumenMusic, volumenSound;
     private boolean explicitImage, counterLog;
     private String allText, characterSelect, characterNameAux;
@@ -63,6 +63,8 @@ public class Game extends AppCompatActivity {
     private Handler handler;
     private InputStream stream;
     private Animation animation;
+    private Bundle bundle;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class Game extends AppCompatActivity {
         buttonOption1 = findViewById(R.id.btnOption1);
         buttonOption2 = findViewById(R.id.btnOption2);
         buttonOption3 = findViewById(R.id.btnOption3);
+        buttonContinue = findViewById(R.id.btnContinue);
         leftImage = findViewById(R.id.leftPosition);
         centerImage = findViewById(R.id.centerPosition);
         rightImage = findViewById(R.id.rightPosition);
@@ -122,33 +125,12 @@ public class Game extends AppCompatActivity {
         moh = new MyOpenHelper(this);
         moh.getWritableDatabase();
 
-        Bundle bundle = getIntent().getExtras();
+        bundle = getIntent().getExtras();
         if (bundle != null) {
             player = (Player) bundle.getSerializable("player");
         }
 
-        //Load all
-        if (player.getStage() == 1) {
-            Stage1 stage1 = new Stage1();
-            loadStage(stage1, 1);
-        }
-        if (player.getStage() >= 2) {
-            Stage2 stage2 = new Stage2();
-            if (player.getNeko() > player.getMature()) {
-                if (player.getMature() > player.getAngel()) {
-                    loadStage(stage2, 1);
-                } else {
-                    loadStage(stage2, 2);
-                }
-            }
-            if (player.getNeko() < player.getMature()) {
-                if (player.getNeko() > player.getAngel()) {
-                    loadStage(stage2, 1);
-                } else {
-                    loadStage(stage2, 3);
-                }
-            }
-        }
+        startGame(player);
 
         textDialogBox.setText(R.string.tap);
 
@@ -167,6 +149,19 @@ public class Game extends AppCompatActivity {
     public void save3(View view) {
         soundClick.start();
         saveFile(3);
+    }
+
+    public void continueGame(View view) {
+        new AlertDialog.Builder(this, R.style.AlertDialogCustom)
+                .setMessage(R.string.messageContinue)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        continueGame();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 
     public void saveFile(final int saveFileId) {
@@ -216,9 +211,33 @@ public class Game extends AppCompatActivity {
     public void back() {
         this.finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        Intent intent = new Intent(this, HomeActivity.class);
+        intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
+    }
+
+    public void startGame(Player player){
+        if (player.getStage() == 1) {
+            Stage1 stage1 = new Stage1();
+            loadStage(stage1, 1);
+        }
+        if (player.getStage() >= 2) {
+            Stage2 stage2 = new Stage2();
+            if (player.getNeko() > player.getMature()) {
+                if (player.getMature() > player.getAngel()) {
+                    loadStage(stage2, 1);
+                } else {
+                    loadStage(stage2, 2);
+                }
+            }
+            if (player.getNeko() < player.getMature()) {
+                if (player.getNeko() > player.getAngel()) {
+                    loadStage(stage2, 1);
+                } else {
+                    loadStage(stage2, 3);
+                }
+            }
+        }
     }
 
     public void loadStage(Stage stage, int scriptOption) {
@@ -240,6 +259,15 @@ public class Game extends AppCompatActivity {
         }
         allText = convertStreamToString(stream);
         mediaPlayerMusic.start();
+    }
+
+    public void continueGame(){
+        bundle = new Bundle();
+        bundle.putSerializable("player", player);
+        intent = new Intent(this, Game.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+        this.finish();
     }
 
     public void clickNext(View view) {
@@ -299,6 +327,8 @@ public class Game extends AppCompatActivity {
                 sexScene();
                 handler.postDelayed(new Runnable() {
                     public void run() {
+                        buttonContinue.setVisibility(View.GONE);
+                        buttonContinue.setEnabled(false);
                         finalMessage.setText(R.string.thanksMessage);
                         layoutEndOfStage.setVisibility(View.VISIBLE);
                     }
@@ -568,4 +598,5 @@ public class Game extends AppCompatActivity {
             soundClick.release();
         }
     }
+
 }

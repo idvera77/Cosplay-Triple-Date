@@ -144,6 +144,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ListView
+                android:id="@+id/textBoxLog"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                tools:layout_editor_absoluteX="55dp"
+                tools:layout_editor_absoluteY="57dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -219,6 +227,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/btnSave2"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -246,7 +255,7 @@
             android:text="@string/save2"
             android:textAllCaps="false"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnContinue"
             app:layout_constraintEnd_toStartOf="@+id/btnSave3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/btnSave1"
@@ -267,6 +276,19 @@
             app:layout_constraintStart_toEndOf="@+id/btnSave2"
             app:layout_constraintTop_toTopOf="@+id/btnSave2" />
 
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_load"
+            android:onClick="continueGame"
+            android:text="@string/CONTINUE"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btnSave3"
+            app:layout_constraintStart_toStartOf="@+id/btnSave1"
+            app:layout_constraintTop_toBottomOf="@+id/btnSave2" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -281,15 +303,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/scenario">
 
-        <ListView
-            android:id="@+id/textBoxLog"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

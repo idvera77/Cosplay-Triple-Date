@@ -3,6 +3,7 @@
     <string name="newGame">New Game</string>
     <string name="next">NEXT</string>
     <string name="start">START</string>
+    <string name="load">LOAD</string>
     <string name="CONTINUE">CONTINUE</string>
     <string name="gallery">GALLERY</string>
     <string name="settings">SETTINGS</string>
@@ -10,11 +11,13 @@
     <string name="log">LOG</string>
     <string name="exitQuestion">Do you really want to exit?</string>
     <string name="saveGame">Do you want to save?</string>
+    <string name="messageContinue">Do you want to resume your game?</string>
     <string name="deleteSaveGame">Are you sure you want to delete this save?</string>
     <string name="moveToPatreon">^_^ Move to Patreon?</string>
     <string name="moveToTwitter">^_^ Move to Twitter?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="date">Date:\u0020</string>
     <string name="save1">SAVE 1</string>
     <string name="save2">SAVE 2</string>
     <string name="save3">SAVE 3</string>
@@ -31,7 +34,7 @@
     <string name="OFF">OFF</string>
     <string name="gameCompleted">GAME COMPLETED</string>
     <string name="thanksMessage">THANKS FOR PLAYING ^_^</string>
-    <string name="chapterComplete">CHAPTER COMPLETE\nNew images unlocked in gallery ^_^</string>
+    <string name="chapterComplete">CHAPTER COMPLETE</string>
     <string name="messageGameCompleted">Try a new game and discover a new route!!!</string>
     <string name="chapter">CHAPTER:\u0020</string>
     <string name="tap">Tap to Continue...\u0020\u00BB\u0020</string>

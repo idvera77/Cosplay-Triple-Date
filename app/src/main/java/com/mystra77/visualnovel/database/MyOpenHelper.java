@@ -18,7 +18,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
      * Strings variables that helps us to insert resources from the Android application
      */
     private String gameCompleted;
-    private String stage;
+    private String stage, date;
 
     /**
      * Builder with the name of the database and its version, as well as String variables
@@ -28,6 +28,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         super(context, Constants.getDatabaseName(), null, Constants.getDatabaseVersion());
         gameCompleted = context.getResources().getString(R.string.gameCompleted);
         stage = context.getResources().getString(R.string.chapter);
+        date = context.getResources().getString(R.string.date);
     }
 
     /**
@@ -143,6 +144,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     public ArrayList<String> fillLoadButton() {
         ArrayList<String> dateLoadString = new ArrayList<String>();
         String timeData, stageData;
+        String[] parts;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor result = db.query(Constants.getTableGame(), null, null, null,
                 null, null, Constants.getKeyId());
@@ -155,7 +157,10 @@ public class MyOpenHelper extends SQLiteOpenHelper {
                 } else {
                     //little trick that will help us when we call the function in the ContinueFragment
                     if (!timeData.equals("0")) {
-                        dateLoadString.add(stageData + "\n\n" + timeData);
+                        parts = timeData.split(" ");
+                        String part1 = parts[0]; // 004
+                        String part2 = parts[1]; //
+                        dateLoadString.add(stageData + "\n\n" + date + part1 + "\n'" + part2 + "'");
                     } else {
                         dateLoadString.add(".");
                     }

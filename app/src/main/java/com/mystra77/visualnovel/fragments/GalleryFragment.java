@@ -176,4 +176,11 @@ public class GalleryFragment extends Fragment {
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(lp);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+            System.gc();
+    }
+
 }

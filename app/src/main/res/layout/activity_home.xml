@@ -63,7 +63,7 @@
             android:layout_weight="1"
             android:background="@drawable/button_menu"
             android:onClick="Continue"
-            android:text="@string/CONTINUE" />
+            android:text="@string/load" />
 
         <Button
             android:id="@+id/btnGallery"
