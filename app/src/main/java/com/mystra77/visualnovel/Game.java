@@ -43,23 +43,44 @@ import java.util.ArrayList;
 public class Game extends AppCompatActivity {
     private MyOpenHelper moh;
     private Player player;
-    private ConstraintLayout layoutBackground, layoutTextBox, layoutEndOfStage, containerText;
-    private LinearLayout layoutScenario, layoutButtons;
-    private MediaPlayer mediaPlayerMusic, mediaPlayerSound, soundClick;
-    private Button buttonLog, buttonOption1, buttonOption2, buttonOption3, buttonContinue;
-    private float volumenMusic, volumenSound;
-    private boolean explicitImage, counterLog;
-    private String allText, characterSelect, characterNameAux;
+    private ConstraintLayout layoutBackground;
+    private ConstraintLayout layoutTextBox;
+    private ConstraintLayout layoutEndOfStage;
+    private ConstraintLayout containerText;
+    private LinearLayout layoutScenario;
+    private LinearLayout layoutButtons;
+    private MediaPlayer mediaPlayerMusic;
+    private MediaPlayer mediaPlayerSound;
+    private MediaPlayer soundClick;
+    private Button buttonLog;
+    private Button buttonOption1;
+    private Button buttonOption2;
+    private Button buttonOption3;
+    private Button buttonContinue;
+    private Button btnExit;
+    private float volumenMusic;
+    private float volumenSound;
+    private boolean explicitImage;
+    private boolean counterLog;
+    private String allText;
+    private String characterSelect;
+    private String characterNameAux;
     private String[] lines;
-    private int lengthMusic, counterLines;
-    private ImageView leftImage, centerImage, rightImage;
-    private TextView textDialogBox, textCharacterName, finalMessage;
+    private int lengthMusic;
+    private int counterLines;
+    private ImageView leftImage;
+    private ImageView centerImage;
+    private ImageView rightImage;
+    private TextView textDialogBox;
+    private TextView textCharacterName;
+    private TextView finalMessage;
     private ListView textDialogLog;
     private ArrayAdapter<String> adapterLog;
     private ArrayList<String> logsLines;
-    private GirlCharacters mature, neko, angel;
+    private GirlCharacters mature;
+    private GirlCharacters neko;
+    private GirlCharacters angel;
     private KeyWords keyWords;
-    private Button btnExit;
     private Handler handler;
     private InputStream stream;
     private Animation animation;
@@ -231,7 +252,7 @@ public class Game extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void startGame(Player player){
+    public void startGame(Player player) {
         if (player.getStage() == 1) {
             Stage1 stage1 = new Stage1();
             loadStage(stage1, 1);
@@ -276,7 +297,7 @@ public class Game extends AppCompatActivity {
         mediaPlayerMusic.start();
     }
 
-    public void continueGame(){
+    public void continueGame() {
         bundle = new Bundle();
         bundle.putSerializable("player", player);
         intent = new Intent(this, Game.class);

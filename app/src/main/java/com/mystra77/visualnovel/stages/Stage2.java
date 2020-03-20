@@ -16,4 +16,5 @@ public class Stage2 extends Stage {
         //setScriptPlot2(R.raw.chapter2nekoangel);
         setScriptPlot3(R.raw.chapter2angelmature);
     }
+
 }

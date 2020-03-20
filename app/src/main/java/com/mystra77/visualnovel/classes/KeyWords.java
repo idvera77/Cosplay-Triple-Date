@@ -2,9 +2,10 @@ package com.mystra77.visualnovel.classes;
 
 public class KeyWords {
 
-    private String keyAngel, keyNeko, keyMature, keyNormalLeftPosition, keyNormalCenterPosition, keyNormalRightPosition,
-            keyHappyLeftPosition, keyHappyCenterPosition, keyHappyRightPosition, keyAngryLeftPosition,
-            keyAngryCenterPosition, keyAngryRightPosition, keyButtons;
+    private String keyAngel, keyNeko, keyMature, keyNormalLeftPosition, keyNormalCenterPosition,
+            keyNormalRightPosition, keyHappyLeftPosition, keyHappyCenterPosition, keyHappyRightPosition,
+            keyAngryLeftPosition, keyAngryCenterPosition, keyAngryRightPosition, keyButtons;
+    //String type variable, indicates the keyWord
 
     /**
      * Builder with all the keywords that help us to read the script and perform actions
@@ -79,4 +80,5 @@ public class KeyWords {
     public String getKeyButtons() {
         return keyButtons;
     }
+
 }

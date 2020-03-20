@@ -1,31 +1,37 @@
 package com.mystra77.visualnovel.fragments;
 
 
-        import android.app.AlertDialog;
-        import android.app.Dialog;
-        import android.content.DialogInterface;
-        import android.content.SharedPreferences;
-        import android.os.Bundle;
+import android.app.AlertDialog;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 
-        import androidx.fragment.app.Fragment;
+import androidx.fragment.app.Fragment;
 
-        import android.view.KeyEvent;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.Window;
-        import android.view.WindowManager;
-        import android.widget.ImageView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 
-        import com.mystra77.visualnovel.HomeActivity;
-        import com.mystra77.visualnovel.R;
+import com.mystra77.visualnovel.HomeActivity;
+import com.mystra77.visualnovel.R;
 
 
 public class GalleryFragment extends Fragment {
     private HomeActivity activity;
     private View view;
-    private ImageView image0, image1, image2, image3, image4, image5, image6, image7, bigImage;
-    private int unlockPointDB, unlockPointPreference;
+    private ImageView image0;
+    private ImageView image1;
+    private ImageView image2;
+    private ImageView image3;
+    private ImageView image4;
+    private ImageView image5;
+    private ImageView image6;
+    private ImageView image7;
+    private ImageView bigImage;
+    private int unlockPointDB;
+    private int unlockPointPreference;
     private AlertDialog alert;
 
     public GalleryFragment() {
@@ -170,7 +176,7 @@ public class GalleryFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-            System.gc();
+        System.gc();
     }
 
 }

@@ -23,4 +23,6 @@ public class Mature extends GirlCharacters {
         setSoundHappy(R.raw.mature_sound_happy);
         setSoundAngry(R.raw.mature_sound_angry);
     }
+
 }
+

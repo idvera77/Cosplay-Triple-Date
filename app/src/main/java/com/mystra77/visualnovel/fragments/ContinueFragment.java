@@ -24,7 +24,12 @@ import java.util.ArrayList;
 public class ContinueFragment extends Fragment {
     private HomeActivity activity;
     private View view;
-    private Button load1, load2, load3, delete1, delete2, delete3;
+    private Button load1;
+    private Button load2;
+    private Button load3;
+    private Button delete1;
+    private Button delete2;
+    private Button delete3;
     private Intent intentContinueGame;
     private ArrayList<String> fillButton;
     private Bundle bundle;
@@ -215,4 +220,5 @@ public class ContinueFragment extends Fragment {
                 })
                 .show();
     }
+
 }

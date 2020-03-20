@@ -23,7 +23,8 @@ import java.util.ArrayList;
 public class GameStartFragment extends Fragment {
     private HomeActivity activity;
     private View view;
-    private Button newGame, loadLastSave;
+    private Button newGame;
+    private Button loadLastSave;
     private Intent intentNewGame;
     private ArrayList<String> unlockLastSave;
     private Bundle bundle;
@@ -98,7 +99,7 @@ public class GameStartFragment extends Fragment {
                 }
             }
         });
-
         return view;
     }
+
 }

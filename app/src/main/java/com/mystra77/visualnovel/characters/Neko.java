@@ -23,4 +23,5 @@ public class Neko extends GirlCharacters {
         setSoundHappy(R.raw.neko_sound_happy);
         setSoundAngry(R.raw.neko_sound_angry);
     }
+
 }

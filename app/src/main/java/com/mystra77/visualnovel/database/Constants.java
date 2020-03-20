@@ -82,4 +82,5 @@ public class Constants {
     public static String getUpdateTimeTrigger() {
         return UPDATE_TIME_TRIGGER;
     }
+
 }

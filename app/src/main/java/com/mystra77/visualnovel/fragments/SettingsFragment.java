@@ -21,11 +21,17 @@ import com.mystra77.visualnovel.R;
 public class SettingsFragment extends Fragment {
     private HomeActivity activity;
     private View view;
-    private SeekBar musicSeekBar, soundSeekBar;
-    private CheckBox musicOff, soundOff, explicitOff;
-    private int volumenMusicBar, volumeSoundBar;
-    private float volumenMusic, volumenSound;
-    private MediaPlayer mediaPlayerMusic, mediaPlayerSound;
+    private SeekBar musicSeekBar;
+    private SeekBar soundSeekBar;
+    private CheckBox musicOff;
+    private CheckBox soundOff;
+    private CheckBox explicitOff;
+    private int volumenMusicBar;
+    private int volumeSoundBar;
+    private float volumenMusic;
+    private float volumenSound;
+    private MediaPlayer mediaPlayerMusic;
+    private MediaPlayer mediaPlayerSound;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -236,4 +242,5 @@ public class SettingsFragment extends Fragment {
             mediaPlayerSound.release();
         }
     }
+
 }

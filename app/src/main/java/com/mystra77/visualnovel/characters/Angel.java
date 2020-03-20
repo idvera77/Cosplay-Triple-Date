@@ -24,4 +24,5 @@ public class Angel extends GirlCharacters {
         setSoundHappy(R.raw.angel_sound_happy);
         setSoundAngry(R.raw.angel_sound_angry);
     }
+
 }

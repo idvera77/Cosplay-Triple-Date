@@ -55,4 +55,5 @@ public abstract class Stage {
     public void setScriptPlot3(int scriptPlot3) {
         this.scriptPlot3 = scriptPlot3;
     }
+
 }

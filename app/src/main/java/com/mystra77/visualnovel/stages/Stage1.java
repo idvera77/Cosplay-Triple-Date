@@ -14,4 +14,5 @@ public class Stage1 extends Stage {
         setStageMusic(R.raw.theme_stage1);
         setScriptPlot1(R.raw.chapter1);
     }
+
 }

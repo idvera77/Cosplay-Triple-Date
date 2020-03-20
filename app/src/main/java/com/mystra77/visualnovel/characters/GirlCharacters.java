@@ -3,8 +3,9 @@ package com.mystra77.visualnovel.characters;
 
 public abstract class GirlCharacters {
     private String name; //String type variable, indicates the name of the girl
-    private int imageAngryLeft, imageAngryRight, imageNormaLeft, imageNormalRight,
-            imageLaughtLeft, imageLaughtRight, sceneSexUncensored, sceneCensored;  //Integer type variable, indicates the image of each girl and her position
+    private int imageAngryLeft, imageAngryRight, imageNormaLeft,
+            imageNormalRight, imageLaughtLeft, imageLaughtRight,
+            sceneSexUncensored, sceneCensored; //Integer type variable, indicates the image of each girl and her position
     private int soundAngry, soundNormal, soundHappy; //Integer type variable, indicates the sound of each girl and her emotion
 
     /**
@@ -17,9 +18,9 @@ public abstract class GirlCharacters {
 
     /**
      * GETTERS AND SETTERS that returns or modify the value in each field
-     *
+     * <p>
      * We will use the getters to receive the necessary images or sounds
-     *
+     * <p>
      * The setters will be used in the class you inherit and we will insert the necessary images and sounds
      */
 
@@ -118,4 +119,5 @@ public abstract class GirlCharacters {
     public void setSceneCensored(int sceneCensored) {
         this.sceneCensored = sceneCensored;
     }
+
 }

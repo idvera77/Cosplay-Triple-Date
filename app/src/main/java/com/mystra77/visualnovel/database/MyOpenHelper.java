@@ -18,7 +18,8 @@ public class MyOpenHelper extends SQLiteOpenHelper {
      * Strings variables that helps us to insert resources from the Android application
      */
     private String gameCompleted;
-    private String stage, date;
+    private String stage;
+    private String date;
 
     /**
      * Builder with the name of the database and its version, as well as String variables
@@ -171,6 +172,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
             return dateLoadString;
         }
     }
+
 }
 
 
