@@ -10,7 +10,7 @@ public class Stage2 extends Stage {
      * image background and script of the stage
      */
     public Stage2() {
-        setStageBackground(R.mipmap.stage2background);
+        setStageBackground(R.drawable.stage2background);
         setStageMusic(R.raw.theme_stage2);
         setScriptPlot1(R.raw.chapter2nekomature);
         //setScriptPlot2(R.raw.chapter2nekoangel);

@@ -40,7 +40,7 @@
                 android:cropToPadding="true"
                 android:padding="3dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@mipmap/chapter1unlock" />
+                app:srcCompat="@drawable/chapter1unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery1"
@@ -54,7 +54,7 @@
                 android:cropToPadding="true"
                 android:padding="3dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@mipmap/chapter1unlock" />
+                app:srcCompat="@drawable/chapter1unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery2"
@@ -68,7 +68,7 @@
                 android:cropToPadding="true"
                 android:padding="3dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@mipmap/chapter2unlock" />
+                app:srcCompat="@drawable/chapter2unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery3"
@@ -82,7 +82,7 @@
                 android:cropToPadding="true"
                 android:padding="3dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@mipmap/chapter2unlock" />
+                app:srcCompat="@drawable/chapter2unlock" />
 
         </LinearLayout>
 
@@ -108,7 +108,7 @@
                 android:cropToPadding="true"
                 android:padding="3dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@mipmap/chapter3unlock" />
+                app:srcCompat="@drawable/chapter3unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery5"
@@ -122,7 +122,7 @@
                 android:cropToPadding="true"
                 android:padding="3dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@mipmap/chapter3unlock" />
+                app:srcCompat="@drawable/chapter3unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery6"
@@ -136,7 +136,7 @@
                 android:cropToPadding="true"
                 android:padding="3dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@mipmap/chapter4unlock" />
+                app:srcCompat="@drawable/chapter4unlock" />
 
             <ImageView
                 android:id="@+id/imageGallery7"
@@ -150,7 +150,7 @@
                 android:cropToPadding="true"
                 android:padding="3dp"
                 android:scaleType="fitXY"
-                app:srcCompat="@mipmap/chapter4unlock" />
+                app:srcCompat="@drawable/chapter4unlock" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,14 @@
 package com.mystra77.visualnovel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import static java.security.AccessController.getContext;
 
 public class LoadingScreenAnimation extends Animation {
     private Context context;

@@ -21,15 +21,9 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name="com.mystra77.visualnovel.services.ServiceGallery"
-            android:enabled="true"
-            android:stopWithTask="true" />
     </application>
 
 </manifest>
