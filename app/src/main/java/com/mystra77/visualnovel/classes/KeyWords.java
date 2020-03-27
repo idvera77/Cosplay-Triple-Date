@@ -2,7 +2,7 @@ package com.mystra77.visualnovel.classes;
 
 public class KeyWords {
 
-    private String keyAngel, keyNeko, keyMature, keyNormalLeftPosition, keyNormalCenterPosition,
+    private String keyAngel, keyNeko, keyWitch, keyNormalLeftPosition, keyNormalCenterPosition,
             keyNormalRightPosition, keyHappyLeftPosition, keyHappyCenterPosition, keyHappyRightPosition,
             keyAngryLeftPosition, keyAngryCenterPosition, keyAngryRightPosition, keyButtons;
     //String type variable, indicates the keyWord
@@ -13,7 +13,7 @@ public class KeyWords {
     public KeyWords() {
         this.keyAngel = "*angel*";
         this.keyNeko = "*neko*";
-        this.keyMature = "*mature*";
+        this.keyWitch = "*witch*";
         this.keyNormalLeftPosition = "*normalLeftPosition*";
         this.keyNormalCenterPosition = "*normalCenterPosition*";
         this.keyNormalRightPosition = "*normalRightPosition*";
@@ -37,8 +37,8 @@ public class KeyWords {
         return keyNeko;
     }
 
-    public String getKeyMature() {
-        return keyMature;
+    public String getKeyWitch() {
+        return keyWitch;
     }
 
     public String getKeyNormalLeftPosition() {

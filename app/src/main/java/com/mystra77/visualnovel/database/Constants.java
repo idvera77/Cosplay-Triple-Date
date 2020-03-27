@@ -13,7 +13,7 @@ public class Constants {
     private static final String STAGE = "stage";
     private static final String ANGEL = "angel";
     private static final String NEKO = "neko";
-    private static final String MATURE = "mature";
+    private static final String WITCH = "witch";
     private static final String SCORE = "score";
 
     /**
@@ -21,7 +21,7 @@ public class Constants {
      */
     private static final String CREATE_TABLE_GAME = "CREATE TABLE " + TABLE_GAME + "("
             + KEY_ID + " INTEGER PRIMARY KEY NOT NULL, " + TIME + " TIMESTAMP DEFAULT 0, "
-            + STAGE + " INTEGER DEFAULT 1," + ANGEL + " INTEGER," + NEKO + " INTEGER," + MATURE + " INTEGER," + SCORE + " INTEGER);";
+            + STAGE + " INTEGER DEFAULT 1," + ANGEL + " INTEGER," + NEKO + " INTEGER," + WITCH + " INTEGER," + SCORE + " INTEGER);";
 
     /**
      * Trigger that updates the time each time we update an entry
@@ -67,8 +67,8 @@ public class Constants {
         return NEKO;
     }
 
-    public static String getMATURE() {
-        return MATURE;
+    public static String getWITCH() {
+        return WITCH;
     }
 
     public static String getSCORE() {

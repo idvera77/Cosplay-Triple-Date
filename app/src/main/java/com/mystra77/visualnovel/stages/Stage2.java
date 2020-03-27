@@ -13,7 +13,7 @@ public class Stage2 extends Stage {
         setStageBackground(R.drawable.stage2background);
         setStageMusic(R.raw.theme_stage2);
         setScriptPlot1(R.raw.chapter2nekomature);
-        //setScriptPlot2(R.raw.chapter2nekoangel);
+        setScriptPlot2(R.raw.chapter2angelneko);
         setScriptPlot3(R.raw.chapter2angelmature);
     }
 

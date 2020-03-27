@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mystra77.visualnovel.characters.GirlCharacters;
-import com.mystra77.visualnovel.characters.Mature;
+import com.mystra77.visualnovel.characters.Witch;
 import com.mystra77.visualnovel.characters.Neko;
 import com.mystra77.visualnovel.characters.Angel;
 import com.mystra77.visualnovel.classes.KeyWords;
@@ -33,6 +33,8 @@ import com.mystra77.visualnovel.database.MyOpenHelper;
 import com.mystra77.visualnovel.stages.Stage;
 import com.mystra77.visualnovel.stages.Stage1;
 import com.mystra77.visualnovel.stages.Stage2;
+import com.mystra77.visualnovel.stages.Stage3;
+import com.mystra77.visualnovel.stages.Stage4;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -77,7 +79,7 @@ public class Game extends AppCompatActivity {
     private ListView textDialogLog;
     private ArrayAdapter<String> adapterLog;
     private ArrayList<String> logsLines;
-    private GirlCharacters mature;
+    private GirlCharacters witch;
     private GirlCharacters neko;
     private GirlCharacters angel;
     private KeyWords keyWords;
@@ -140,7 +142,7 @@ public class Game extends AppCompatActivity {
         handler = new Handler();
         neko = new Neko();
         angel = new Angel();
-        mature = new Mature();
+        witch = new Witch();
 
         //Open database
         moh = new MyOpenHelper(this);
@@ -248,7 +250,6 @@ public class Game extends AppCompatActivity {
         this.finish();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 
@@ -257,21 +258,33 @@ public class Game extends AppCompatActivity {
             Stage1 stage1 = new Stage1();
             loadStage(stage1, 1);
         }
-        if (player.getStage() >= 2) {
+        if (player.getStage() == 2) {
             Stage2 stage2 = new Stage2();
-            if (player.getNeko() > player.getMature()) {
-                if (player.getMature() > player.getAngel()) {
-                    loadStage(stage2, 1);
-                } else {
-                    loadStage(stage2, 2);
-                }
+            selectScene(stage2);
+        }
+        if(player.getStage() == 3){
+            Stage3 stage3 = new Stage3();
+            selectScene(stage3);
+        }
+        if(player.getStage() == 4){
+            Stage4 stage4 = new Stage4();
+            selectScene(stage4);
+        }
+    }
+
+    public void selectScene(Stage stage){
+        if (player.getNeko() > player.getMature()) {
+            if (player.getMature() > player.getAngel()) {
+                loadStage(stage, 1);
+            } else {
+                loadStage(stage, 2);
             }
-            if (player.getNeko() < player.getMature()) {
-                if (player.getNeko() > player.getAngel()) {
-                    loadStage(stage2, 1);
-                } else {
-                    loadStage(stage2, 3);
-                }
+        }
+        if (player.getNeko() < player.getMature()) {
+            if (player.getNeko() > player.getAngel()) {
+                loadStage(stage, 1);
+            } else {
+                loadStage(stage, 3);
             }
         }
     }
@@ -298,6 +311,7 @@ public class Game extends AppCompatActivity {
     }
 
     public void continueGame() {
+        soundClick.start();
         bundle = new Bundle();
         bundle.putSerializable("player", player);
         intent = new Intent(this, Game.class);
@@ -319,10 +333,10 @@ public class Game extends AppCompatActivity {
                 characterSelect = keyWords.getKeyAngel();
                 changeCharacterName(angel);
                 textCharacterName.setTextColor(getColor(R.color.angel));
-            } else if (lines[counterLines].equals(keyWords.getKeyMature())) {
-                characterSelect = keyWords.getKeyMature();
-                changeCharacterName(mature);
-                textCharacterName.setTextColor(getColor(R.color.mature));
+            } else if (lines[counterLines].equals(keyWords.getKeyWitch())) {
+                characterSelect = keyWords.getKeyWitch();
+                changeCharacterName(witch);
+                textCharacterName.setTextColor(getColor(R.color.witch));
             } else if (lines[counterLines].equals(keyWords.getKeyNormalLeftPosition())) {
                 drawGirl(girlSelection(), 0, 0, false);
             } else if (lines[counterLines].equals(keyWords.getKeyNormalCenterPosition())) {
@@ -452,7 +466,7 @@ public class Game extends AppCompatActivity {
         if (characterSelect.equals(keyWords.getKeyAngel())) {
             player.setAngel(player.getAngel() + points - 3);
         }
-        if (characterSelect.equals(keyWords.getKeyMature())) {
+        if (characterSelect.equals(keyWords.getKeyWitch())) {
             player.setMature(player.getMature() + points + 5);
         }
     }
@@ -482,11 +496,11 @@ public class Game extends AppCompatActivity {
                 layoutBackground.setBackground(getDrawable(angel.getSceneCensored()));
             }
         }
-        if (characterSelect.equals(keyWords.getKeyMature())) {
+        if (characterSelect.equals(keyWords.getKeyWitch())) {
             if (explicitImage) {
-                layoutBackground.setBackground(getDrawable(mature.getSceneSexUncensored()));
+                layoutBackground.setBackground(getDrawable(witch.getSceneSexUncensored()));
             } else {
-                layoutBackground.setBackground(getDrawable(mature.getSceneCensored()));
+                layoutBackground.setBackground(getDrawable(witch.getSceneCensored()));
             }
         }
     }
@@ -497,7 +511,7 @@ public class Game extends AppCompatActivity {
         } else if (characterSelect.equals(keyWords.getKeyAngel())) {
             return angel;
         } else {
-            return mature;
+            return witch;
         }
     }
 

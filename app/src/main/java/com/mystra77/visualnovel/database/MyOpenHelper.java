@@ -57,16 +57,16 @@ public class MyOpenHelper extends SQLiteOpenHelper {
      * @param stage    Integer type variable, indicates the chapter in the game
      * @param tsundere Integer type variable, indicates the point obtained by the character tsundere(angel)
      * @param neko     Integer type variable, indicates the point obtained by the character neko
-     * @param mature   Integer type variable, indicates the point obtained by the character mature
+     * @param witch   Integer type variable, indicates the point obtained by the character witch
      * @param score    Integer type variable, indicates the score to save to unlock images
      */
-    public void saveGame(int id, int stage, int tsundere, int neko, int mature, int score) {
+    public void saveGame(int id, int stage, int tsundere, int neko, int witch, int score) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Constants.getSTAGE(), stage);
         values.put(Constants.getANGEL(), tsundere);
         values.put(Constants.getNEKO(), neko);
-        values.put(Constants.getMATURE(), mature);
+        values.put(Constants.getWITCH(), witch);
         values.put(Constants.getSCORE(), score);
         db.update(Constants.getTableGame(), values, Constants.getKeyId() + " = (" + id + " );", null);
     }
@@ -86,7 +86,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         player = new Player(result.getInt(result.getColumnIndex(Constants.getSTAGE())),
                 result.getInt(result.getColumnIndex(Constants.getANGEL())),
                 result.getInt(result.getColumnIndex(Constants.getNEKO())),
-                result.getInt(result.getColumnIndex(Constants.getMATURE())),
+                result.getInt(result.getColumnIndex(Constants.getWITCH())),
                 result.getInt(result.getColumnIndex(Constants.getSCORE())));
         return player;
     }
@@ -105,7 +105,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         player = new Player(result.getInt(result.getColumnIndex(Constants.getSTAGE())),
                 result.getInt(result.getColumnIndex(Constants.getANGEL())),
                 result.getInt(result.getColumnIndex(Constants.getNEKO())),
-                result.getInt(result.getColumnIndex(Constants.getMATURE())),
+                result.getInt(result.getColumnIndex(Constants.getWITCH())),
                 result.getInt(result.getColumnIndex(Constants.getSCORE())));
         return player;
     }

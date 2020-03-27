@@ -64,6 +64,7 @@ public class GameStartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 newGame.setEnabled(false);
+                loadLastSave.setEnabled(false);
                 activity.getSoundSaveLoad().start();
                 Bundle bundle = new Bundle();
                 Player player = new Player();
@@ -83,6 +84,7 @@ public class GameStartFragment extends Fragment {
         loadLastSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                newGame.setEnabled(false);
                 loadLastSave.setEnabled(false);
                 activity.getSoundSaveLoad().start();
                 bundle = new Bundle();
