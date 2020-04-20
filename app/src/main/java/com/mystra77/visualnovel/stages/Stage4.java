@@ -12,8 +12,8 @@ public class Stage4 extends Stage {
     public Stage4() {
         setStageBackground(R.drawable.stage4background);
         setStageMusic(R.raw.theme_stage4);
-        setScriptPlot1(R.raw.chapter4neko);
-        setScriptPlot2(R.raw.chapter4mature);
+        setScriptPlot1(R.raw.chapter4witch);
+        setScriptPlot2(R.raw.chapter4neko);
         setScriptPlot3(R.raw.chapter4angel);
     }
 

@@ -198,7 +198,7 @@ public class Game extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        moh.saveGame(saveFileId, player.getStage(), player.getAngel(), player.getNeko(), player.getMature(), player.getScore());
+                        moh.saveGame(saveFileId, player.getStage(), player.getAngel(), player.getNeko(), player.getWitch(), player.getScore());
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -268,24 +268,35 @@ public class Game extends AppCompatActivity {
         }
         if(player.getStage() == 4){
             Stage4 stage4 = new Stage4();
-            selectScene(stage4);
+            selectLastScene(stage4);
         }
     }
 
     public void selectScene(Stage stage){
-        if (player.getNeko() > player.getMature()) {
-            if (player.getMature() > player.getAngel()) {
+        if (player.getWitch() >= player.getNeko()) {
+            if (player.getNeko() >= player.getAngel()) {
                 loadStage(stage, 1);
             } else {
                 loadStage(stage, 2);
             }
-        }
-        if (player.getNeko() < player.getMature()) {
-            if (player.getNeko() > player.getAngel()) {
+        }else{
+            if (player.getNeko() >= player.getAngel()) {
                 loadStage(stage, 1);
             } else {
                 loadStage(stage, 3);
             }
+        }
+    }
+
+    public void selectLastScene(Stage stage){
+        if(player.getWitch() >= player.getNeko() && player.getWitch() >= player.getAngel()) {
+            loadStage(stage, 1);
+        } else if (player.getNeko() > player.getWitch() && player.getNeko() >= player.getAngel()) {
+            loadStage(stage, 2);
+        } else if (player.getAngel() > player.getWitch() && player.getAngel() > player.getNeko()) {
+            loadStage(stage, 3);
+        } else{
+            loadStage(stage, 1);
         }
     }
 
@@ -444,7 +455,7 @@ public class Game extends AppCompatActivity {
         counterLines++;
         updateText();
         counterLines += 2;
-        afinityGirl(0);
+        afinityGirl(5);
         enableDisableAnswerButtons(false);
     }
 
@@ -455,7 +466,7 @@ public class Game extends AppCompatActivity {
         answerEmotion();
         counterLines++;
         updateText();
-        afinityGirl(-10);
+        afinityGirl(0);
         enableDisableAnswerButtons(false);
     }
 
@@ -464,10 +475,10 @@ public class Game extends AppCompatActivity {
             player.setNeko(player.getNeko() + points);
         }
         if (characterSelect.equals(keyWords.getKeyAngel())) {
-            player.setAngel(player.getAngel() + points - 3);
+            player.setAngel(player.getAngel() + points - 2);
         }
         if (characterSelect.equals(keyWords.getKeyWitch())) {
-            player.setMature(player.getMature() + points + 5);
+            player.setWitch(player.getWitch() + points + 2);
         }
     }
 

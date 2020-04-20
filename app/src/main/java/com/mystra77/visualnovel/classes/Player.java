@@ -6,7 +6,7 @@ public class Player implements Serializable {
     private int stage; //Integer type variable, indicates the chapter in the game
     private int angel; //Integer type variable, indicates the point obtained by the character angel
     private int neko; //Integer type variable, indicates the point obtained by the character neko
-    private int mature; //Integer type variable, indicates the point obtained by the character mature
+    private int witch; //Integer type variable, indicates the point obtained by the character mature
     private int score;  //Integer type variable, indicates the score to save to unlock images
 
     /**
@@ -16,7 +16,7 @@ public class Player implements Serializable {
         this.stage = 1;
         this.angel = 0;
         this.neko = 0;
-        this.mature = 0;
+        this.witch = 0;
         this.score = 0;
     }
 
@@ -26,14 +26,14 @@ public class Player implements Serializable {
      * @param stage  //Integer type variable, indicates the chapter in the game
      * @param angel  //Integer type variable, indicates the point obtained by the character angel
      * @param neko   //Integer type variable, indicates the point obtained by the character neko
-     * @param mature //Integer type variable, indicates the point obtained by the character mature
+     * @param witch //Integer type variable, indicates the point obtained by the character witch
      * @param score  //Integer type variable, indicates the score to save to unlock images
      */
-    public Player(int stage, int angel, int neko, int mature, int score) {
+    public Player(int stage, int angel, int neko, int witch, int score) {
         this.stage = stage;
         this.angel = angel;
         this.neko = neko;
-        this.mature = mature;
+        this.witch = witch;
         this.score = score;
     }
 
@@ -64,12 +64,12 @@ public class Player implements Serializable {
         this.neko = neko;
     }
 
-    public int getMature() {
-        return mature;
+    public int getWitch() {
+        return witch;
     }
 
-    public void setMature(int mature) {
-        this.mature = mature;
+    public void setWitch(int mature) {
+        this.witch = mature;
     }
 
     public int getScore() {

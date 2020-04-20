@@ -18,8 +18,8 @@ public class Angel extends GirlCharacters {
         setImageLaughtRight(R.drawable.right_angel_happy);
         setImageAngryLeft(R.drawable.left_angel_angry);
         setImageAngryRight(R.drawable.right_angel_angry);
-        setSceneCensored(R.drawable.right_angel_normal);
-        setSceneSexUncensored(R.drawable.right_angel_happy);
+        setSceneCensored(R.drawable.censored);
+        setSceneSexUncensored(R.drawable.uncensored);
         setSoundNormal(R.raw.angel_sound_normal);
         setSoundHappy(R.raw.angel_sound_happy);
         setSoundAngry(R.raw.angel_sound_angry);

@@ -17,8 +17,8 @@ public class Neko extends GirlCharacters {
         setImageLaughtRight(R.drawable.right_neko_happy);
         setImageAngryLeft(R.drawable.left_neko_angry);
         setImageAngryRight(R.drawable.right_neko_angry);
-        setSceneCensored(R.drawable.right_neko_normal);
-        setSceneSexUncensored(R.drawable.right_neko_happy);
+        setSceneCensored(R.drawable.censored);
+        setSceneSexUncensored(R.drawable.uncensored);
         setSoundNormal(R.raw.neko_sound_normal);
         setSoundHappy(R.raw.neko_sound_happy);
         setSoundAngry(R.raw.neko_sound_angry);

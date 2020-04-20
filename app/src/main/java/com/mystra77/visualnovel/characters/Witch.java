@@ -17,8 +17,8 @@ public class Witch extends GirlCharacters {
         setImageLaughtRight(R.drawable.right_witch_happy);
         setImageAngryLeft(R.drawable.left_witch_angry);
         setImageAngryRight(R.drawable.right_witch_angry);
-        setSceneCensored(R.drawable.right_witch_normal);
-        setSceneSexUncensored(R.drawable.right_witch_happy);
+        setSceneCensored(R.drawable.censored);
+        setSceneSexUncensored(R.drawable.uncensored);
         setSoundNormal(R.raw.witch_sound_normal);
         setSoundHappy(R.raw.witch_sound_happy);
         setSoundAngry(R.raw.witch_sound_angry);
