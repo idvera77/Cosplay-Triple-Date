@@ -172,7 +172,6 @@ public class MyOpenHelper extends SQLiteOpenHelper {
             return dateLoadString;
         }
     }
-
 }
 
 

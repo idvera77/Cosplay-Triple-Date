@@ -262,25 +262,25 @@ public class Game extends AppCompatActivity {
             Stage2 stage2 = new Stage2();
             selectScene(stage2);
         }
-        if(player.getStage() == 3){
+        if (player.getStage() == 3) {
             Stage3 stage3 = new Stage3();
             selectScene(stage3);
         }
-        if(player.getStage() == 4){
+        if (player.getStage() == 4) {
             Stage4 stage4 = new Stage4();
             selectLastScene(stage4);
         }
     }
 
-    public void selectScene(Stage stage){
+    public void selectScene(Stage stage) {
         if (player.getWitch() >= player.getNeko()) {
             if (player.getNeko() >= player.getAngel()) {
                 loadStage(stage, 1);
             } else {
                 loadStage(stage, 2);
             }
-        }else{
-            if (player.getNeko() >= player.getAngel()) {
+        } else {
+            if (player.getWitch() >= player.getAngel()) {
                 loadStage(stage, 1);
             } else {
                 loadStage(stage, 3);
@@ -288,14 +288,14 @@ public class Game extends AppCompatActivity {
         }
     }
 
-    public void selectLastScene(Stage stage){
-        if(player.getWitch() >= player.getNeko() && player.getWitch() >= player.getAngel()) {
+    public void selectLastScene(Stage stage) {
+        if (player.getWitch() >= player.getNeko() && player.getWitch() >= player.getAngel()) {
             loadStage(stage, 1);
         } else if (player.getNeko() > player.getWitch() && player.getNeko() >= player.getAngel()) {
             loadStage(stage, 2);
         } else if (player.getAngel() > player.getWitch() && player.getAngel() > player.getNeko()) {
             loadStage(stage, 3);
-        } else{
+        } else {
             loadStage(stage, 1);
         }
     }
