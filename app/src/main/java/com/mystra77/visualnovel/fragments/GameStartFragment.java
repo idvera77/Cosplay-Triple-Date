@@ -98,6 +98,7 @@ public class GameStartFragment extends Fragment {
                     new AlertDialog.Builder(view.getContext(), R.style.AlertDialogCustom)
                             .setMessage(R.string.messageGameCompleted)
                             .show();
+                    newGame.setEnabled(true);
                 }
             }
         });
